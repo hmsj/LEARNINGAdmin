@@ -254,6 +254,9 @@ p {
 .parallax-section-8 {
     background-image: url(../img/backgrounds/bg-8.jpg);
 }
+.parallax-section-9 {
+    background-image: url(../img/backgrounds/bg-9.jpg);
+}
 
 /*----- Home Sections -----*/
 #home-parallax-fullscreen, 
@@ -264,7 +267,8 @@ p {
 .parallax-section-5, 
 .parallax-section-6, 
 .parallax-section-7,
-.parallax-section-8 {
+.parallax-section-8,
+.parallax-section-9 {
     background-position: 50% 0;
 	background-size: cover;
 	background-repeat: no-repeat;

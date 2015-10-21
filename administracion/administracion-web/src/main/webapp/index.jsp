@@ -29,10 +29,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					    </button>
-                        <a class="navbar-brand to-top" rel="home" href="#">
+                       
+                       <!--  <a class="navbar-brand to-top" rel="home" href="#">
                         	<img src="img/assets/logo-white.png" alt="Vossen" class="logo-big">
                             <img src="img/assets/logo-dark.png" alt="Vossen" class="logo-small">
-                        </a>
+                        </a>--> 
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,18 +44,8 @@
                             <!-- <li class="to-section"><a href="#team">Team</a></li>
                             <li class="to-section"><a href="#portfolio">Portfolio</a></li>
  -->                            
-                            <li class="dropdown">
-                                <span class="dropdown-toggle" data-toggle="dropdown">Cursos <b class="caret"></b></span>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li class="active"><a href="#">Home - Parallax</a></li>
-                                    <li><a href="home-video.html">Home - Video Slider</a></li>
-                                    <li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
-                                    <li><a href="home-landing-page.html">Home - Landing Page</a></li> 
-                                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                                    <li><a href="http://themeforest.net/user/VossenDesign/portfolio" id="btn-buy"><span class="btn-buy">Buy Now</span></a></li>
-                                </ul>
-                            </li> 
-                            
+ 
+ 							<li class="to-section"><a href="#contact">Cursos</a></li>                           
                             <li class="to-section"><a href="#contact">Alumnos</a></li>
                             <li class="to-section"><a href="#about">Logout</a></li>
                       </ul>
@@ -68,7 +59,7 @@
          
             
             <!-- Start Get Connected -->
-            <section id="get-connected" class="parallax-section-4">
+            <section id="get-connected" class="parallax-section-9">
                 <div class="container"> 
                 	
                     <div class="col-md-12 text-center">
@@ -80,7 +71,7 @@
                             
  							<li class="connected-icon">
                                 <a target="_blank" href="#">
-                                    <span class="icon icon-social-facebook size-6x"></span>
+                                    <span class="ion-ios-gear size-6x"></span>
                                     <h4 class="white">Perfil Admin.</h4>
                                     <span class="grey">Editar</span>
                                 </a>
@@ -88,7 +79,7 @@
                             
                             <li class="connected-icon">
                                 <a target="_blank" href="#">
-                                    <span class="icon icon-social-twitter size-6x"></span>
+                                    <span class="ion-university size-6x"></span>
                                     <h4 class="white">Alumnado</h4>
                                     <span class="grey">Gestionar</span>
                                 </a>
@@ -96,7 +87,7 @@
                             
                             <li class="connected-icon">
                                 <a target="_blank" href="#">
-                                    <span class="icon icon-social-youtube size-6x"></span>
+                                    <span class="ion-ios-bookmarks size-6x"></span>
                                     <h4 class="white">Cursos</h4>
                                     <span class="grey">Validar y gestionar</span>
                                 </a>
