@@ -1,7 +1,7 @@
 package es.uc3m.tiw.dominios;
 
 public class Calificacion {
-	Usuario alumno;
+	Alumno alumno;
 	Curso curso;
 	double nota;
 	TipoLogro tipoLogro;
@@ -11,7 +11,7 @@ public class Calificacion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Calificacion(Usuario alumno, Curso curso, double nota,
+	public Calificacion(Alumno alumno, Curso curso, double nota,
 			TipoLogro tipoLogro) {
 		super();
 		this.alumno = alumno;
@@ -20,11 +20,11 @@ public class Calificacion {
 		this.tipoLogro = tipoLogro;
 	}
 
-	public Usuario getAlumno() {
+	public Alumno getAlumno() {
 		return alumno;
 	}
 
-	public void setAlumno(Usuario alumno) {
+	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
 	}
 
