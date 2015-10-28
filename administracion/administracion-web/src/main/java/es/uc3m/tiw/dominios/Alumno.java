@@ -1,8 +1,9 @@
 package es.uc3m.tiw.dominios;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Alumno {
+public class Alumno implements Serializable{
 	Usuario username;
 	Curso curso_actual;
 	ArrayList<Curso> listado_cursos;

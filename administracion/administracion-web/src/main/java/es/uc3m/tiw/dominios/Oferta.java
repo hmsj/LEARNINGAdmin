@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Oferta {
+import java.io.Serializable;
+
+public class Oferta implements Serializable{
 	int idoferta;
 	TipoOferta tipoOferta;
 	double valor;

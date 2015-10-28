@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class DatosBancarios {
+import java.io.Serializable;
+
+public class DatosBancarios implements Serializable{
 	int iddatosBancarios;
 	String tarjeta;
 	String fecha_caducidad;

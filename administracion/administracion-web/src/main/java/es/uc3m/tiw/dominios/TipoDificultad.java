@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class TipoDificultad {
+import java.io.Serializable;
+
+public class TipoDificultad implements Serializable{
 	int idtipoDificultad;
 	String descripcion_tipoDificultad;
 	

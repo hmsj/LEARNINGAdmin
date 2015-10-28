@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class ProfesorInvitado {
+import java.io.Serializable;
+
+public class ProfesorInvitado implements Serializable{
 	Usuario usuario_username;
 	Curso curso_idcurso;
 	

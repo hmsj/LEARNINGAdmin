@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class TipoOferta {
+import java.io.Serializable;
+
+public class TipoOferta implements Serializable{
 	int idtipoOferta;
 	String descripcion_tipoOferta;
 	

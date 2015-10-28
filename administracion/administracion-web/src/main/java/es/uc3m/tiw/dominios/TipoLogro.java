@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class TipoLogro {
+import java.io.Serializable;
+
+public class TipoLogro implements Serializable{
 	int idtipoLogro;
 	String descripcion_tipoLogro;
 	

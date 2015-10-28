@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Direccion {
+import java.io.Serializable;
+
+public class Direccion implements Serializable{
 	int iddireccion;
 	String calle;
 	int numero;

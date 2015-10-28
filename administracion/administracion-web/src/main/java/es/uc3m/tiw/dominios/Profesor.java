@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Profesor {
+import java.io.Serializable;
+
+public class Profesor implements Serializable{
 	int tipo=2;
 	Usuario usuario;
 	

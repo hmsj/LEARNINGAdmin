@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable{
 	int idcategoria;
 	String descripcion_categoria;
 	

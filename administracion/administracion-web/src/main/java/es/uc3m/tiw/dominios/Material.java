@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Material {
+import java.io.Serializable;
+
+public class Material implements Serializable{
 	int idmaterial;
 	TipoMaterial tipoMaterial;
 	Leccion leccion;

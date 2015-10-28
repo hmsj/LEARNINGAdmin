@@ -38,24 +38,7 @@
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="main-nav">
-			<ul class="nav navbar-nav  navbar-right">
-
-				<li><a class="to-section" href="index.jsp">Home</a></li>
-				<li class="to-section"><a href="signup.jsp">Registrarse</a></li>
-
-				<!-- <li class="to-section"><a href="#team">Team</a></li>
-                            <li class="to-section"><a href="#portfolio">Portfolio</a></li>-->
-
-				<li class="to-section"><a href="#contact">Contact</a></li>
-				<li><a class="social-icon" href="http://www.twitter.com"><i
-						class="icon icon-social-twitter"></i></a></li>
-				<li><a class="social-icon" href="http://www.facebook.com"><i
-						class="icon icon-social-facebook"></i></a></li>
-				<li><a class="social-icon" href="http://www.google.com"><i
-						class="icon icon-support"></i></a></li>
-			</ul>
-		</div>
+			
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container --> </nav> </header>
@@ -67,7 +50,7 @@
 		<div class="row">
 
 			<div class="col-md-12">
-				<h2 class="section-title wow fadeInUp">ACCEDE A TUS CURSOS</h2>
+				<h2 class="section-title wow fadeInUp">ACCEDE A LA ADMINISTRACION</h2>
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
@@ -78,7 +61,7 @@
 				<form method="post" action="login" name="loginform" id="loginform">
 					<fieldset>
 						<input name="username" type="text" id="username"
-							placeholder="Nombre de usuario*" />
+							placeholder="Nombre de administrador*" />
 						<input name="password"
 							type="password" id="password" placeholder="Contraseña*"/>
 					</fieldset>

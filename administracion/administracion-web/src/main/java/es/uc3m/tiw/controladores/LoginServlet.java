@@ -92,11 +92,11 @@ public class LoginServlet extends HttpServlet {
 	
 	private Usuario comprobarUsuario(String username, String password){
 		Usuario user = null;
-			for (Usuario usuario : usuarios){
-				if(username.equals(usuario.getUsername()) && password.equals(usuario.getPassword())){
-					user = new Usuario();					
-					user = usuario;
-				}
+			for (Usuario usuario : usuarios){				
+					if(username.equals(usuario.getUsername()) && password.equals(usuario.getPassword())&&usuario.getTipoUsuario().getIdtipoUsuario()==3){
+						user = new Usuario();					
+						user = usuario;
+					}
 			}
 		return user;
 		

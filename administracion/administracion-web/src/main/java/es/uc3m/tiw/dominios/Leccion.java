@@ -1,7 +1,9 @@
 package es.uc3m.tiw.dominios;
 
+import java.io.Serializable;
 
-public class Leccion {
+
+public class Leccion implements Serializable{
 	int idleccion;
 	String titulo;
 	Curso curso;

@@ -73,27 +73,7 @@
 						<li class="to-section"><a href="login">Login</a></li>
 					</c:otherwise>
 				</c:choose>
-				<!-- <li class="to-section"><a href="#team">Team</a></li>
-                            <li class="to-section"><a href="#portfolio">Portfolio</a></li>
- -->
-				<li class="dropdown"><span class="dropdown-toggle"
-					data-toggle="dropdown">Cursos <b class="caret"></b></span>
-					<ul class="dropdown-menu" role="menu">
-						<li class="active"><a href="#">Home - Parallax</a></li>
-						<li><a href="home-video.html">Home - Video Slider</a></li>
-						<li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
-						<li><a href="home-landing-page.html">Home - Landing Page</a></li>
-						<li><a href="shortcodes.html">Shortcodes</a></li>
-
-					</ul></li>
-
-				<li class="to-section"><a href="signup.jsp">Registrarse</a></li>
-				<li><a class="social-icon" href="http://www.twitter.com"><i
-						class="icon icon-social-twitter"></i></a></li>
-				<li><a class="social-icon" href="http://www.facebook.com"><i
-						class="icon icon-social-facebook"></i></a></li>
-				<li><a class="social-icon" href="http://www.google.com"><i
-						class="icon icon-support"></i></a></li>
+				<li class="to-section"><a href="cursos">Cursos </a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -121,100 +101,8 @@
 							data-splitout="none" data-elementdelay="0.1"
 							data-endelementdelay="0.1" data-endspeed="300"
 							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<h2 class="home-heading op-1">DokuLearning</h2>
+							<h2 class="home-heading op-1">Bienvenido Administrador</h2>
 						</div> <!-- Home Subheading -->
-						<div class="tp-caption home-subheading sft fadeout"
-							data-x="center" data-y="360" data-speed="1200" data-start="1350"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-1">2015 · TU PORTAL DE E-LEARNING</div>
-						</div> <!-- Home Button -->
-						<div class="tp-caption home-button sft fadeout" data-x="center"
-							data-y="400" data-speed="1200" data-start="1550"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-1">
-								<a href="#features" class="btn btn-primary btn-scroll">ACCEDER</a>
-							</div>
-						</div></li>
-
-					<!-- SLIDE 2 -->
-					<li data-transition="fade" data-slotamount="7"
-						data-masterspeed="2000" data-thumb="img/backgrounds/bg-1.jpg"
-						data-delay="10000" data-saveperformance="on"
-						data-title="Digital Agency"><img
-						src="img/backgrounds/bg-1.jpg" alt="slidebg1"
-						data-bgposition="center top" data-bgfit="cover"
-						data-bgrepeat="no-repeat"> <!-- Home Heading -->
-						<div class="tp-caption sft" data-x="center" data-y="260"
-							data-speed="1200" data-start="1100"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<h2 class="home-heading op-2">A Digital Design Agency</h2>
-						</div> <!-- Home Subheading -->
-						<div class="tp-caption home-subheading sft fadeout"
-							data-x="center" data-y="360" data-speed="1200" data-start="1350"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-2">2015 · BRAND POSITIONING · IDENTITY
-								DESIGN · VISUAL DESIGN</div>
-						</div> <!-- Home Button -->
-						<div class="tp-caption home-button sft fadeout" data-x="center"
-							data-y="400" data-speed="1200" data-start="1550"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-2">
-								<a href="#about" class="btn btn-primary btn-scroll">WHAT WE
-									DO</a>
-							</div>
-						</div></li>
-
-					<!-- SLIDE 3 -->
-					<li data-transition="fade" data-slotamount="7"
-						data-masterspeed="2000" data-thumb="img/backgrounds/bg-3.jpg"
-						data-delay="10000" data-saveperformance="on"
-						data-title="Creative Coders"><img
-						src="img/backgrounds/bg-3.jpg" alt="slidebg1"
-						data-bgposition="center top" data-bgfit="cover"
-						data-bgrepeat="no-repeat"> <!-- Home Heading -->
-						<div class="tp-caption sft" data-x="center" data-y="260"
-							data-speed="1200" data-start="1100"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<h2 class="home-heading op-3">Creative Coders</h2>
-						</div> <!-- Home Subheading -->
-						<div class="tp-caption home-subheading sft fadeout"
-							data-x="center" data-y="360" data-speed="1200" data-start="1350"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-3">2015 · BRAND POSITIONING · IDENTITY
-								DESIGN · VISUAL DESIGN</div>
-						</div> <!-- Home Button -->
-						<div class="tp-caption home-button sft fadeout" data-x="center"
-							data-y="400" data-speed="1200" data-start="1550"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-3">
-								<a href="#team" class="btn btn-primary btn-scroll">MEET THE
-									TEAM</a>
-							</div>
-						</div></li>
 
 				</ul>
 				<div class="tp-bannertimer"></div>
@@ -231,124 +119,53 @@
 		</div>
 	</div>
 	</section>
+	
+
 	<!-- End Home Revolution Slider Parallax Section -->
 
 	<div class="site-wrapper content">
 
-		<!-- Start Portfolio Section -->
-		<section id="portfolio" style="position: relative;">
-		<div class="separator"></div>
-		<div class="container">
-
-			<div class="col-md-12 text-center">
-				<h3 class="section-title wow fadeInUp">Nuestros cursos</h3>
-				<p class="subheading wow fadeInUp">
-					Elige entre nuestra variedad de <span class="highlight">cursos</span>.
-				</p>
-			</div>
-
-			<div id="filters-container-fullwidth"
-				class="cbp-l-filters-alignCenter wow fadeInUp">
-				<c:choose>
-					<c:when test="${not empty categorias }">
-						<div data-filter="*"
-							class="cbp-filter-item-active cbp-filter-item">
-							Todos
-							<div class="cbp-filter-counter"></div>
-						</div>
-						<c:forEach items="${categorias }" var="categoria">
-							<div data-filter=".${categoria.descripcion_categoria }"
-								class="cbp-filter-item">${categoria.descripcion_categoria }<div
-									class="cbp-filter-counter"></div>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<div data-filter="*"
-							class="cbp-filter-item-active cbp-filter-item">
-							Todos
-							<div class="cbp-filter-counter"></div>
-						</div>
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div id="grid-container-fullwidth" class="cbp-l-grid-fullScreen">
-				<ul>
-					<c:if test="${not empty cursos }">
-						<c:forEach items="${cursos }" begin="0" end="2" var="curso">
-							<c:choose>
-								<c:when test="${curso.validado ==  1}">
-									<li
-										class="cbp-item effect effects ${curso.categoria.descripcion_categoria }">
-										<div class="img">
-											<img src="${curso.imagen }" class="img-responsive" alt=""
-												style="width: 100%; height: 100%;" />
-											<div class="overlay">
-												<ul class="expand">
-													<li class="cbp-l-caption-title">${curso.titulo }</li>
-													<li class="cbp-l-caption-desc">by
-														${curso.profesor_titular.nombre }</li>
-													<li class="cbp-l-icon"><a
-														href="cursos?idcurso=${curso.idcurso }"><i
-															class="icon-info"></i></a></li>
-												</ul>
-											</div>
-										</div>
-									</li>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-					</c:if>
-				</ul>
-			</div>
-			<div style="margin-top:30px;margin-left: 45%;">
-				<a href="cursos" class="boton">VER MAS</a>
-			</div>
-
-		</div>
-		</section>
-		<!-- End Portfolio Section -->
-
-		<!-- Start Testimonials Section -->
-		<section id="testimonials" class="parallax-section-7">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-md-12 text-center">
-					<h3 class="section-title white wow fadeInUp">Cursos Destacados</h3>
-					<p class="subheading grey wow fadeInUp">
-						Estos son nuestros cursos con mas <span class="highlight">exito</span>
-					</p>
-				</div>
-
-				<div class="clients">
-					<c:if test="${not empty cursos }">
-						<c:forEach items="${cursos }" var="curso">
-							<c:if test="${curso.validado == 1 }">
-								<c:if test="${curso.destacado == 1 }">
-									<div class="col-md-2 col-sm-3 col-xs-6 client wow fadeInUp">
-										<c:choose>
-											<c:when test="${not empty curso.imagen }">
-												<a href="cursos?idcurso=${curso.idcurso }">
-													<div class="logo-dark">
-														<img src="${curso.imagen }" class="img-responsive"
-															alt="client">
-													</div>
-													<div class="logo-light">
-														<img src="img/clients/logo-1-light.png"
-															class="img-responsive" alt="client">
-													</div>
-												</a>
-											</c:when>
-										</c:choose>
-									</div>
-								</c:if>
-							</c:if>
-						</c:forEach>
-					</c:if>
-				</div>
-		</section>
+		<!-- Start Get Connected -->
+            <section id="get-connected" class="parallax-section-4">
+                <div class="container"> 
+                	
+                    <div class="col-md-12 text-center">
+                        <h3 class="section-title white wow fadeInUp">Administracion</h3> 
+                        <p class="subheading grey wow fadeInUp">Configure los <span class="highlight">datos</span> deseados.</p>
+                    </div>
+                    
+                    <div class="row text-center wow fadeInUp">
+                    	<ul class="connected-icons text-center">
+                            
+ 							<li class="connected-icon">
+                                <a target="_blank" href="#">
+                                    <span class="icon ion-university size-6x"></span>
+                                    <h4 class="white">Almunos</h4>
+                                    <span class="grey">Acceso al alumnado</span>
+                                </a>
+                            </li>
+                            
+                            <li class="connected-icon">
+                                <a target="_blank" href="#">
+                                    <span class="icon ion-ios-bookmarks size-6x"></span>
+                                    <h4 class="white">Cursos</h4>
+                                    <span class="grey">Acceso a los cursos</span>
+                                </a>
+                            </li>
+                            
+                            <li class="connected-icon">
+                                <a target="_blank" href="#"> 
+                                    <span class="icon ion-ios-briefcase size-6x"></span>
+                                    <h4 class="white">Profesores</h4>
+                                    <span class="grey">Acceso al profesorado</span>
+                                </a>
+                            </li>                                                                               
+                    	</ul>        
+                	</div>  
+                    
+                </div>
+            </section>
+            <!-- End Get Connected -->     
 		<!-- End Testimonials Section -->
 
 		<!-- Start Footer 1 -->

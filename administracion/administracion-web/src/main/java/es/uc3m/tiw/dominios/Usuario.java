@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
 	String username;
 	String nombre;
 	String apellidos;

@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class TipoMaterial {
+import java.io.Serializable;
+
+public class TipoMaterial implements Serializable{
 	int idtipoMaterial;
 	String descripcion_tipoMaterial;
 	

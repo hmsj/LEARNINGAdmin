@@ -1,6 +1,8 @@
 package es.uc3m.tiw.dominios;
 
-public class Calificacion {
+import java.io.Serializable;
+
+public class Calificacion implements Serializable{
 	Alumno alumno;
 	Curso curso;
 	double nota;
