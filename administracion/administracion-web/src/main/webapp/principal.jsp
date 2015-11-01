@@ -74,7 +74,7 @@
                             </li>
                             
                             <li class="connected-icon">
-                                <a target="_blank" href="#"> 
+                                <a target="_blank" href="profesores"> 
                                     <span class="icon ion-ios-briefcase size-6x"></span>
                                     <h4 class="white">Profesores</h4>
                                     <span class="grey">Acceso al profesorado</span>
