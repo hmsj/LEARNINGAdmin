@@ -3,34 +3,55 @@ package es.uc3m.tiw.dominios;
 import java.io.Serializable;
 
 public class Profesor implements Serializable{
-	int tipo=2;
-	Usuario usuario;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5239875224782443362L;
+	Usuario usuario_username;
+	Curso curso_idcurso;
+	boolean esTitular;
 	
 	public Profesor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profesor(int tipo, Usuario usuario) {
+	public Profesor(Usuario usuario_username, Curso curso_idcurso, boolean esTitular) {
 		super();
-		this.tipo = tipo;
-		this.usuario = usuario;
+		this.usuario_username = usuario_username;
+		this.curso_idcurso = curso_idcurso;
+		this.esTitular = esTitular;
 	}
 
-	public int getTipo() {
-		return tipo;
+	public Profesor(Usuario usuario_username, Curso curso_idcurso) {
+		super();
+		this.usuario_username = usuario_username;
+		this.curso_idcurso = curso_idcurso;
+		this.esTitular = false;
+	}
+	
+	public Usuario getUsuario_username() {
+		return usuario_username;
 	}
 
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
+	public void setUsuario_username(Usuario usuario_username) {
+		this.usuario_username = usuario_username;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Curso getCurso_idcurso() {
+		return curso_idcurso;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCurso_idcurso(Curso curso_idcurso) {
+		this.curso_idcurso = curso_idcurso;
+	}
+
+	public final boolean isEsTitular() {
+		return esTitular;
+	}
+
+	public final void setEsTitular(boolean esTitular) {
+		this.esTitular = esTitular;
 	}
 	
 }

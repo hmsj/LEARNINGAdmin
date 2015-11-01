@@ -7,6 +7,7 @@ public class Material implements Serializable{
 	TipoMaterial tipoMaterial;
 	Leccion leccion;
 	String archivo;
+	String titulo;
 	
 	public Material() {
 		super();
@@ -14,12 +15,13 @@ public class Material implements Serializable{
 	}
 
 	public Material(int idmaterial, TipoMaterial tipoMaterial, Leccion leccion,
-			String archivo) {
+			String archivo, String titulo) {
 		super();
 		this.idmaterial = idmaterial;
 		this.tipoMaterial = tipoMaterial;
 		this.leccion = leccion;
 		this.archivo = archivo;
+		this.titulo = titulo;
 	}
 
 	public int getIdmaterial() {
@@ -36,6 +38,14 @@ public class Material implements Serializable{
 
 	public void setTipoMaterial(TipoMaterial tipoMaterial) {
 		this.tipoMaterial = tipoMaterial;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public Leccion getLeccion() {

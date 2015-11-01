@@ -19,7 +19,7 @@ import es.uc3m.tiw.dominios.Direccion;
 import es.uc3m.tiw.dominios.Leccion;
 import es.uc3m.tiw.dominios.Material;
 import es.uc3m.tiw.dominios.Oferta;
-import es.uc3m.tiw.dominios.ProfesorInvitado;
+import es.uc3m.tiw.dominios.Profesor;
 import es.uc3m.tiw.dominios.Seccion;
 import es.uc3m.tiw.dominios.TipoDificultad;
 import es.uc3m.tiw.dominios.TipoLogro;
@@ -49,7 +49,7 @@ public class InicioServlet extends HttpServlet {
 	private ArrayList<Leccion> lecciones = new ArrayList<Leccion>();
 	private ArrayList<Material> materiales = new ArrayList<Material>();
 	private ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
-	private ArrayList<ProfesorInvitado> pInvitados = new ArrayList<ProfesorInvitado>();
+	private ArrayList<Profesor> profesores = new ArrayList<Profesor>();
 	private ArrayList<Seccion> secciones = new ArrayList<Seccion>();
     private ArrayList<TipoDificultad> tipoDificultades = new ArrayList<TipoDificultad>();
     private ArrayList<TipoLogro> tipoLogros = new ArrayList<TipoLogro>();
@@ -141,39 +141,39 @@ public class InicioServlet extends HttpServlet {
 		datosBancarios.add(banco2);
 		datosBancarios.add(banco3);
 		
-		Usuario usuario1 = new Usuario("alumnoUser", "Alumno", "Registrado", "alumno@dokulearning.es","123456", "", "123456987", "", "", 20, tipoUsuario1, direccion1, banco1);
-		Usuario usuario2 = new Usuario(	"profeUser", "Profesor", "Registrado", "profesor@dokulearning.es", "123456", "", "987456213", "", "", 58, tipoUsuario2, direccion2, banco2);
-		Usuario usuario3 = new Usuario(	"adminUser", "Administrador", "Registrado", "admin@dokulearning.es", "123456", "", "541664884", "", "", 35, tipoUsuario3, direccion3, banco3);
-		Usuario usuario4 = new Usuario(	"profeUser2", "Profe", "Invitado", "profeInvitado@dokulearning.es", "123456", "", "987456951", "", "", 38, tipoUsuario2, direccion3, banco2);
-		Usuario usuario5 = new Usuario("alumn", "Alumno", "Registrado", "alumno@dokulearning.es","123456", "", "123456987", "", "", 20, tipoUsuario1, direccion1, banco1);
-
+		Usuario usuario1 = new Usuario("alumno1", "Pepito", "Registrado", "alumno1@dokulearning.es","123456", "", "123456987", "", "", 20, tipoUsuario1, direccion1, banco1);
+		Usuario usuario2 = new Usuario("alumno2", "Juanito", "Registrado", "alumno2@dokulearning.es","123456", "", "123456987", "", "", 20, tipoUsuario1, direccion1, banco1);
+		Usuario usuario3 = new Usuario("alumno3", "Jorgito", "Registrado", "alumno3@dokulearning.es","123456", "", "123456987", "", "", 20, tipoUsuario1, direccion1, banco1);
+		Usuario usuario4 = new Usuario(	"profeUser", "Sita Carapapel", "Registrado", "profesor1@dokulearning.es", "123456", "", "987456213", "", "", 58, tipoUsuario2, direccion2, banco2);
+		Usuario usuario5 = new Usuario(	"profeUser2", "Señorita Pepis", "Invitado", "profesor2@dokulearning.es", "123456", "", "987456951", "", "", 38, tipoUsuario2, direccion3, banco2);
+		Usuario usuario6 = new Usuario(	"adminUser", "Administrador", "Registrado", "admin@dokulearning.es", "123456", "", "541664884", "", "", 35, tipoUsuario3, direccion3, banco3);
 		usuarios.add(usuario1);
 		usuarios.add(usuario2);
 		usuarios.add(usuario3);
 		usuarios.add(usuario4);
 		usuarios.add(usuario5);
+		usuarios.add(usuario6);
 		
 		Oferta oferta1 = new Oferta(1, tipoOferta2, 30, "31/10/2015");
 		ofertas.add(oferta1);
 		
 		double precioInicial = 50;
-		double preciofinal = calcularPrecio(precioInicial, oferta1);
+		double preciofinal = calcularPrecio(precioInicial, oferta1);	
 		
-		Curso curso1 = new Curso(1, "Curso de diseño photoshop", "Aprende el manejo basico de Photoshop", 25, usuario2, "img/courses/DiseñoPhotoshop.jpg ", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria4, tipoDificultad1);
-		Curso curso2 = new Curso(2, "Curso de diseño de videojuegos", "Diseño de juegos y simulacion con 3d Unity", 25, usuario2, "img/courses/DiseñoVideojuegos.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria4, tipoDificultad1);
-		Curso curso3 = new Curso(3, "Curso de fotografia: el enfoque", "Sacale el maximo partido a tu camara", 25, usuario2, "img/courses/FotografiaEnfocar.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria2, tipoDificultad1);
-		Curso curso4 = new Curso(4, "Curso de fotografia nocturna", "Fotografia nocturna con tu camara digital", 25, usuario2, "img/courses/FotografiaNocturna.jpg", "", destacado, novalidado, precioInicial, preciofinal, oferta1, categoria2, tipoDificultad1);
-		Curso curso5 = new Curso(5, "Curso de idiomas: Aleman", "Nivel intermedio de aleman con profesores nativos", 25, usuario2, "img/courses/IdiomaAleman.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria5, tipoDificultad1);
-		Curso curso6 = new Curso(6, "Curso de idiomas: Ingles", "Aprende ingles con 1000 palabras, metodo mejorado", 25, usuario2, "img/courses/IdiomaIngles.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria5, tipoDificultad1);
-		Curso curso7 = new Curso(7, "Curso de marketing digital", "Marketing basado en conocimiento de community manager", 25, usuario2, "img/courses/MarketingDigital.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria3, tipoDificultad1);
-		Curso curso8 = new Curso(8, "Curso de marketing directo", "Como conseguir la mejor impresion en las personas", 25, usuario2, "img/courses/MarketingDirecto.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria3, tipoDificultad1);
-		Curso curso9 = new Curso(9, "Curso de negocios: inversion de bolsa", "Aprende  invertir en funcion de tu perfil de riesgo", 25, usuario2, "img/courses/NegocioBolsa.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria6, tipoDificultad1);
-		Curso curso10 = new Curso(10, "Curso de negocios: estrategia", "Toma de decisiones en diferentes aspectos de mercado", 25, usuario2, "img/courses/NegociosEstrategia.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria6, tipoDificultad1);
-		Curso curso11 = new Curso(11, "Curso para emprendedores", "Como hacer un plan de empresa desde cero", 25, usuario2, "img/courses/OtrosEmprendimiento.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria7, tipoDificultad1);
-		Curso curso12 = new Curso(12, "Curso de ofimatica Microsoft", "Curso rapido de Word, Excell, Power Point", 25, usuario2, "img/courses/OtrosMicrosoft.jpg", "", destacado, novalidado, precioInicial, preciofinal, oferta1, categoria7, tipoDificultad1);
-		Curso curso13 = new Curso(13, "Curso de programacion en Android", "Crea tu propia aplicacion en menos de una semana", 25, usuario2, "img/courses/ProgramacionAndroid.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria1, tipoDificultad1);
-		Curso curso14 = new Curso(14, "Curso de programacion web: HTML5", "Conceptos basicos e intermedios de programacion web", 25, usuario2, "img/courses/ProgramacionHtml5.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria1, tipoDificultad1);
-
+		Curso curso1 = new Curso(1, "Curso de diseño photoshop", "Aprende el manejo basico de Photoshop", 25, null, "", destacado, validado, precioInicial, preciofinal, oferta1, categoria4, tipoDificultad1, "profeUser");
+		Curso curso2 = new Curso(2, "Curso de diseño de videojuegos", "Diseño de juegos y simulacion con 3d Unity", 25, "img/courses/DiseñoVideojuegos.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria4, tipoDificultad1, "profeUser2");
+		Curso curso3 = new Curso(3, "Curso de fotografia: el enfoque", "Sacale el maximo partido a tu camara", 25, "img/courses/FotografiaEnfocar.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria2, tipoDificultad1);
+		Curso curso4 = new Curso(4, "Curso de fotografia nocturna", "Fotografia nocturna con tu camara digital", 25, "img/courses/FotografiaNocturna.jpg", "", destacado, novalidado, precioInicial, preciofinal, oferta1, categoria2, tipoDificultad1);
+		Curso curso5 = new Curso(5, "Curso de idiomas: Aleman", "Nivel intermedio de aleman con profesores nativos", 25, "img/courses/IdiomaAleman.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria5, tipoDificultad1);
+		Curso curso6 = new Curso(6, "Curso de idiomas: Ingles", "Aprende ingles con 1000 palabras, metodo mejorado", 25, "img/courses/IdiomaIngles.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria5, tipoDificultad1);
+		Curso curso7 = new Curso(7, "Curso de marketing digital", "Marketing basado en conocimiento de community manager", 25, "img/courses/MarketingDigital.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria3, tipoDificultad1);
+		Curso curso8 = new Curso(8, "Curso de marketing directo", "Como conseguir la mejor impresion en las personas", 25, "img/courses/MarketingDirecto.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria3, tipoDificultad1);
+		Curso curso9 = new Curso(9, "Curso de negocios: inversion de bolsa", "Aprende  invertir en funcion de tu perfil de riesgo", 25, "img/courses/NegocioBolsa.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria6, tipoDificultad1);
+		Curso curso10 = new Curso(10, "Curso de negocios: estrategia", "Toma de decisiones en diferentes aspectos de mercado", 25, "img/courses/NegociosEstrategia.jpg", "", nodestacado, validado, precioInicial, preciofinal, oferta1, categoria6, tipoDificultad1);
+		Curso curso11 = new Curso(11, "Curso para emprendedores", "Como hacer un plan de empresa desde cero", 25, "img/courses/OtrosEmprendimiento.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria7, tipoDificultad1);
+		Curso curso12 = new Curso(12, "Curso de ofimatica Microsoft", "Curso rapido de Word, Excell, Power Point", 25, "img/courses/OtrosMicrosoft.jpg", "", destacado, novalidado, precioInicial, preciofinal, oferta1, categoria7, tipoDificultad1);
+		Curso curso13 = new Curso(13, "Curso de programacion en Android", "Crea tu propia aplicacion en menos de una semana", 25, "img/courses/ProgramacionAndroid.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria1, tipoDificultad1);
+		Curso curso14 = new Curso(14, "Curso de programacion web: HTML5", "Conceptos basicos e intermedios de programacion web", 25, "img/courses/ProgramacionHtml5.jpg", "", destacado, validado, precioInicial, preciofinal, oferta1, categoria1, tipoDificultad1);
 		cursos.add(curso1);
 		cursos.add(curso2);
 		cursos.add(curso3);
@@ -187,12 +187,20 @@ public class InicioServlet extends HttpServlet {
 		cursos.add(curso11);
 		cursos.add(curso12);
 		cursos.add(curso13);
-		cursos.add(curso14);
+		cursos.add(curso14);	
 		
 		Alumno alumno1 = new Alumno(usuario1, null, cursos);
-		Alumno alumno2 = new Alumno(usuario5, null, null);
+		Alumno alumno2 = new Alumno(usuario2, curso1, null);
+		Alumno alumno3 = new Alumno(usuario3, null, null);
 		alumnos.add(alumno1);
 		alumnos.add(alumno2);
+		alumnos.add(alumno3);
+				
+		Profesor profesor = new Profesor(usuario4, curso1);
+		Profesor profesor2 = new Profesor(usuario5, curso2);
+		profesores.add(profesor);
+		profesores.add(profesor2);	
+		
 		
 		Calificacion calificacion1 = new Calificacion(alumno1, curso1, 6.5, tipoLogro1);
 		calificaciones.add(calificacion1);
@@ -203,11 +211,10 @@ public class InicioServlet extends HttpServlet {
 		Leccion leccion1 = new Leccion(1, "Leccion1", curso1, "Descripcion leccion 1", seccion1); 
 		lecciones.add(leccion1);
 		
-		Material material1 = new Material(1, tipoMaterial1, leccion1, ""); 
+		Material material1 = new Material(1, tipoMaterial1, leccion1, "", "material 1"); 
 		materiales.add(material1);
 		
-		ProfesorInvitado profeInvitado = new ProfesorInvitado(usuario4, curso1);
-		pInvitados.add(profeInvitado);
+		
 		
 		contexto.getServletContext().setAttribute("alumnos", alumnos);
 		contexto.getServletContext().setAttribute("calificaciones", calificaciones);
@@ -218,7 +225,7 @@ public class InicioServlet extends HttpServlet {
 		contexto.getServletContext().setAttribute("lecciones", lecciones);
 		contexto.getServletContext().setAttribute("materiales", materiales);
 		contexto.getServletContext().setAttribute("ofertas", ofertas);
-		contexto.getServletContext().setAttribute("profesInvitados",pInvitados);
+		contexto.getServletContext().setAttribute("profesores",profesores);
 		contexto.getServletContext().setAttribute("secciones", secciones);
 		contexto.getServletContext().setAttribute("tipoDificultades", tipoDificultades);
 		contexto.getServletContext().setAttribute("tipoLogros", tipoLogros);
@@ -242,7 +249,7 @@ public class InicioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String forwardJSP = "/login.jsp";
+		String forwardJSP = "/principal.jsp";
 		forward(request, response, forwardJSP);
 	}
 
@@ -264,7 +271,7 @@ public class InicioServlet extends HttpServlet {
 		if(tipoOfer==1){
 			precioFinal = precioInicial - valorOfer;
 		}else if(tipoOfer==2){
-			precioFinal = (1-valorOfer)*precioInicial;
+			precioFinal = (1-(valorOfer/100))*precioInicial;
 		}
 		return precioFinal;
 	}

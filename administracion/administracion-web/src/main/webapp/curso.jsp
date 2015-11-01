@@ -17,62 +17,32 @@
 
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
+<style type="text/css">
+.boton {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: #7E7B7B;
+	font-size: 14px;
+	background: #F6F7F7;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	font-weight: 700;
+	line-height: 1.6;
+	margin: 0 5px 0 5px;
+	padding: 10px 22px;
+	text-align: center;
+}
+
+.boton:hover {
+	background: #B2CC02;
+	text-decoration: none;
+}
+</style>
 </head>
 <body>
-	<!--Start Header-->
-	<header> <nav class="navbar navbar-default navbar-alt"
-		role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#main-nav">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand to-top" rel="home" href="#"> <img
-				src="img/assets/logo-white.png" alt="Dokulearning" class="logo-big">
-				<img src="img/assets/logo-dark.png" alt="Dokulearning"
-				class="logo-small">
-			</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="main-nav">
-			<ul class="nav navbar-nav  navbar-right">
-
-				<li><a class="to-top">Home</a></li>
-				<li class="to-section"><a href="#about">Login</a></li>
-				<!-- <li class="to-section"><a href="#team">Team</a></li>
-                            <li class="to-section"><a href="#portfolio">Portfolio</a></li>
- -->
-				<li class="dropdown"><span class="dropdown-toggle"
-					data-toggle="dropdown">Cursos <b class="caret"></b></span>
-					<ul class="dropdown-menu" role="menu">
-						<li class="active"><a href="#">Home - Parallax</a></li>
-						<li><a href="home-video.html">Home - Video Slider</a></li>
-						<li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
-						<li><a href="home-landing-page.html">Home - Landing Page</a></li>
-						<li><a href="shortcodes.html">Shortcodes</a></li>
-						<li><a
-							href="http://themeforest.net/user/VossenDesign/portfolio"
-							id="btn-buy"><span class="btn-buy">Buy Now</span></a></li>
-					</ul></li>
-
-				<li class="to-section"><a href="#contact">Contact</a></li>
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-social-twitter"></i></a></li>
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-social-facebook"></i></a></li>
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-support"></i></a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </header>
-	<!--End Header-->
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<!-- Start Home Revolution Slider Parallax Section -->
 	<section id="home-revolution-slider">
@@ -85,10 +55,18 @@
 						data-masterspeed="2000"
 						data-thumb="img/backgrounds/bg-home-fullscreen.jpg"
 						data-delay="10000" data-saveperformance="on"
-						data-title="We Are Vossen"><img
-						src="${sessionScope.curso.imagen }" alt="slidebg1"
-						data-bgposition="center top" data-bgfit="cover"
-						data-bgrepeat="no-repeat"> <!-- Home Heading -->
+						data-title="We Are Vossen"><c:choose>
+							<c:when test="${not empty sessionScope.curso.imagen }">
+								<img src="${sessionScope.curso.imagen }" alt="slidebg1"
+									data-bgposition="center top" data-bgfit="cover"
+									data-bgrepeat="no-repeat">
+							</c:when>
+							<c:otherwise>
+								<img src="img/portfolio/1.jpg" alt="slidebg1"
+									data-bgposition="center top" data-bgfit="cover"
+									data-bgrepeat="no-repeat">
+							</c:otherwise>
+						</c:choose> <!-- Home Heading -->
 						<div class="tp-caption sft" data-x="center" data-y="260"
 							data-speed="1200" data-start="1100"
 							data-easing="Power3.easeInOut" data-splitin="none"
@@ -103,7 +81,7 @@
 							data-splitout="none" data-elementdelay="0.1"
 							data-endelementdelay="0.1" data-endspeed="300"
 							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<div class="op-1">${sessionScope.curso.profesor_titular.nombre }</div>
+							<div class="op-1">${sessionScope.curso.profesor_titular }</div>
 						</div> <!-- Home Button -->
 						<div class="tp-caption home-button sft fadeout" data-x="center"
 							data-y="400" data-speed="1200" data-start="1550"
@@ -117,23 +95,37 @@
 									<c:choose>
 										<c:when test="${not empty mensaje1 }">
 											<div class="op-1">
-												<a href="#features" class="btn btn-primary btn-scroll">ENTRAR</a>
+												<a href="price-list" class="btn btn-primary btn-scroll">ENTRAR</a>
 											</div>
 										</c:when>
 										<c:when test="${not empty mensaje2 }">
 											<div class="op-1">
-												<a href="#features" class="btn btn-primary btn-scroll">VER
+												<a href="#services" class="btn btn-primary btn-scroll">VER
 													DATOS</a>
 											</div>
 										</c:when>
 										<c:when test="${not empty mensaje3 }">
 											<div class="op-1">
-												<a href="#features" class="btn btn-primary btn-scroll">MATRICULATE</a>
+												<a href="#" class="btn btn-primary btn-scroll">MATRICULATE</a>
+											</div>
+										</c:when>
+										<c:when test="${not empty mensaje }">
+											<div class="op-1">
+												<div class="error">${mensaje }</div>
+												<a href="#" class="btn btn-primary btn-scroll">MATRICULATE</a>
+											</div>
+										</c:when>
+										<c:when
+											test="${sessionScope.usuario.tipoUsuario.idtipoUsuario == 2}">
+											<div class="op-1">
+												<div class="error">${mensaje }</div>
+												<a href="#" class="btn btn-primary btn-scroll">AÑADIR UN
+													ALUMNO</a>
 											</div>
 										</c:when>
 										<c:otherwise>
 											<div class="op-1">
-												<a href="#features" class="btn btn-primary btn-scroll">MATRICULATE</a>
+												<a href="#" class="btn btn-primary btn-scroll">MATRICULATE</a>
 											</div>
 										</c:otherwise>
 									</c:choose>
@@ -186,50 +178,220 @@
 		</section>
 
 
-
-		<!-- Start Price List -->
+		<section id="alumnosMatriculados">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title wow fadeInUp">Alumnos matriculados</h3>
+				<p class="subheading wow fadeInUp">
+					<span class="highlight">Estos son los alumnos matriculados
+						en el curso ${sessionScope.curso.titulo }</span>
+				</p>
+				<c:if test="${not empty mensaje }">
+					<div id="message">
+						<p class="error_message">${mensaje }</p>
+					</div>
+				</c:if>
+			</div>
+			<div class="row">
+				<c:if test="${not empty alumnos }">
+					<c:forEach items="${alumnos }" var="alumno">
+						<c:if
+							test="${alumno.curso_actual.idcurso == sessionScope.curso.idcurso }">
+							<div class="col-md-3 col-sm-6 team-member">
+								<div class="effect effects wow fadeInUp">
+									<div class="img">
+										<c:choose>
+											<c:when test="${not empty alumno.username.imagen }">
+												<img src="${alumno.username.imagen }" class="img-responsive"
+													alt="" />
+											</c:when>
+											<c:otherwise>
+												<img src="img/clients/client-1.png" class="img-responsive"
+													alt="" />
+											</c:otherwise>
+										</c:choose>
+										<div class="overlay">
+											<ul class="expand">
+												<li class="social-icon"><a
+													href="usuarios?idusuario=${alumno.username.username }"><i
+														class="icon-eye"></i></a></li>
+												<c:if
+													test="${sessionScope.usuario.username == sessionScope.curso.profesor_titular  }">
+													<c:if test="${sessionScope.usuario.tipoUsuario ==3 }">
+													<li class="social-icon"><a
+														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=modifyAlumno&target=${alumno.username.username }"><i
+															class="ion-edit"></i></a></li>
+													</c:if>
+													<li class="social-icon"><a
+														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=deleteAlumno&target=${alumno.username.username }"><i
+															class="ion-trash-a"></i></a></li>
+												</c:if>
+											</ul>
+											<a class="close-overlay hidden">x</a>
+										</div>
+									</div>
+								</div>
+								<div class="member-info wow fadeInUp">
+									<h4></h4>
+									<p>${alumno.username.username }</p>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
+				</c:if>
+				<c:if
+					test="${sessionScope.usuario.username == sessionScope.curso.profesor_titular }">
+					<div class="col-md-12 text-center">
+						<p class="subheading wow fadeInUp">
+							<span class="highlight">Añada un nuevo alumno a su curso</span>
+						</p>
+					</div>
+					<div id="contact">
+						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+							<form method="post" action="cursos" name="addAlumnform"
+								id="addAlumnform">
+								<input name="target" type="text" id="target"
+									placeholder="Nombre de usuario del alumno" /> <input
+									name="accion" id="accion" type="hidden" value="addAlumno" /> <input
+									name="idcurso" id="idcurso" type="hidden"
+									value="${sessionScope.curso.idcurso }" /> <input type="submit"
+									class="submit" id="submit" value="AÑADIR ALUMNO" />
+							</form>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		</section>
 		<section id="price-list" class="parallax-section-6">
 		<div class="container">
 			<div class="col-md-12 text-center">
-				<h3 class="section-title white wow fadeInUp">Temario del curso</h3>
+				<h3 class="section-title white wow fadeInUp">Temario</h3>
 			</div>
 			<div class="row wow fadeInUp">
 				<c:choose>
 					<c:when test="${not empty secciones }">
 						<c:forEach items="${secciones }" var="seccion">
-							<c:if test="${seccion.curso.idcurso == $sessionScope.curso.idcurso }">
-							<div class="col-md-3 col-sm-6 price-list-box">
-								<div class="price-box">
-									<div class="price-table">
-										<h3 class="label">${seccion.titulo }</h3>
-										<p class="price grey">
-											<sup class="currency">$</sup> <span class="pricing">99
-												<span style="display: in">Hola</span>
-											</span> <span class="time-period">Per Month</span>
-										</p>
-										<p class="features grey">
-											<span class="feature">24/7 Free Support</span> <span
-												class="feature">100GB Storage</span> <span class="feature">1GB
-												Bandwidth</span> <span class="feature"></span> <span
-												class="feature no-border"></span> <span
-												class="feature option-button no-border"> <a href="#"
-												class="btn-effect">SIGN UP NOW!</a>
-											</span>
-
-										</p>
+							<c:if
+								test="${seccion.curso.idcurso == sessionScope.curso.idcurso }">
+								<div class="col-md-3 col-sm-6 price-list-box">
+									<div class="price-box">
+										<div class="price-table">
+											<h3 class="label">${seccion.titulo }</h3>
+											<c:if test="${not empty lecciones }">
+												<c:forEach items="${lecciones }" var="leccion">
+													<c:if
+														test="${leccion.seccion.idseccion == seccion.idseccion }">
+														<p class="price grey">
+															<span class="pricing">${leccion.titulo }
+														</p>
+														<c:if test="${not empty sessionScope.usuario }">
+															<c:forEach items="${alumnos }" var="alumno">
+																<c:if
+																	test="${sessionScope.usuario.username == alumno.username.username && sessionScope.curso.idcurso == alumno.curso_actual.idcurso }">
+																	<c:if test="${not empty materiales }">
+																		<c:forEach items="${materiales }" var="material">
+																			<p class="features grey">
+																				<a class="feature" href="${material.archivo }">${material.titulo }</a>
+																			</p>
+																		</c:forEach>
+																	</c:if>
+																</c:if>
+															</c:forEach>
+														</c:if>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</div>
 									</div>
 								</div>
-							</div>
 							</c:if>
 						</c:forEach>
 					</c:when>
-					<c:otherwise>
-					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
 		</section>
-		<!-- End Price List -->
+
+		<section id="profesoresCurso">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title wow fadeInUp">Profesores del curso</h3>
+				<p class="subheading wow fadeInUp">
+					<span class="highlight">Estos son los profesores del curso
+						${sessionScope.curso.titulo }</span>
+				</p>
+			</div>
+			<div class="row">
+				<c:if test="${not empty profesores }">
+					<c:forEach items="${profesores }" var="profesor">
+						<c:if
+							test="${profesor.curso_idcurso.idcurso == sessionScope.curso.idcurso }">
+							<div class="col-md-4 col-sm-4 team-member">
+								<div class="effect effects wow fadeInUp">
+									<div class="img">
+										<c:choose>
+											<c:when test="${not empty profesor.usuario_username.imagen }">
+												<img src="${profesor.usuario_username.imagen }" class="img-responsive"
+													alt="" />
+											</c:when>
+											<c:otherwise>
+												<img src="img/clients/client-1.png" class="img-responsive"
+													alt="" />
+											</c:otherwise>
+										</c:choose>
+										<div class="overlay">
+											<ul class="expand">
+												<li class="social-icon"><a
+													href="usuarios?idusuario=${alumno.username.username }"><i
+														class="icon-eye"></i></a></li>
+												<c:if
+													test="${sessionScope.usuario.username == sessionScope.curso.profesor_titular  }">
+													<c:if test="${sessionScope.usuario.tipoUsuario ==3 }">
+													<li class="social-icon"><a
+														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=modifyAlumno&target=${alumno.username.username }"><i
+															class="ion-edit"></i></a></li>
+													</c:if>
+													<li class="social-icon"><a
+														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=deleteAlumno&target=${alumno.username.username }"><i
+															class="ion-trash-a"></i></a></li>
+												</c:if>
+											</ul>
+											<a class="close-overlay hidden">x</a>
+										</div>
+									</div>
+								</div>
+								<div class="member-info wow fadeInUp">
+									<h4>${profesor.usuario_username.username }</h4>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
+				</c:if>
+				<c:if
+					test="${sessionScope.usuario.username == sessionScope.curso.profesor_titular }">
+					<div class="col-md-12 text-center">
+						<p class="subheading wow fadeInUp">
+							<span class="highlight">Añada un nuevo alumno a su curso</span>
+						</p>
+					</div>
+					<div id="contact">
+						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+							<form method="post" action="cursos" name="addAlumnform"
+								id="addAlumnform">
+								<input name="target" type="text" id="target"
+									placeholder="Nombre de usuario del alumno" /> <input
+									name="accion" id="accion" type="hidden" value="addAlumno" /> <input
+									name="idcurso" id="idcurso" type="hidden"
+									value="${sessionScope.curso.idcurso }" /> <input type="submit"
+									class="submit" id="submit" value="AÑADIR ALUMNO" />
+							</form>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		</section>
 
 		<!-- Start Footer 1 -->
 		<footer id="footer">
@@ -239,7 +401,7 @@
 
 					<div class="col-md-6 col-sm-12">
 						<p>
-							© 2015 Vossen Theme by <a href="index.html" class="logo">Vossen
+							© 2015 Vossen Theme by <a href="inicio" class="logo">Vossen
 								Design.</a> All Rights Reserved.
 						</p>
 					</div>

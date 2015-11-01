@@ -19,59 +19,7 @@
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 </head>
 <body>
-	<!--Start Header-->
-	<header> <nav class="navbar navbar-default navbar-alt"
-		role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#main-nav">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand to-top" rel="home" href="#"> <img
-				src="img/assets/logo-white.png" alt="Dokulearning" class="logo-big">
-				<img src="img/assets/logo-dark.png" alt="Dokulearning"
-				class="logo-small">
-			</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="main-nav">
-			<ul class="nav navbar-nav  navbar-right">
-
-				<li><a class="to-top">Home</a></li>
-				<li class="to-section"><a href="login.jsp">Login</a></li>
-				<!-- <li class="to-section"><a href="#team">Team</a></li>
-                            <li class="to-section"><a href="#portfolio">Portfolio</a></li>
-                            
-                            <li class="dropdown">
-                                <span class="dropdown-toggle" data-toggle="dropdown">Cursos <b class="caret"></b></span>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li class="active"><a href="#">Home - Parallax</a></li>
-                                    <li><a href="home-video.html">Home - Video Slider</a></li>
-                                    <li><a href="home-fullwidth.html">Home - Fullwidth</a></li>
-                                    <li><a href="home-landing-page.html">Home - Landing Page</a></li> 
-                                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                                    <li><a href="http://themeforest.net/user/VossenDesign/portfolio" id="btn-buy"><span class="btn-buy">Buy Now</span></a></li>
-                                </ul>
-                            </li> 
-                            
-                            <li class="to-section"><a href="#contact">Contact</a></li> -->
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-social-twitter"></i></a></li>
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-social-facebook"></i></a></li>
-				<li><a class="social-icon" href="#"><i
-						class="icon icon-support"></i></a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav> </header>
-	<!--End Header-->
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<!-- Start Home Revolution Slider Parallax Section -->
 	<section id="home-revolution-slider">
@@ -133,26 +81,40 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
@@ -184,31 +146,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular.nombre }</h4>
+													<h4 style="color: white;">${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -234,31 +210,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular.nombre }</h4>
+													<h4>${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -284,31 +274,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular.nombre }</h4>
+													<h4 style="color: white;">${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -334,31 +338,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular.nombre }</h4>
+													<h4>${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -384,31 +402,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular.nombre }</h4>
+													<h4 style="color: white;">${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -434,31 +466,45 @@
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
-														<img src="${curso.imagen }" class="img-responsive" alt="" />
+														<c:choose>
+															<c:when test="${not empty curso.imagen }">
+																<img src="${curso.imagen }" class="img-responsive"
+																	alt="" />
+															</c:when>
+															<c:otherwise>
+																<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
+															</c:otherwise>
+														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-facebook"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-twitter"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-youtube"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class="icon-social-dribbble"></i></a></li>
-																<li class="social-icon"><a href="#"
-																	onClick="return false;"><i
-																		class=" icon-envelope-open"></i></a></li>
+																<li class="cbp-l-caption-title">${curso.titulo }</li>
+																<li class="cbp-l-caption-desc">by
+																	${curso.profesor_titular }</li>
+																<li class="cbp-l-icon"><a
+																	href="cursos?idcurso=${curso.idcurso }"><i
+																		class="icon-info"></i></a></li>
+																<li class="cbp-l-caption-desc">Precio inicial:
+																	${curso.precio_inicial } €</li>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} €</li>
+																</c:if>
+																<c:if
+																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	<li class="cbp-l-caption-desc">Descuento:
+																		${curso.oferta.valor} %</li>
+																</c:if>
+																<li class="cbp-l-caption-desc">Precio final:
+																	${curso.precio_final } €</li>
+
 															</ul>
-															<a class="close-overlay hidden">x</a>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular.nombre }</h4>
+													<h4>${curso.profesor_titular }</h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -478,10 +524,9 @@
 		<div class="footer-copyright">
 			<div class="container">
 				<div class="row">
-
 					<div class="col-md-6 col-sm-12">
 						<p>
-							© 2015 Vossen Theme by <a href="index.html" class="logo">Vossen
+							© 2015 Vossen Theme by <a href="inicio" class="logo">Vossen
 								Design.</a> All Rights Reserved.
 						</p>
 					</div>
