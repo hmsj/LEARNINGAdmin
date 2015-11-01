@@ -249,7 +249,7 @@ public class InicioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String forwardJSP = "/principal.jsp";
+		String forwardJSP = "/login.jsp";
 		forward(request, response, forwardJSP);
 	}
 

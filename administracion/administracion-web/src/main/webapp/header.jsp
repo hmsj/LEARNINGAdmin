@@ -22,23 +22,29 @@
 			<ul class="nav navbar-nav  navbar-right">
 
 				<li><a class="to-section" href="principal.jsp">Home</a></li>
-				
+
 				<c:choose>
 					<c:when test="${sessionScope.usuario != null }">
 						<li class="dropdown"><span class="dropdown-toggle"
 							data-toggle="dropdown">Mi cuenta <b class="caret"></b></span>
 							<ul class="dropdown-menu" role="menu">
-								<li class="active"><a href="usuarios?username=${sessionScope.usuario.username }">Mi perfil</a></li>
+								<li class="active"><a
+									href="usuarios?username=${sessionScope.usuario.username }">Mi
+										perfil</a></li>
+								<c:if
+									test="${sessionScope.usuario.tipoUsuario.idtipoUsuario == 3}">
+									<li><a href="crearCurso.jsp">Añadir curso</a></li>
+									<li><a href="registro">Añadir usuario</a></li>
+								</c:if>
 								<li><a href="login?accion=salir">Logout</a></li>
-							</ul>
-						</li>
+							</ul></li>
 					</c:when>
 					<c:otherwise>
 						<li class="to-section"><a href="login">Login</a></li>
 						<li class="to-section"><a href="registro">Registrarse</a></li>
 					</c:otherwise>
 				</c:choose>
-				
+
 				<li><a class="social-icon" href="http://www.twitter.com"><i
 						class="icon icon-social-twitter"></i></a></li>
 				<li><a class="social-icon" href="http://www.facebook.com"><i
