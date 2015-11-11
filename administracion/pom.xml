@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.uc3m.tiw</groupId>
 	<artifactId>administracion</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 	<packaging>pom</packaging>
 	<name>TIW-Archetype</name>
 	<description>Archetype for rapid development. This archetype build a parent project with submodules like EAR, EJB, WAR, Util and Persistence model.
 	Useful for Internet Technologies for the web subject of Carlos III University. Computer Science</description>
-	
+
 
 
 	<organization>
@@ -46,9 +47,9 @@
 	</developers>
 	<properties>
 
-	<!-- GITHUB PAGES DEPLOY PROPERTIES -->
-	<github.global.server>github</github.global.server>
-			<!-- ======================== -->
+		<!-- GITHUB PAGES DEPLOY PROPERTIES -->
+		<github.global.server>github</github.global.server>
+		<!-- ======================== -->
 		<!-- PROJECT PROPERTIES -->
 		<!-- ======================== -->
 
@@ -61,7 +62,7 @@
 		<!-- ======================== -->
 		<!-- PLUGIN PROPERTIES -->
 		<!-- ======================== -->
-		
+
 		<plugin.assembly.version>2.5.3</plugin.assembly.version>
 		<plugin.checkstyle.version>2.15</plugin.checkstyle.version>
 		<plugin.clean.version>2.6.1</plugin.clean.version>
@@ -90,7 +91,7 @@
 		<plugin.wagon-webdav.version>1.0</plugin.wagon-webdav.version>
 		<plugin.versions.version>2.1</plugin.versions.version>
 		<plugin.war>2.6</plugin.war>
-		
+
 		<!-- ================================== -->
 		<!-- DEPENDENCIES PROPERTIES -->
 		<!-- ================================== -->
@@ -98,7 +99,7 @@
 		<junit.version>4.12</junit.version>
 		<commons.logging.version>1.2</commons.logging.version>
 		<jee.version>6.0</jee.version>
-		
+
 		<!-- ============================= -->
 		<!-- CODE ANALYSIS PROPERTIES -->
 		<!-- ============================= -->
@@ -106,12 +107,12 @@
 		<maven-checkstyle-plugin.configLocation>../code-analysis/checkstyle.xml</maven-checkstyle-plugin.configLocation>
 		<!-- @OVERRIDE as needed -->
 		<maven-pmd-plugin.configLocation>../code-analysis/pmd.xml</maven-pmd-plugin.configLocation>
-		
+
 		<!-- ======================== -->
 		<!-- SITE DOC PROPERTIES -->
 		<!-- ======================== -->
 
-		
+
 		<site-docs.url>/${env.HOME}/sitedocs/${project.artifactId}</site-docs.url>
 
 		<scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>
@@ -121,27 +122,27 @@
 		<repository.user>hmsj</repository.user>
 		<!-- @OVERRIDE this property per each project -->
 		<repository.name>LEARNINGAdmin</repository.name>
-		
+
 		<!-- @OVERRIDE [This is the branch that the web "pages" are located in. 
 			For GitHub, gh-pages; ] -->
 		<scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
 		<!-- @OVERRIDE [SCM location for documentation repository] -->
 		<scm-publish.pubScmUrl>scm:git:https://${repository.domain}/${repository.user}/${repository.name}.git</scm-publish.pubScmUrl>
 		<scm-publish.siteDocOuputDirectory>${project.reporting.outputDirectory}</scm-publish.siteDocOuputDirectory>
-		
-				<!-- ========================== -->
+
+		<!-- ========================== -->
 		<!-- CHANGE LOG PROPERTIES -->
 		<!-- ========================== -->
 		<!-- GitHub Changelog Parameters -->
 		<changelog.github.fileUri>${project.scm.url}/tree/master/%FILE%</changelog.github.fileUri>
 		<changelog.revision.github.fileUri>${project.scm.url}/commit</changelog.revision.github.fileUri>
-				<!-- NOTE: Choose the changelog File Uri for your project. By default, 
+		<!-- NOTE: Choose the changelog File Uri for your project. By default, 
 			this will fail if not setup -->
 		<!-- example: <changelog.fileUri>${changelog.bitbucket.fileUri}</changelog.fileUri> -->
 		<!-- @OVERRIDE ENFORCER will fail if these are not defined -->
 		<changelog.fileUri>${changelog.github.fileUri}</changelog.fileUri>
 		<changelog.revision.fileUri>${changelog.revision.github.fileUri}</changelog.revision.fileUri>
-				<!-- ============================= -->
+		<!-- ============================= -->
 		<!-- PLUGIN STATUS PROPERTIES -->
 		<!-- ============================= -->
 		<!-- @OVERRIDE as needed -->
@@ -150,64 +151,69 @@
 		<javadocs.skip>false</javadocs.skip>
 		<pmd.skip>false</pmd.skip>
 		<versions.skip>false</versions.skip>
-		
+
+		<local.glassfish.home>/home/tiw/glassfish4/glassfish</local.glassfish.home>
+		<local.glassfish.user>admin</local.glassfish.user>
+		<local.glassfish.domain>domain1</local.glassfish.domain>
+		<local.glassfish.passfile>${local.glassfish.home}/domains/${local.glassfish.domain}/config/domain-passwords</local.glassfish.passfile>
+
 	</properties>
-<url>https://${repository.domain}/${repository.user}/${repository.name}</url>
-		<scm>
+	<url>https://${repository.domain}/${repository.user}/${repository.name}</url>
+	<scm>
 		<connection>scm:git:https://${repository.domain}/${repository.user}/${repository.name}.git</connection>
 		<url>https://${repository.domain}/${repository.user}/${repository.name}</url>
 		<developerConnection>scm:git:https://${repository.domain}/${repository.user}/${repository.name}.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-		<prerequisites>
-		
+	<prerequisites>
+
 		<maven>3.2.0</maven>
 	</prerequisites>
-		
+
 	<inceptionYear>2015</inceptionYear>
-	
-		<issueManagement>
+
+	<issueManagement>
 		<url>https://www.github.com/${repository.user}/${repository.name}/issues</url>
 		<system>Github Issues</system>
 	</issueManagement>
-	
-		<distributionManagement>
+
+	<distributionManagement>
 		<site>
-   <id>github-pages-site</id>
-    <name>Deployment through GitHub's site deployment plugin</name>
-    <url>${project.version}</url>
+			<id>github-pages-site</id>
+			<name>Deployment through GitHub's site deployment plugin</name>
+			<url>${project.version}</url>
 		</site>
 	</distributionManagement>
-	  <dependencyManagement>
-    
-	<dependencies>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>${jee.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>${commons.logging.version}</version>
-		</dependency>
-		   <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-	        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>${jee.version}</version>
-            <scope>provided</scope>
-        </dependency>
-	</dependencies>
+	<dependencyManagement>
+
+		<dependencies>
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${jee.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons.logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-web-api</artifactId>
+				<version>${jee.version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 	<build>
-			<extensions>
+		<extensions>
 			<extension>
 				<!-- add support for ssh/scp -->
 				<groupId>org.apache.maven.wagon</groupId>
@@ -223,11 +229,11 @@
 		</extensions>
 		<pluginManagement>
 			<plugins>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${plugin.compiler.version}</version>
- 			<inherited>true</inherited>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${plugin.compiler.version}</version>
+					<inherited>true</inherited>
 					<configuration>
 						<verbose>true</verbose>
 						<fork>true</fork>
@@ -238,7 +244,7 @@
 						<meminitial>128m</meminitial>
 						<maxmem>512m</maxmem>
 					</configuration>
-            </plugin>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -424,7 +430,7 @@
 						</execution>
 					</executions>
 				</plugin>
-								<plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${plugin.pmd.version}</version>
@@ -523,7 +529,7 @@
 							<artifactId>doxia-module-markdown</artifactId>
 							<version>1.6</version>
 						</dependency>
-						
+
 					</dependencies>
 					<configuration>
 						<attach>true</attach>
@@ -541,8 +547,35 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
 		<plugins>
-		<plugin>
+			<plugin>
+				<groupId>org.glassfish.maven.plugin</groupId>
+				<artifactId>maven-glassfish-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<glassfishDirectory>${local.glassfish.home}</glassfishDirectory>
+					<user>admin</user>
+					<!-- <passwordFile>${local.glassfish.passfile}</passwordFile> -->
+					<adminPassword>admin</adminPassword>
+					<domain>
+						<name>domain1</name>
+						<httpPort>8080</httpPort>
+						<adminPort>4848</adminPort>
+					</domain>
+					<components>
+						<component>
+							<name>${project.artifactId}</name>
+							<artifact>${project.artifactId}-ear/target/${project.artifactId}-ear-${project.version}.ear</artifact>
+						</component>
+					</components>
+					<debug>true</debug>
+					<terse>false</terse>
+					<echo>true</echo>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<executions>
@@ -571,7 +604,8 @@
 									<message>Please set the property [changelog.revision.fileUri]
 										GitHub
 										(changelog.revision.github.fileUri) or
-										Other (make your own)</message>
+										Other (make your
+										own)</message>
 									<regexMessage>Please set the property
 										[changelog.revision.fileUri] to GitHub
 										(changelog.revision.github.fileUri)
@@ -609,7 +643,7 @@
 					</execution>
 				</executions>
 			</plugin>
-						<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 			</plugin>
@@ -646,11 +680,8 @@
 							<type>range</type>
 							<range>30</range>
 						</configuration>
-					<!-- Excluded for privacy only
-					<reports>
-							<report>changelog</report>
-						</reports>
-						-->
+						<!-- Excluded for privacy only <reports> <report>changelog</report> 
+							</reports> -->
 					</reportSet>
 					<reportSet>
 						<id>activty</id>
@@ -662,7 +693,7 @@
 							<range>30</range>
 						</configuration>
 						<reports>
-							<report>dev-activity</report> 
+							<report>dev-activity</report>
 							<report>file-activity</report>
 						</reports>
 					</reportSet>
@@ -745,7 +776,7 @@
 					<skipEmptyReport>false</skipEmptyReport>
 				</configuration>
 			</plugin>
-	<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
@@ -824,7 +855,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
-		<profiles>
+	<profiles>
 		<profile>
 			<id>reporting</id>
 			<build>
@@ -836,7 +867,7 @@
 						<configuration>
 							<message>Creating site for ${project.version}</message>
 							<path>${project.distributionManagement.site.url}</path>
-							 <merge>true</merge>
+							<merge>true</merge>
 						</configuration>
 						<executions>
 							<execution>
@@ -850,12 +881,12 @@
 				</plugins>
 			</build>
 		</profile>
-</profiles>
-  <modules>
-    <module>administracion-ejb</module>
-    <module>administracion-web</module>
-    <module>administracion-ear</module>
-    <module>administracion-util</module>
-    <module>administracion-model</module>
-  </modules>
+	</profiles>
+	<modules>
+		<module>administracion-ejb</module>
+		<module>administracion-web</module>
+		<module>administracion-ear</module>
+		<module>administracion-util</module>
+		<module>administracion-model</module>
+	</modules>
 </project>
