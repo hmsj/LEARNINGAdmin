@@ -68,7 +68,7 @@
 		<section id="cat1">
 		<div class="container">
 			<div>
-				<h2 class="content-title wow fadeInUp">Alumnos</h2>
+				<h2 class="content-title wow fadeInUp">Usuarios</h2>
 			</div>
 			<div class="row">
 				<c:if test="${not empty alumnos }">

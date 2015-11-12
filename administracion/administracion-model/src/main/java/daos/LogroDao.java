@@ -1,4 +1,4 @@
-package es.uc3m.tiw.daos;
+package daos;
 
 public interface LogroDao {
 
