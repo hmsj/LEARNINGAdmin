@@ -31,13 +31,14 @@
 								<li class="active"><a
 									href="usuarios?username=${sessionScope.usuario.username }">Mi
 										perfil</a></li>
-								<c:if
-									test="${sessionScope.usuario.tipoUsuario.idtipoUsuario == 3}">
-									<li><a href="crearCurso.jsp">Añadir curso</a></li>
-									<li><a href="registro">Añadir usuario</a></li>
-								</c:if>
 								<li><a href="login?accion=salir">Logout</a></li>
 							</ul></li>
+						<c:if
+							test="${sessionScope.usuario.tipoUsuario.idtipoUsuario == 3}">
+							<li><a href="/crearCurso.jsp">Añadir curso</a></li>
+							<li><a href="registro">Añadir usuario</a></li>
+							<li><a href="oferta">Añadir cupon</a></li>
+						</c:if>
 					</c:when>
 					<c:otherwise>
 						<li class="to-section"><a href="login">Login</a></li>

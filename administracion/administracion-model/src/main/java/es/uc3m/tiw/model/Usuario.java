@@ -11,37 +11,40 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
-	
-	@Column(nullable=false, unique=true)
+
+	@Column(nullable = false, unique = true)
 	private String username;
+
+	@Column(nullable = false)
+	private String password;
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nombre;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String apellido;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String descripcion;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String intereses;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String imagen;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Oferta idOferta;
-	
+	@Column(nullable = true)
+	private String correo;
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Direccion idDireccion;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Banco idBanco;
 
@@ -50,17 +53,18 @@ public class Usuario implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(String username, String nombre, String apellido,
-			String descripcion, String intereses, String imagen,
-			Oferta idOferta, Direccion idDireccion, Banco idBanco) {
+	public Usuario(String username, String password, String nombre, String apellido,
+			String descripcion, String intereses, String imagen, String correo,
+			Direccion idDireccion, Banco idBanco) {
 		super();
 		this.username = username;
+		this.password = password;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.descripcion = descripcion;
 		this.intereses = intereses;
 		this.imagen = imagen;
-		this.idOferta = idOferta;
+		this.correo = correo;
 		this.idDireccion = idDireccion;
 		this.idBanco = idBanco;
 	}
@@ -81,6 +85,14 @@ public class Usuario implements Serializable{
 		this.username = username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -116,17 +128,17 @@ public class Usuario implements Serializable{
 	public String getImagen() {
 		return imagen;
 	}
+	
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
-	}
-
-	public Oferta getIdOferta() {
-		return idOferta;
-	}
-
-	public void setIdOferta(Oferta idOferta) {
-		this.idOferta = idOferta;
 	}
 
 	public Direccion getIdDireccion() {

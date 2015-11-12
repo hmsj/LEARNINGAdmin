@@ -3,6 +3,9 @@ package es.uc3m.tiw.controladores;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,8 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.dominios.Usuario;
+import es.uc3m.tiw.daos.UsuarioDao;
+import es.uc3m.tiw.daos.UsuarioDaoImpl;
+import es.uc3m.tiw.model.Usuario;
+
+
 
 /**
  * Servlet implementation class LoginServlet
@@ -20,7 +28,14 @@ import es.uc3m.tiw.dominios.Usuario;
 @WebServlet(value="/login")//No se necesita loadonstartup
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ArrayList<Usuario> usuarios = new ArrayList<Usuario>(); 
+	Usuario usuario;
+	
+	@PersistenceContext(unitName="administracion-model")
+	private EntityManager em;
+	@Resource
+	private UserTransaction ut;
+	
+	private UsuarioDaoImpl usuarioDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,7 +48,8 @@ public class LoginServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
-		usuarios = (ArrayList<Usuario>) this.getServletContext().getAttribute("usuarios");
+		usuarioDao = new UsuarioDaoImpl(em, ut);
+		//usuarios = (ArrayList<Usuario>) this.getServletContext().getAttribute("usuarios");
 	}
 
 	/**
@@ -91,14 +107,14 @@ public class LoginServlet extends HttpServlet {
 	
 	
 	private Usuario comprobarUsuario(String username, String password){
-		Usuario user = null;
-			for (Usuario usuario : usuarios){
-				if(username.equals(usuario.getUsername()) && password.equals(usuario.getPassword())){
-					user = new Usuario();					
-					user = usuario;
-				}
-			}
-		return user;
+		Usuario usuario = null;
+		try {
+			usuario = usuarioDao.comprobarUsuarioUsernamePass(username, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return usuario;
 		
 	}
 

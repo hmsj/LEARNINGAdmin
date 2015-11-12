@@ -16,7 +16,7 @@ public class OfertaDaoImpl implements OfertaDao{
 	}
 
 	@Override
-	public Oferta createCurso(Oferta ofertaNueva) throws Exception{
+	public Oferta createOferta(Oferta ofertaNueva) throws Exception{
 		ut.begin();
 		em.persist(ofertaNueva);
 		ut.commit();

@@ -1,5 +1,7 @@
 package es.uc3m.tiw.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
@@ -21,6 +23,12 @@ public class CursoDaoImpl implements CursoDao{
 		em.persist(cursoNuevo);
 		ut.commit();
 		return cursoNuevo;
+	}
+
+	@Override
+	public List<Curso> findAll() throws Exception {
+		List<Curso> listaCursos = em.createQuery("SELECT c from Curso c",Curso.class).getResultList();
+		return listaCursos;
 	}
 	
 }
