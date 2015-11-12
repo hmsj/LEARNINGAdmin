@@ -59,9 +59,9 @@
                             
  							<li class="connected-icon">
                                 <a target="_blank" href="alumnos">
-                                    <span class="icon ion-university size-6x"></span>
-                                    <h4 class="white">Almunos</h4>
-                                    <span class="grey">Acceso al alumnado</span>
+                                    <span class="icon ion-person size-6x"></span>
+                                    <h4 class="white">Usuarios</h4>
+                                    <span class="grey">Acceso a los usuarios</span>
                                 </a>
                             </li>
                             
@@ -70,14 +70,6 @@
                                     <span class="icon ion-ios-bookmarks size-6x"></span>
                                     <h4 class="white">Cursos</h4>
                                     <span class="grey">Acceso a los cursos</span>
-                                </a>
-                            </li>
-                            
-                            <li class="connected-icon">
-                                <a target="_blank" href="profesores"> 
-                                    <span class="icon ion-ios-briefcase size-6x"></span>
-                                    <h4 class="white">Profesores</h4>
-                                    <span class="grey">Acceso al profesorado</span>
                                 </a>
                             </li>                                                                               
                     	</ul>        
