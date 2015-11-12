@@ -3,30 +3,19 @@ package es.uc3m.tiw.controladores;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.dominios.Alumno;
-import es.uc3m.tiw.dominios.Calificacion;
-import es.uc3m.tiw.dominios.Categoria;
-import es.uc3m.tiw.dominios.Curso;
-import es.uc3m.tiw.dominios.DatosBancarios;
-import es.uc3m.tiw.dominios.Direccion;
-import es.uc3m.tiw.dominios.Leccion;
-import es.uc3m.tiw.dominios.Material;
-import es.uc3m.tiw.dominios.Oferta;
-import es.uc3m.tiw.dominios.Profesor;
-import es.uc3m.tiw.dominios.Seccion;
-import es.uc3m.tiw.dominios.TipoDificultad;
-import es.uc3m.tiw.dominios.TipoLogro;
-import es.uc3m.tiw.dominios.TipoMaterial;
-import es.uc3m.tiw.dominios.TipoOferta;
-import es.uc3m.tiw.dominios.TipoUsuario;
-import es.uc3m.tiw.dominios.Usuario;
+import es.uc3m.tiw.daos.*;
+import es.uc3m.tiw.model.*;
+
 
 /**
  * Servlet implementation class InicioServlet
@@ -35,27 +24,48 @@ import es.uc3m.tiw.dominios.Usuario;
 public class InicioServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-    private static final int destacado = 1;
-    private static final int nodestacado = 0;
-    private static final int validado = 1;
-    private static final int novalidado = 0;
+	
+	@PersistenceContext(unitName="administracion-model")
+	EntityManager em;
+	@Resource
+	UserTransaction ut;
+	AlumnoCursoDao alumnoCursoDao;
+	AlumnoLeccionDao alumnoLeccionDao;
+	BancoDao bancoDao;
+	CategoriaDao categoriaDao;
+	CursoDao cursoDao;
+	DificultadDao dificultadDao;
+	DireccionDao direccionDao;
+	LeccionCursoDao leccionCursoDao;
+	ListaDeseosDao listaDeseosDao;
+	LogroDao logroDao;
+	MaterialLeccionDao materialLeccionDao;
+	OfertaDao ofertaDao;
+	ProfesorCursoDao profesorCursoDao;
+	SeccionCursoDao seccionCursoDao;
+	TipoOfertaDao tipoOfertaDao;
+	UsuarioDao usuarioDao;
+	
+    private static final boolean DESTACADO = true;
+    private static final boolean NODESTACADO = false;
+    private static final boolean VALIDADO = true;;
+    private static final boolean NOVALIDADO = false;
 
-    private ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
-	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
-    private ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+    private ArrayList<AlumnoCurso> alumnosCursos = new ArrayList<AlumnoCurso>();
+	private ArrayList<AlumnoLeccion> alumnosLecciones = new ArrayList<AlumnoLeccion>();
+	private ArrayList<Banco> bancos = new ArrayList<Banco>();
+	private ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 	private ArrayList<Curso> cursos = new ArrayList<Curso>();
-	private ArrayList<DatosBancarios> datosBancarios = new ArrayList<DatosBancarios>();
-	private ArrayList<Direccion> direcciones = new ArrayList<Direccion>();
-	private ArrayList<Leccion> lecciones = new ArrayList<Leccion>();
-	private ArrayList<Material> materiales = new ArrayList<Material>();
+    private ArrayList<Dificultad> dificultades = new ArrayList<Dificultad>();
+    private ArrayList<Direccion> direcciones = new ArrayList<Direccion>();
+	private ArrayList<LeccionCurso> leccionesCursos = new ArrayList<LeccionCurso>();
+    private ArrayList<ListaDeseos> listasDeseos = new ArrayList<ListaDeseos>();
+	private ArrayList<Logro> logros = new ArrayList<Logro>();
+    private ArrayList<MaterialLeccion> materialesLecciones = new ArrayList<MaterialLeccion>();
 	private ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
-	private ArrayList<Profesor> profesores = new ArrayList<Profesor>();
-	private ArrayList<Seccion> secciones = new ArrayList<Seccion>();
-    private ArrayList<TipoDificultad> tipoDificultades = new ArrayList<TipoDificultad>();
-    private ArrayList<TipoLogro> tipoLogros = new ArrayList<TipoLogro>();
-    private ArrayList<TipoMaterial> tipoMateriales = new ArrayList<TipoMaterial>();
-    private ArrayList<TipoOferta> tipoOfertas = new ArrayList<TipoOferta>();
-    private ArrayList<TipoUsuario> tipoUsuarios = new ArrayList<TipoUsuario>();
+	private ArrayList<ProfesorCurso> profesoresCursos = new ArrayList<ProfesorCurso>();
+	private ArrayList<SeccionCurso> seccionesCursos = new ArrayList<SeccionCurso>();
+    private ArrayList<TipoOferta> tiposOfertas = new ArrayList<TipoOferta>();
 	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     
 
@@ -69,17 +79,12 @@ public class InicioServlet extends HttpServlet {
     }
     
     public void init(javax.servlet.ServletConfig contexto) throws ServletException {
-    	TipoUsuario tipoUsuario1 = new TipoUsuario(1, "alumno");
-		TipoUsuario tipoUsuario2 = new TipoUsuario(2, "profesor");
-		TipoUsuario tipoUsuario3 = new TipoUsuario(3, "administrador");
-		tipoUsuarios.add(tipoUsuario1);
-		tipoUsuarios.add(tipoUsuario2);
-		tipoUsuarios.add(tipoUsuario3);
-		
-		TipoOferta tipoOferta1 = new TipoOferta(1, "Fijo");
-		TipoOferta tipoOferta2 = new TipoOferta(2, "Porcentaje");		
-		tipoOfertas.add(tipoOferta1);
-		tipoOfertas.add(tipoOferta2);
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+    	
+    	TipoOferta tipoOferta1 = new TipoOferta(1, "Fijo");
+		TipoOferta tipoOferta2 = new TipoOferta(2, "Porcentaje");
+		tipoOfertaDao.create(tipoOferta1);
+		tipoOfertaDao.create(tipoOferta2);
 		
 		TipoMaterial tipoMaterial1 = new TipoMaterial(1, "txt");
 		TipoMaterial tipoMaterial2 = new TipoMaterial(2, "pdf");

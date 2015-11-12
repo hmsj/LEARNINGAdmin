@@ -4,17 +4,19 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Logro  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
-	private Long idLogro;
+	private int idLogro;
 	
 	@Column(nullable=true)
 	private String descripcionLogro;
@@ -24,17 +26,17 @@ public class Logro  implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Logro(Long idLogro, String descripcionLogro) {
+	public Logro(int idLogro, String descripcionLogro) {
 		super();
 		this.idLogro = idLogro;
 		this.descripcionLogro = descripcionLogro;
 	}
 
-	public Long getIdLogro() {
+	public int getIdLogro() {
 		return idLogro;
 	}
 
-	public void setIdLogro(Long idLogro) {
+	public void setIdLogro(int idLogro) {
 		this.idLogro = idLogro;
 	}
 

@@ -3,17 +3,19 @@ package es.uc3m.tiw.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class TipoOferta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long idTipoOferta;
+	private int idTipoOferta;
 	
 	@Column(nullable=false)
 	private String descripcionTipoOferta;
@@ -23,17 +25,17 @@ public class TipoOferta implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoOferta(Long idTipoOferta, String descripcionTipoOferta) {
+	public TipoOferta(int idTipoOferta, String descripcionTipoOferta) {
 		super();
 		this.idTipoOferta = idTipoOferta;
 		this.descripcionTipoOferta = descripcionTipoOferta;
 	}
 
-	public Long getIdTipoOferta() {
+	public int getIdTipoOferta() {
 		return idTipoOferta;
 	}
 
-	public void setIdTipoOferta(Long idTipoOferta) {
+	public void setIdTipoOferta(int idTipoOferta) {
 		this.idTipoOferta = idTipoOferta;
 	}
 

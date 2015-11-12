@@ -3,17 +3,19 @@ package es.uc3m.tiw.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Categoria implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
-	private Long idCategoria;
+	private int idCategoria;
 	
 	@Column(nullable=false)
 	private String descripcionCategoria;
@@ -23,17 +25,17 @@ public class Categoria implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Categoria(Long idCategoria, String descripcionCategoria) {
+	public Categoria(int idCategoria, String descripcionCategoria) {
 		super();
 		this.idCategoria = idCategoria;
 		this.descripcionCategoria = descripcionCategoria;
 	}
 
-	public Long getIdCategoria() {
+	public int getIdCategoria() {
 		return idCategoria;
 	}
 
-	public void setIdCategoria(Long idCategoria) {
+	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 
