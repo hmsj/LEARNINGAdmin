@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
 	@Column(nullable = true)
 	private String imagen;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String correo;
 
 	@ManyToOne(cascade = CascadeType.ALL)

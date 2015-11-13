@@ -3,10 +3,20 @@ package es.uc3m.tiw.daos;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.model.Curso;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
 import es.uc3m.tiw.model.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao{
@@ -30,10 +40,10 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	@Override
 	public Usuario comprobarUsuarioUsernamePass(String username, String password)
 			throws Exception {
-		Query query =  em.createQuery("SELECT u FROM Usuario u where u.username=:username and u.password=:password", Usuario.class);
-		query.setParameter("username", username);
-		query.setParameter("password", password);
-		return (Usuario) query.getSingleResult();
+		Query q = em.createQuery("select u from Usuario u where u.username='"+username+"' and u.password='"+password+"'",Usuario.class);
+		q.setParameter("username", username);
+		q.setParameter("passwor", password);
+		return (Usuario) q.getSingleResult();
 	}
 
 	@Override

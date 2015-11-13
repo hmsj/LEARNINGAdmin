@@ -192,7 +192,14 @@ public class InicioServlet extends HttpServlet {
 		}
 		
 		
-		Usuario usuario1 = new Usuario("alumno1", "123456", "Pepito", "Registrado", null, null, null, "alumno2@dokulearning.es", direccion1, null);
+		Usuario usuario1 = new Usuario();
+		usuario1.setUsername("alumno1");
+		usuario1.setPassword("123456");
+		usuario1.setNombre("Pepito");
+		usuario1.setApellido("Registrado");
+		usuario1.setCorreo("alumno2@dokulearning.es");
+		usuario1.setIdDireccion(direccion1);
+		
 		Usuario usuario2 = new Usuario("alumno2", "123456", "Juanito", "Registrado",  null, null, null, "alumno2@dokulearning.es", direccion1, null);
 		Usuario usuario3 = new Usuario("alumno3", "123456", "Jorgito", "Registrado", null, null, null, "alumno3@dokulearning.es", direccion1, null);
 		Usuario usuario4 = new Usuario(	"profeUser", "123456", "Sita Carapapel", "Registrado", null, null, null, "profesor1@dokulearning.es", direccion2, banco2);

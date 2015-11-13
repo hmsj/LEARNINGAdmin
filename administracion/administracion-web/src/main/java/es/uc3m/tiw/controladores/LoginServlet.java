@@ -74,6 +74,7 @@ public class LoginServlet extends HttpServlet {
 		String forwardJSP = "";
 		String mensaje = "";
 		HttpSession sesion = request.getSession(true);
+		usuarioDao = new UsuarioDaoImpl(em, ut);
 		String usuario = request.getParameter("username");
 		String password = request.getParameter("password");
 		Usuario user = comprobarUsuario(usuario, password);
