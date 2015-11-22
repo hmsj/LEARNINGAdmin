@@ -27,17 +27,21 @@ public class ProfesorCurso implements Serializable{
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Curso idCurso;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Banco idBanco;
 
 	public ProfesorCurso() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfesorCurso(boolean titular, Usuario idUsuario, Curso idCurso) {
+	public ProfesorCurso(boolean titular, Usuario idUsuario, Curso idCurso, Banco idBanco) {
 		super();
 		this.titular = titular;
 		this.idUsuario = idUsuario;
 		this.idCurso = idCurso;
+		this.idBanco = idBanco;
 	}
 
 	public Long getIdProfesorCurso() {
@@ -70,6 +74,14 @@ public class ProfesorCurso implements Serializable{
 
 	public void setIdCurso(Curso idCurso) {
 		this.idCurso = idCurso;
+	}
+
+	public Banco getIdBanco() {
+		return idBanco;
+	}
+
+	public void setIdBanco(Banco idBanco) {
+		this.idBanco = idBanco;
 	}
 
 }

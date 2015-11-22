@@ -1,5 +1,7 @@
 package es.uc3m.tiw.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
@@ -22,5 +24,26 @@ public class MaterialLeccionDaoImpl implements MaterialLeccionDao{
 		em.persist(materialLeccionNuevo);
 		ut.commit();
 		return materialLeccionNuevo;
+	}
+
+	@Override
+	public void removeMaterial(MaterialLeccion material) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(material));
+		ut.commit();
+	}
+
+	@Override
+	public List<MaterialLeccion> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		List<MaterialLeccion> listadoMateriales = em.createQuery("SELECT m from MaterialLeccion m", MaterialLeccion.class).getResultList();
+		return listadoMateriales;
+	}
+
+	@Override
+	public MaterialLeccion findById(int idMaterial) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(MaterialLeccion.class, new Long(idMaterial));
 	}
 }

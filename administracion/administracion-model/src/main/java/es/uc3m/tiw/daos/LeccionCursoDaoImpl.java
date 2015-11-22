@@ -1,5 +1,7 @@
 package es.uc3m.tiw.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
@@ -21,6 +23,27 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 		em.persist(leccionCursoNueva);
 		ut.commit();
 		return leccionCursoNueva;
+	}
+
+	@Override
+	public void removeLeccion(LeccionCurso leccionCurso) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(leccionCurso));
+		ut.commit();
+	}
+
+	@Override
+	public List<LeccionCurso> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		List<LeccionCurso> listadoLeccionesCurso = em.createQuery("SELECT l from LeccionCurso l",LeccionCurso.class).getResultList();
+		return listadoLeccionesCurso;
+	}
+
+	@Override
+	public LeccionCurso findById(int idLeccion) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(LeccionCurso.class, new Long(idLeccion));
 	}
 	
 }

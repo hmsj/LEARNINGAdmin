@@ -26,6 +26,14 @@
           
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+        	<groupId>es.uc3m.tiw.model</groupId>
+        	<artifactId>administracion-model</artifactId>
+        	<version>${project.parent.version}</version>
+        	<scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -42,5 +50,4 @@
             
         </plugins>
     </build>
-
 </project>

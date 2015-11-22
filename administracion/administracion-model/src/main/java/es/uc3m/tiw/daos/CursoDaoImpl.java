@@ -30,5 +30,19 @@ public class CursoDaoImpl implements CursoDao{
 		List<Curso> listaCursos = em.createQuery("SELECT c from Curso c",Curso.class).getResultList();
 		return listaCursos;
 	}
+
+	@Override
+	public void removeCurso(Curso curso) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(curso));
+		ut.commit();
+	}
+
+	@Override
+	public Curso findById(Long idCurso) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Curso.class, new Long(idCurso));
+	}
 	
 }

@@ -22,5 +22,19 @@ public class DireccionDaoImpl implements DireccionDao{
 		ut.commit();
 		return direccionNueva;
 	}
+
+	@Override
+	public void removeDireccion(Direccion direccion) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(direccion));
+		ut.commit();
+	}
+
+	@Override
+	public Direccion findById(int idDireccion) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Direccion.class, new Long(idDireccion));
+	}
 	
 }

@@ -45,9 +45,6 @@ public class Usuario implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Direccion idDireccion;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Banco idBanco;
-
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,7 +52,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(String username, String password, String nombre, String apellido,
 			String descripcion, String intereses, String imagen, String correo,
-			Direccion idDireccion, Banco idBanco) {
+			Direccion idDireccion) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -66,7 +63,6 @@ public class Usuario implements Serializable {
 		this.imagen = imagen;
 		this.correo = correo;
 		this.idDireccion = idDireccion;
-		this.idBanco = idBanco;
 	}
 
 	public Long getIdUsuario() {
@@ -147,14 +143,6 @@ public class Usuario implements Serializable {
 
 	public void setIdDireccion(Direccion idDireccion) {
 		this.idDireccion = idDireccion;
-	}
-
-	public Banco getIdBanco() {
-		return idBanco;
-	}
-
-	public void setIdBanco(Banco idBanco) {
-		this.idBanco = idBanco;
 	}
 
 }

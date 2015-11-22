@@ -3,18 +3,7 @@ package es.uc3m.tiw.daos;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.transaction.UserTransaction;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.model.Usuario;
@@ -50,6 +39,20 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	public List<Usuario> findAll() throws Exception {
 		List<Usuario> listaUsuarios = em.createQuery("SELECT u from Usuario u",Usuario.class).getResultList();
 		return listaUsuarios;
+	}
+
+	@Override
+	public void removeUsuario(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(usuario));
+		ut.commit();
+	}
+
+	@Override
+	public Usuario findByUsername(String username) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Usuario.class, new String(username));
 	}
 	
 }

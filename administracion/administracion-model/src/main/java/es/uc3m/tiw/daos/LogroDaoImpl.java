@@ -1,5 +1,7 @@
 package es.uc3m.tiw.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
@@ -21,6 +23,19 @@ public class LogroDaoImpl implements LogroDao{
 		em.persist(logroNuevo);
 		ut.commit();
 		return logroNuevo;
+	}
+
+	@Override
+	public List<Logro> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		List<Logro> listadoLogros = em.createQuery("SELECT l from Logro l", Logro.class).getResultList();
+		return listadoLogros;
+	}
+
+	@Override
+	public Logro findById(int idLogro) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Logro.class, new Long(idLogro));
 	}
 	
 }

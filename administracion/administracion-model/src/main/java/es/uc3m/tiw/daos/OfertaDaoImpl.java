@@ -1,5 +1,7 @@
 package es.uc3m.tiw.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
@@ -22,4 +24,26 @@ public class OfertaDaoImpl implements OfertaDao{
 		ut.commit();
 		return ofertaNueva;
 	}
+
+	@Override
+	public void removeOferta(Oferta oferta) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.remove(em.merge(oferta));
+		ut.commit();
+	}
+	
+	@Override
+	public List<Oferta> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		List<Oferta> listadoOfertas = em.createQuery("SELECT o from Oferta o", Oferta.class).getResultList();
+		return listadoOfertas;
+	}
+
+	@Override
+	public Oferta findById(int idOferta) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Oferta.class, new Long(idOferta));
+	}
+
 }
