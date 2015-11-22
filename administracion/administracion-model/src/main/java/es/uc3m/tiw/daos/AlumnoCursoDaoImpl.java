@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.model.AlumnoCurso;
+import es.uc3m.tiw.model.Curso;
 
 public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 	private EntityManager em;
@@ -46,4 +47,14 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 		// TODO Auto-generated method stub
 		return em.find(AlumnoCurso.class, new String(alumnoUsername));
 	}
+
+	@Override
+	public AlumnoCurso comprobarAlumno(String alumnoUsername, long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		AlumnoCurso alumno = null;
+		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"' and a.idCurso='"+idCurso+"'", AlumnoCurso.class).getSingleResult();
+		return alumno;
+	}
+
 }

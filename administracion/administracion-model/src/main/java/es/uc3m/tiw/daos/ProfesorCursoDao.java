@@ -14,4 +14,7 @@ public interface ProfesorCursoDao {
 	
 	public abstract ProfesorCurso findByUsername(String profesorUsername) throws Exception;
 
+	public abstract ProfesorCurso comprobarProfesorInvitado(String profeInvUsername,
+			long idCurso) throws Exception;
+
 }

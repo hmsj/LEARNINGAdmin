@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
+import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.ProfesorCurso;
 
 public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
@@ -45,5 +46,14 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 			throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(ProfesorCurso.class, new String(profesorUsername));
+	}
+	
+	@Override
+	public ProfesorCurso comprobarProfesorInvitado(String profeInvUsername, long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		ProfesorCurso profeInvitado = null;
+		profeInvitado = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idUsuario.username='"+profeInvUsername+"' and p.idCurso='"+idCurso +"'", ProfesorCurso.class).getSingleResult();
+		return profeInvitado;
 	}
 }

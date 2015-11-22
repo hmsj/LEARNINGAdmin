@@ -2,7 +2,11 @@ package es.uc3m.tiw.controladores;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,16 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.dominios.Alumno;
-import es.uc3m.tiw.dominios.Categoria;
-import es.uc3m.tiw.dominios.Curso;
-import es.uc3m.tiw.dominios.Leccion;
-import es.uc3m.tiw.dominios.Material;
-import es.uc3m.tiw.dominios.Profesor;
-import es.uc3m.tiw.dominios.Seccion;
-import es.uc3m.tiw.dominios.TipoUsuario;
-import es.uc3m.tiw.dominios.Usuario;
+import es.uc3m.tiw.daos.*;
+import es.uc3m.tiw.model.*;
 
 /**
  * Servlet implementation class AlumnosServlet
@@ -27,9 +25,15 @@ import es.uc3m.tiw.dominios.Usuario;
 @WebServlet("/alumnos")
 public class AlumnosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private AlumnoCurso alumno;
        
-	ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+	List<AlumnoCurso> alumnos = new ArrayList<AlumnoCurso>();
 
+	@PersistenceContext(unitName = "administracion-model")
+	private EntityManager em;
+	@Resource
+	private UserTransaction ut;
+	private AlumnoCursoDaoImpl alumnoDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,8 +46,15 @@ public class AlumnosServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
-		alumnos = (ArrayList<Alumno>) this.getServletContext().getAttribute("alumnos");
-	}
+		alumnoDao = new AlumnoCursoDaoImpl(em, ut);
+		//alumnos = (ArrayList<Alumno>) this.getServletContext().getAttribute("alumnos");
+		try {
+			alumnos = alumnoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

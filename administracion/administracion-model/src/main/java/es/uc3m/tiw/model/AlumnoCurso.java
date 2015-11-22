@@ -16,7 +16,7 @@ public class AlumnoCurso implements Serializable{
 	@Column(nullable=true)
 	private double notaMedia;
 	
-	@Column(nullable=true)
+	@Column(nullable=false)
 	private boolean enCurso;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
