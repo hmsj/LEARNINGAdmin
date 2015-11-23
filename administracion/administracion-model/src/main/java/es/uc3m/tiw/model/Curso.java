@@ -37,13 +37,13 @@ public class Curso implements Serializable{
 	@Column(nullable=true)
 	private String imagen;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Oferta idOferta;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Categoria idCategoria;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Dificultad idDificultad;
 
 	public Curso() {

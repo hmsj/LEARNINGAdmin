@@ -27,7 +27,7 @@ public class MaterialLeccion implements Serializable{
 	@Column(nullable=false)
 	private String fichero;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private LeccionCurso idLeccion;
 	
 	public MaterialLeccion() {

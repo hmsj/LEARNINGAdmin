@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
 	@Column(nullable = false)
 	private String correo;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Direccion idDireccion;
 
 	public Usuario() {

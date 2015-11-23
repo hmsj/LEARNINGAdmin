@@ -19,13 +19,13 @@ public class AlumnoCurso implements Serializable{
 	@Column(nullable=false)
 	private boolean enCurso;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Usuario idUsuario;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Curso idCurso;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Logro idLogro;
 
 	public AlumnoCurso() {

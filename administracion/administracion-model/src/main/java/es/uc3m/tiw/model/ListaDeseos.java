@@ -18,10 +18,10 @@ public class ListaDeseos implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idListaDeseos;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Usuario idUsuario;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Curso idCurso;
 
 	public ListaDeseos() {

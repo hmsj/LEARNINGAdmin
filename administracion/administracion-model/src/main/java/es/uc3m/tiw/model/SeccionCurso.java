@@ -24,7 +24,7 @@ public class SeccionCurso implements Serializable{
 	@Column(nullable=false)
 	private String descripcion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Curso idCurso;
 
 	public SeccionCurso() {
