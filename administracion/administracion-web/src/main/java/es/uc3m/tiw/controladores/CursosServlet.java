@@ -59,7 +59,7 @@ public class CursosServlet extends HttpServlet {
 	List<LeccionCurso> lecciones = new ArrayList<LeccionCurso>();
 	List<MaterialLeccion> materiales = new ArrayList<MaterialLeccion>();
 	List<AlumnoCurso> alumnos = new ArrayList<AlumnoCurso>();
-	List<ProfesorCurso> profesores = new ArrayList<ProfesorCurso>();
+	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
 	List<Dificultad> dificultades = new ArrayList<Dificultad>();
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
@@ -126,7 +126,7 @@ public class CursosServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			profesores = profeDao.findAll();
+			profesoresCurso = profeDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -221,14 +221,14 @@ public class CursosServlet extends HttpServlet {
 								/*boolean yaEnCurso = comprobarProfesorYaEnCurso(
 										profe, course);*/
 								if (profeAyudante.isTitular()) {
-									for (int i = 0; i < profesores.size(); i++) {
-										if (course.getIdCurso() == profesores
+									for (int i = 0; i < profesoresCurso.size(); i++) {
+										if (course.getIdCurso() == profesoresCurso
 												.get(i).getIdCurso().getIdCurso()) {
 											if (profeAyudante
 													.getIdUsuario()
 													.getUsername()
 													.equalsIgnoreCase(
-															profesores
+															profesoresCurso
 																	.get(i)
 																	.getIdUsuario()
 																	.getUsername())) {
@@ -236,14 +236,14 @@ public class CursosServlet extends HttpServlet {
 												// eliminar al profesor titular
 												// del curso salvo el
 												// administrador
-												if (!profesores.get(i)
+												if (!profesoresCurso.get(i)
 														.isTitular()) {
-													profesores.remove(i);
+													profesoresCurso.remove(i);
 													mensaje = "El profesor ya se ha eliminado del curso";
 													this.getServletContext()
 															.setAttribute(
 																	"profesores",
-																	profesores);
+																	profesoresCurso);
 												} 
 											}
 										}
@@ -358,7 +358,8 @@ public class CursosServlet extends HttpServlet {
 
 							if (mensaje == null) {
 								profe.setIdCurso(course);
-								profesores.add(profe);
+								profe.setTitular(false);
+								profesoresCurso.add(profe);
 								mensaje = "El profesor ya se ha añadido en el curso";
 								this.getServletContext().setAttribute("cursos",
 										cursos);

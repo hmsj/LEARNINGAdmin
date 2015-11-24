@@ -179,6 +179,7 @@ public class RegistroServlet extends HttpServlet {
 			if(dirCreated!=null){
 				nuevoUsuario.setIdDireccion(nuevaDireccion);
 			}
+			nuevoUsuario.setAdmin(false);
 			Usuario userCreated = null;
 			try {
 				userCreated = usuarioDao.createUsuario(nuevoUsuario);

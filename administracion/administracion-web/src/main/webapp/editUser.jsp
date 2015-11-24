@@ -70,13 +70,13 @@
 							</span> <span class="feature"> <span class="highlight">Nombre:</span>
 								${sessionScope.usuario.nombre}
 							</span> <span class="feature"> <span class="highlight">Apellidos:</span>
-								${sessionScope.usuario.apellidos}
+								${sessionScope.usuario.apellido}
 							</span> <span class="feature"> <span class="highlight">E-mail:</span>
-								${sessionScope.usuario.email}
+								${sessionScope.usuario.correo}
 							</span>
 							<c:if test="${sessionScope.usuario.telefono != null }">
 								<span class="feature"> <span class="highlight">Telefono:</span>
-									${sessionScope.usuario.telefono}
+									${sessionScope.usuario.idDireccion.telefono}
 								</span>
 							</c:if>
 							<c:if test="${sessionScope.usuario.descripcion != null }">
@@ -112,14 +112,14 @@
 						<input name="nombreEdit" type="text" id="nombreEdit"
 							value="${sessionScope.usuario.nombre }" /> <input
 							name="apellidosEdit" type="text" id="apellidosEdit"
-							value="${sessionScope.usuario.apellidos }" /> <input
+							value="${sessionScope.usuario.apellido }" /> <input
 							name="usernameEdit" type="text" id="usernameEdit"
 							value="${sessionScope.usuario.username }" /> <input
 							name="emailEdit" type="text" id="emailEdit"
-							value="${sessionScope.usuario.email }" /> <input name="edadEdit"
+							value="${sessionScope.usuario.correo }" /> <input name="edadEdit"
 							type="number" id="edadEdit" value="${sessionScope.usuario.edad }" />
 						<input name="phoneEdit" type="tel" id="phoneEdit"
-							value="${sessionScope.usuario.telefono }" />
+							value="${sessionScope.usuario.idDireccion.telefono }" />
 
 					</fieldset>
 					<fieldset>
@@ -163,18 +163,19 @@
 				<div class="row">
 
 					<c:choose>
-						<c:when test="${not empty sessionScope.alumno.curso_actual }">
+					<c:forEach items="${alumnosCurso }" var="alumnoCurso">
+						<c:when test="${alumnoCurso.enCurso}">
 							<div class="col-md-6 text-left about-text">
-								<h2 class="content-title white wow fadeInUp">${sessionScope.alumno.curso_actual.titulo }</h2>
-								<p class="grey wow fadeInUp">${sessionScope.alumno.curso_actual.descripcion }</p>
+								<h2 class="content-title white wow fadeInUp">${alumnoCurso.idCurso.titulo }</h2>
+								<p class="grey wow fadeInUp">${alumnoCurso.idCurso.descripcion }</p>
 							</div>
 
 							<div class="col-md-6 wow fadeInUp">
 								<div class="container">
 									<c:choose>
 										<c:when
-											test="${not empty sessionScope.alumno.curso_actual.imagen }">
-											<img src="${sessionScope.alumno.curso_actual.imagen }"></img>
+											test="${not empty alumnoCurso.idCurso.imagen }">
+											<img src="${alumnoCurso.idCurso.imagen }"></img>
 										</c:when>
 										<c:otherwise>
 											<div class="row text-center wow fadeInUp">
@@ -188,6 +189,7 @@
 								</div>
 							</div>
 						</c:when>
+						</c:forEach>
 						<c:otherwise>
 							<div class="col-md-12 text-center">
 								<p class="subheading wow fadeInUp">No tienes ningun curso

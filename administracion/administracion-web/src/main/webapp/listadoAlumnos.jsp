@@ -71,14 +71,14 @@
 				<h2 class="content-title wow fadeInUp">Usuarios</h2>
 			</div>
 			<div class="row">
-				<c:if test="${not empty alumnos }">
-					<c:forEach items="${alumnos }" var="alumno">
+				<c:if test="${not empty usuarios }">
+					<c:forEach items="${usuarios }" var="usuario">
 						<div class="col-md-6 col-sm-4 team-member">
 							<div class="effect effects wow fadeInUp">
 								<div class="img">
 									<c:choose>
-										<c:when test="${not empty alumno.username.imagen }">
-											<img src="${alumno.username.imagen }" class="img-responsive"
+										<c:when test="${not empty usuario.imagen }">
+											<img src="${usuario.imagen }" class="img-responsive"
 												alt="" />
 										</c:when>
 										<c:otherwise>
@@ -87,11 +87,11 @@
 									</c:choose>
 									<div class="overlay">
 										<ul class="expand">
-											<li class="cbp-l-caption-title">${alumno.username.username }</li>
-											<c:if test="${not empty alumno.curso_actual.titulo }">
+											<li class="cbp-l-caption-title">${usuario.username }</li>
+											<!--<c:if test="${not empty alumno.curso_actual.titulo }">
 												<li class="cbp-l-caption-desc">Curso actual
 													${alumno.curso_actual.titulo }</li>
-											</c:if>
+											</c:if>-->
 										</ul>
 									</div>
 								</div>

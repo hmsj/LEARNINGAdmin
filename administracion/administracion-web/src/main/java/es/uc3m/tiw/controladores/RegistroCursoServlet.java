@@ -45,7 +45,7 @@ public class RegistroCursoServlet extends HttpServlet {
 
 	List<AlumnoCurso> alumnosCursos = new ArrayList<AlumnoCurso>();
 	List<Curso> cursos = new ArrayList<Curso>();
-	List<ProfesorCurso> profesores = new ArrayList<ProfesorCurso>();
+	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
 	List<SeccionCurso> secciones = new ArrayList<SeccionCurso>();
 	List<LeccionCurso> lecciones = new ArrayList<LeccionCurso>();
 	List<MaterialLeccion> materiales = new ArrayList<MaterialLeccion>();
@@ -89,7 +89,7 @@ public class RegistroCursoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			profesores = profesorCursoDao.findAll();
+			profesoresCurso = profesorCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

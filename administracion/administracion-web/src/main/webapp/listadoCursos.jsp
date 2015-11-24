@@ -66,18 +66,18 @@
 		<c:if test="${not empty categorias }">
 			<c:forEach items="${categorias }" var="categoria">
 				<c:choose>
-					<c:when test="${categoria.idcategoria == 1 }">
+					<c:when test="${categoria.idCategoria == 1 }">
 						<!-- Start Features Section -->
 						<section id="cat1">
 						<div class="container">
 							<div>
 								<h2 class="content-title wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria }</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 1 }">
+										<c:if test="${curso.idCategoria.idCategoria == 1 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -94,8 +94,10 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresCurso }" var="profesor">
+																	<li class="cbp-l-caption-desc">by
+																		${curso.profesor_titular }</li>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idcurso }"><i
 																		class="icon-info"></i></a></li>
