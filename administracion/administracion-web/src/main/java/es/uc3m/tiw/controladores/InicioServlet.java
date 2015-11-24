@@ -200,11 +200,11 @@ public class InicioServlet extends HttpServlet {
 		usuario1.setCorreo("alumno2@dokulearning.es");
 		usuario1.setIdDireccion(direccion1);
 		
-		Usuario usuario2 = new Usuario("alumno2", "123456", "Juanito", "Registrado",  null, null, null, "alumno2@dokulearning.es", direccion1);
-		Usuario usuario3 = new Usuario("alumno3", "123456", "Jorgito", "Registrado", null, null, null, "alumno3@dokulearning.es", direccion1);
-		Usuario usuario4 = new Usuario(	"profeUser", "123456", "Sita Carapapel", "Registrado", null, null, null, "profesor1@dokulearning.es", direccion2);
-		Usuario usuario5 = new Usuario(	"profeUser2", "123456", "Señorita Pepis", "Invitado", null, null, null, "profesor2@dokulearning.es",  direccion3);
-		Usuario usuario6 = new Usuario(	"adminUser", "123456", "Administrador", "Registrado", null, null, null,"admin@dokulearning.es", direccion3);
+		Usuario usuario2 = new Usuario("alumno2", "123456", "Juanito", "Registrado",  null, null, null, 25, "alumno2@dokulearning.es", direccion1);
+		Usuario usuario3 = new Usuario("alumno3", "123456", "Jorgito", "Registrado", null, null, null, 30, "alumno3@dokulearning.es", direccion1);
+		Usuario usuario4 = new Usuario(	"profeUser", "123456", "Sita Carapapel", "Registrado", null, null, null, 20, "profesor1@dokulearning.es", direccion2);
+		Usuario usuario5 = new Usuario(	"profeUser2", "123456", "Señorita Pepis", "Invitado", null, null, null, 20, "profesor2@dokulearning.es",  direccion3);
+		Usuario usuario6 = new Usuario(	"adminUser", "123456", "Administrador", "Registrado", null, null, null, 25, "admin@dokulearning.es", direccion3);
 		try {
 			usuarioDao.createUsuario(usuario1);
 			usuarioDao.createUsuario(usuario2);

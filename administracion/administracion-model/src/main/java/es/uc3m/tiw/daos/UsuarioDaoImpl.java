@@ -29,10 +29,9 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	@Override
 	public Usuario comprobarUsuarioUsernamePass(String username, String password)
 			throws Exception {
-		Query q = em.createQuery("select u from Usuario u where u.username='"+username+"' and u.password='"+password+"'",Usuario.class);
-		q.setParameter("username", username);
-		q.setParameter("passwor", password);
-		return (Usuario) q.getSingleResult();
+		Usuario usuario =null;
+		usuario = em.createQuery("SELECT u FROM Usuario u where u.username='"+username+"' and u.password='"+password+"'",Usuario.class).getSingleResult();
+		return usuario;
 	}
 
 	@Override

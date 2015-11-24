@@ -39,6 +39,9 @@ public class Usuario implements Serializable {
 	@Column(nullable = true)
 	private String imagen;
 	
+	@Column(nullable = true)
+	private int edad;
+	
 	@Column(nullable = false)
 	private String correo;
 
@@ -51,7 +54,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(String username, String password, String nombre, String apellido,
-			String descripcion, String intereses, String imagen, String correo,
+			String descripcion, String intereses, String imagen, int edad, String correo,
 			Direccion idDireccion) {
 		super();
 		this.username = username;
@@ -61,6 +64,7 @@ public class Usuario implements Serializable {
 		this.descripcion = descripcion;
 		this.intereses = intereses;
 		this.imagen = imagen;
+		this.edad = edad;
 		this.correo = correo;
 		this.idDireccion = idDireccion;
 	}
@@ -125,16 +129,24 @@ public class Usuario implements Serializable {
 		return imagen;
 	}
 	
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
+	public int getEdad() {
+		return edad;
+	}
+	
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	
 	public String getCorreo() {
 		return correo;
 	}
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
 	}
 
 	public Direccion getIdDireccion() {

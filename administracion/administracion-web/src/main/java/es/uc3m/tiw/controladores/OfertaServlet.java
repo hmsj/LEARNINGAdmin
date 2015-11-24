@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import es.uc3m.tiw.dominios.Usuario;
+import es.uc3m.tiw.model.Usuario;
+
 
 /**
  * Servlet implementation class OfertaServlet
