@@ -37,7 +37,7 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 	@Override
 	public List<ProfesorCurso> findAll() throws Exception {
 		// TODO Auto-generated method stub
-		List<ProfesorCurso> listadoProfesores = em.createQuery("SELECT p from ProfesorCurso m", ProfesorCurso.class).getResultList();
+		List<ProfesorCurso> listadoProfesores = em.createQuery("SELECT p from ProfesorCurso p", ProfesorCurso.class).getResultList();
 		return listadoProfesores;
 	}
 

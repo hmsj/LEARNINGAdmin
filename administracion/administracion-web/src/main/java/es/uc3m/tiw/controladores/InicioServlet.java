@@ -29,20 +29,7 @@ import es.uc3m.tiw.daos.ProfesorCursoDaoImpl;
 import es.uc3m.tiw.daos.SeccionCursoDaoImpl;
 import es.uc3m.tiw.daos.TipoOfertaDaoImpl;
 import es.uc3m.tiw.daos.UsuarioDaoImpl;
-import es.uc3m.tiw.model.AlumnoCurso;
-import es.uc3m.tiw.model.Banco;
-import es.uc3m.tiw.model.Categoria;
-import es.uc3m.tiw.model.Curso;
-import es.uc3m.tiw.model.Dificultad;
-import es.uc3m.tiw.model.Direccion;
-import es.uc3m.tiw.model.LeccionCurso;
-import es.uc3m.tiw.model.Logro;
-import es.uc3m.tiw.model.MaterialLeccion;
-import es.uc3m.tiw.model.Oferta;
-import es.uc3m.tiw.model.ProfesorCurso;
-import es.uc3m.tiw.model.SeccionCurso;
-import es.uc3m.tiw.model.TipoOferta;
-import es.uc3m.tiw.model.Usuario;
+import es.uc3m.tiw.model.*;
 
 
 /**
@@ -61,22 +48,22 @@ public class InicioServlet extends HttpServlet {
 	@Resource
 	UserTransaction ut;
 	
-	AlumnoCursoDaoImpl alumnoCursoDao;
-	AlumnoLeccionDaoImpl alumnoLeccionDao;
-	BancoDaoImpl bancoDao;
-	CategoriaDaoImpl categoriaDao;
-	CursoDaoImpl cursoDao;
-	DificultadDaoImpl dificultadDao;
-	DireccionDaoImpl direccionDao;
-	LeccionCursoDaoImpl leccionCursoDao;
-	ListaDeseosDaoImpl listaDeseosDao;
-	LogroDaoImpl logroDao;
-	MaterialLeccionDaoImpl materialLeccionDao;
-	OfertaDaoImpl ofertaDao;
-	ProfesorCursoDaoImpl profesorCursoDao;
-	SeccionCursoDaoImpl seccionCursoDao;
-	TipoOfertaDaoImpl tipoOfertaDao;
-	UsuarioDaoImpl usuarioDao;
+	AlumnoCursoDaoImpl alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+	AlumnoLeccionDaoImpl alumnoLeccionDao = new AlumnoLeccionDaoImpl(em, ut);
+	BancoDaoImpl bancoDao = new BancoDaoImpl(em, ut);
+	CategoriaDaoImpl categoriaDao = new CategoriaDaoImpl(em, ut);
+	CursoDaoImpl cursoDao = new CursoDaoImpl(em, ut);
+	DificultadDaoImpl dificultadDao = new DificultadDaoImpl(em, ut);
+	DireccionDaoImpl direccionDao = new DireccionDaoImpl(em, ut);
+	LeccionCursoDaoImpl leccionCursoDao = new LeccionCursoDaoImpl(em, ut);
+	ListaDeseosDaoImpl listaDeseosDao = new ListaDeseosDaoImpl(em, ut);
+	LogroDaoImpl logroDao = new LogroDaoImpl(em, ut);
+	MaterialLeccionDaoImpl materialLeccionDao = new MaterialLeccionDaoImpl(em, ut);
+	OfertaDaoImpl ofertaDao = new OfertaDaoImpl(em, ut);
+	ProfesorCursoDaoImpl profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
+	SeccionCursoDaoImpl seccionCursoDao = new SeccionCursoDaoImpl(em, ut);
+	TipoOfertaDaoImpl tipoOfertaDao = new TipoOfertaDaoImpl(em, ut);
+	UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl(em, ut);
 	
     private static final boolean DESTACADO = true;
     private static final boolean NODESTACADO = false;

@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (user != null) {
+		if (user != null && user.isAdmin()) {
 			forwardJSP = "/principal.jsp";
 			sesion.setAttribute("usuario", user);
 			sesion.setAttribute("acceso", "ok");

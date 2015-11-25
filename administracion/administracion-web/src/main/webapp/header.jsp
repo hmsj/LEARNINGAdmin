@@ -33,8 +33,8 @@
 										perfil</a></li>
 								<li><a href="login?accion=salir">Logout</a></li>
 							</ul></li>
-							<c:if test="${sessionScope.usuario.isAdmin }">
-								<li><a href="/crearCurso.jsp">Añadir curso</a></li>
+							<c:if test="${sessionScope.usuario.admin }">
+								<li><a href="nuevoCurso">Añadir curso</a></li>
 								<li><a href="registro">Añadir usuario</a></li>
 								<li><a href="oferta">Añadir cupon</a></li>
 							</c:if>

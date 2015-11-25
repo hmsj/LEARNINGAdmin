@@ -7,8 +7,7 @@
 	<version>2.0</version>
 	<packaging>pom</packaging>
 	<name>TIW-Archetype</name>
-	<description>Archetype for rapid development. This archetype build a parent project with submodules like EAR, EJB, WAR, Util and Persistence model.
-	Useful for Internet Technologies for the web subject of Carlos III University. Computer Science</description>
+	<description>Proyecto de administracion de la aplicacion de E-Learning desarrollada para la asignatura TIW de la Universidad Carlos III</description>
 
 
 

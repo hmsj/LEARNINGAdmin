@@ -25,15 +25,15 @@ import es.uc3m.tiw.model.*;
 @WebServlet("/alumnos")
 public class AlumnosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AlumnoCurso alumno;
+	private AlumnoCurso alumnoCurso;
        
-	List<AlumnoCurso> alumnos = new ArrayList<AlumnoCurso>();
+	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
 
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
 	private UserTransaction ut;
-	private AlumnoCursoDaoImpl alumnoDao;
+	private AlumnoCursoDaoImpl alumnoCursoDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,10 +46,10 @@ public class AlumnosServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
-		alumnoDao = new AlumnoCursoDaoImpl(em, ut);
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
 		//alumnos = (ArrayList<Alumno>) this.getServletContext().getAttribute("alumnos");
 		try {
-			alumnos = alumnoDao.findAll();
+			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

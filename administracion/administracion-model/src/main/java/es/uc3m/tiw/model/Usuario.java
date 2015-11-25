@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
 	private String correo;
 	
 	@Column(nullable = false)
-	private boolean isAdmin;
+	private boolean admin;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Direccion idDireccion;
@@ -57,7 +57,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(String username, String password, String nombre, String apellido,
-			String descripcion, String intereses, String imagen, int edad, String correo, boolean isAdmin,
+			String descripcion, String intereses, String imagen, int edad, String correo, boolean admin,
 			Direccion idDireccion) {
 		super();
 		this.username = username;
@@ -70,7 +70,7 @@ public class Usuario implements Serializable {
 		this.edad = edad;
 		this.correo = correo;
 		this.idDireccion = idDireccion;
-		this.isAdmin = isAdmin;
+		this.admin = admin;
 	}
 
 	public Long getIdUsuario() {
@@ -152,15 +152,15 @@ public class Usuario implements Serializable {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
+
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
-
+	
 	public Direccion getIdDireccion() {
 		return idDireccion;
 	}

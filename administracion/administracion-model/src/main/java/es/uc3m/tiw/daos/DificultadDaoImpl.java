@@ -35,7 +35,7 @@ public class DificultadDaoImpl implements DificultadDao{
 	@Override
 	public Dificultad findById(int idDificultad) throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(Dificultad.class, new Long(idDificultad));
+		return em.find(Dificultad.class, new Integer(idDificultad));
 	}
 	
 }

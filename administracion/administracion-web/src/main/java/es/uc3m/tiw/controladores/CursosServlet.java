@@ -46,19 +46,19 @@ public class CursosServlet extends HttpServlet {
 
 	private Curso curso;
 	private Categoria categoria;
-	private SeccionCurso seccion;
-	private LeccionCurso leccion;
-	private MaterialLeccion material;
-	private AlumnoCurso alumno;
-	private ProfesorCurso profesor;
+	private SeccionCurso seccionCurso;
+	private LeccionCurso leccionCurso;
+	private MaterialLeccion materialLeccion;
+	private AlumnoCurso alumnoCurso;
+	private ProfesorCurso profesorCurso;
 	private Dificultad dificultad;
 
 	List<Curso> cursos = new ArrayList<Curso>();
 	List<Categoria> categorias = new ArrayList<Categoria>();
-	List<SeccionCurso> secciones = new ArrayList<SeccionCurso>();
-	List<LeccionCurso> lecciones = new ArrayList<LeccionCurso>();
-	List<MaterialLeccion> materiales = new ArrayList<MaterialLeccion>();
-	List<AlumnoCurso> alumnos = new ArrayList<AlumnoCurso>();
+	List<SeccionCurso> seccionesCurso = new ArrayList<SeccionCurso>();
+	List<LeccionCurso> leccionesCurso = new ArrayList<LeccionCurso>();
+	List<MaterialLeccion> materialesLeccion = new ArrayList<MaterialLeccion>();
+	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
 	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
 	List<Dificultad> dificultades = new ArrayList<Dificultad>();
 	@PersistenceContext(unitName = "administracion-model")
@@ -68,9 +68,9 @@ public class CursosServlet extends HttpServlet {
 
 	private CursoDaoImpl cursoDao;
 	private CategoriaDaoImpl categoriaDao;
-	private SeccionCursoDaoImpl seccionDao;
-	private LeccionCursoDaoImpl leccionDao;
-	private MaterialLeccionDaoImpl materialDao;
+	private SeccionCursoDaoImpl seccionCursoDao;
+	private LeccionCursoDaoImpl leccionCursoDao;
+	private MaterialLeccionDaoImpl materialLeccionDao;
 	private AlumnoCursoDaoImpl alumnoCursoDao;
 	private ProfesorCursoDaoImpl profeDao;
 	private DificultadDaoImpl dificultadDao;
@@ -102,25 +102,25 @@ public class CursosServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			secciones = seccionDao.findAll();
+			seccionesCurso = seccionCursoDao.findAll();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
-			lecciones = leccionDao.findAll();
+			leccionesCurso = leccionCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			materiales = materialDao.findAll();
+			materialesLeccion = materialLeccionDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			alumnos = alumnoCursoDao.findAll();
+			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,18 +180,18 @@ public class CursosServlet extends HttpServlet {
 									mensaje = "El alumno no está matriculado en este curso";
 
 								if (mensaje == null) {
-									for (int i = 0; i < alumnos.size(); i++) {
-										if (alumnos
+									for (int i = 0; i < alumnosCurso.size(); i++) {
+										if (alumnosCurso
 												.get(i)
 												.getIdUsuario()
 												.getUsername()
 												.equalsIgnoreCase(
 														alumn.getIdUsuario()
 																.getUsername())) {
-											alumnos.get(i).setEnCurso(false);
+											alumnosCurso.get(i).setEnCurso(false);
 											this.getServletContext()
 													.setAttribute("alumnos",
-															alumnos);
+															alumnosCurso);
 											mensaje = "El alumno se ha eliminado del curso";
 										}
 									}
@@ -314,17 +314,17 @@ public class CursosServlet extends HttpServlet {
 								mensaje = "El alumno ya está matriculado en este curso";
 
 							if (mensaje == null) {
-								for (int i = 0; i < alumnos.size(); i++) {
-									if (alumnos
+								for (int i = 0; i < alumnosCurso.size(); i++) {
+									if (alumnosCurso
 											.get(i)
 											.getIdUsuario()
 											.getUsername()
 											.equalsIgnoreCase(
 													alumn.getIdUsuario()
 															.getUsername())) {
-										alumnos.get(i).setIdCurso(course);
+										alumnosCurso.get(i).setIdCurso(course);
 										this.getServletContext().setAttribute(
-												"alumnos", alumnos);
+												"alumnos", alumnosCurso);
 										mensaje = "El alumno ya se ha matriculado en el curso";
 									}
 								}

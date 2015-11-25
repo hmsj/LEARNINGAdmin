@@ -36,7 +36,7 @@ public class CategoriaDaoImpl implements CategoriaDao {
 	@Override
 	public Categoria findById(int idCategoria) throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(Categoria.class, new Long(idCategoria));
+		return em.find(Categoria.class, new Integer(idCategoria));
 	}
 
 }

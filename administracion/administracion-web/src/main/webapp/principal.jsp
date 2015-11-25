@@ -58,7 +58,7 @@
                     	<ul class="connected-icons text-center">
                             
  							<li class="connected-icon">
-                                <a target="_blank" href="alumnos">
+                                <a target="_self" href="alumnos">
                                     <span class="icon ion-person size-6x"></span>
                                     <h4 class="white">Usuarios</h4>
                                     <span class="grey">Acceso a los usuarios</span>
@@ -66,7 +66,7 @@
                             </li>
                             
                             <li class="connected-icon">
-                                <a target="_blank" href="cursos">
+                                <a target="_self" href="cursos">
                                     <span class="icon ion-ios-bookmarks size-6x"></span>
                                     <h4 class="white">Cursos</h4>
                                     <span class="grey">Acceso a los cursos</span>

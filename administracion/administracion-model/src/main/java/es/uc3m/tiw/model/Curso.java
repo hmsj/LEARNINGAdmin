@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -37,13 +38,13 @@ public class Curso implements Serializable{
 	@Column(nullable=true)
 	private String imagen;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@OneToOne
 	private Oferta idOferta;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@OneToOne
 	private Categoria idCategoria;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@OneToOne
 	private Dificultad idDificultad;
 
 	public Curso() {

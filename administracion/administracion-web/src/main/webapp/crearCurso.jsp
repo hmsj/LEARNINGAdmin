@@ -80,13 +80,13 @@
 		<div class="row">
 
 			<div class="col-md-12">
-				<h2 class="section-title wow fadeInUp">AÑADE TU CURSO</h2>
+				<h2 class="section-title wow fadeInUp">AÑADE UN CURSO</h2>
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<c:if test="${not empty mensajeError }">
+				<c:if test="${not empty mensaje }">
 					<div id="message">
-						<p class="error_message">${mensajeError }</p>
+						<p class="error_message">${mensaje }</p>
 					</div>
 				</c:if>
 				<form method="post" action="nuevoCurso" name="cursoForm"
@@ -95,16 +95,23 @@
 					<fieldset>
 						<input name="tituloCurso" type="text" id="tituloCurso"
 							placeholder="Titulo del curso*" />
-						<input name="categoriaCurso" type="text" id="categoriaCurso"
-							placeholder="Caregoria del curso*" />
+						<select name="categoriaCurso" id="categoriaCurso">
+							<option value="0" selected="selected"> Seleccione una categoria*</option>
+							<c:forEach items="${categorias }" var="categoria">
+								<option value="${categoria.idCategoria }"> ${categoria.descripcionCategoria }</option>
+							</c:forEach>
+						</select>
+						<select name="dificultadCurso" id="dificultadCurso">
+							<option value="0" selected="selected"> Seleccione una dificultad*</option>
+							<c:forEach items="${dificultades }" var="dificultad">
+								<option value="${dificultad.idDificultad }"> ${dificultad.descripcionDificultad }</option>
+							</c:forEach>
+						</select>
+						<input name="precioCurso" type="text" id="precioCurso"
+							placeholder="Precio del curso*" />
 						<textarea name="descripcionCurso" cols="40" rows="3"
 							id="descripcionCurso" placeholder="Descripcion del curso"></textarea>
-						<input name="tituloSeccion" type="text" id="tituloSeccion" placeholder="Titulo de seccion" /> 
-						<input name="tituloLeccion" type="text" id="tituloLeccion" placeholder="Titulo de leccion" />
-						<textarea name="descripcionLeccion" cols="40" rows="3" id="descripcionLeccion"
-							placeholder="Descripcion de la leccion"></textarea>
-						<input name="tituloMaterial" type="text" id="tituloMaterial" placeholder="Titulo del material" />
-						<input type="file" name="file" size="60" placeholder="seleccione el archivo que desea subir"/>
+						<input type="file" name="imgCurso" size="60" placeholder="Seleccione una imagen para el curso"/>
        
 					</fieldset>
 					<input type="submit" class="submit" id="submit"
