@@ -41,7 +41,7 @@ public class SeccionCursoDaoImpl implements SeccionCursoDao{
 	}
 
 	@Override
-	public SeccionCurso findById(int idSeccion) throws Exception {
+	public SeccionCurso findById(Long idSeccion) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(SeccionCurso.class, new Long(idSeccion));
 	}

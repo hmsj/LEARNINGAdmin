@@ -10,6 +10,8 @@ public interface CursoDao {
 	
 	public abstract void removeCurso (Curso curso) throws Exception;
 
+	public abstract Curso modifyCurso(Curso curso) throws Exception;
+
 	public abstract List<Curso> findAll() throws Exception;
 	
 	public abstract Curso findById(Long idCurso) throws Exception;

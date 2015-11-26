@@ -41,7 +41,7 @@ public class OfertaDaoImpl implements OfertaDao{
 	}
 
 	@Override
-	public Oferta findById(int idOferta) throws Exception {
+	public Oferta findById(Long idOferta) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(Oferta.class, new Long(idOferta));
 	}

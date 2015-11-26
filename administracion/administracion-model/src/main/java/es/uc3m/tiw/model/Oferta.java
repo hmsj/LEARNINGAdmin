@@ -24,7 +24,7 @@ public class Oferta implements Serializable{
 	@Column(nullable=false)
 	private String fechaFin;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private TipoOferta tipoOferta;
 
 	public Oferta() {

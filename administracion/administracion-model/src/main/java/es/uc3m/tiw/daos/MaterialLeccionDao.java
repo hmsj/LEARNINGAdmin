@@ -12,6 +12,6 @@ public interface MaterialLeccionDao {
 
 	public abstract List<MaterialLeccion> findAll() throws Exception;
 	
-	public abstract MaterialLeccion findById(int idMaterial) throws Exception;
+	public abstract MaterialLeccion findById(Long idMaterial) throws Exception;
 
 }

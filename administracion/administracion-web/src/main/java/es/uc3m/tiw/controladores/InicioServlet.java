@@ -13,22 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
-import es.uc3m.tiw.daos.AlumnoLeccionDaoImpl;
-import es.uc3m.tiw.daos.BancoDaoImpl;
-import es.uc3m.tiw.daos.CategoriaDaoImpl;
-import es.uc3m.tiw.daos.CursoDaoImpl;
-import es.uc3m.tiw.daos.DificultadDaoImpl;
-import es.uc3m.tiw.daos.DireccionDaoImpl;
-import es.uc3m.tiw.daos.LeccionCursoDaoImpl;
-import es.uc3m.tiw.daos.ListaDeseosDaoImpl;
-import es.uc3m.tiw.daos.LogroDaoImpl;
-import es.uc3m.tiw.daos.MaterialLeccionDaoImpl;
-import es.uc3m.tiw.daos.OfertaDaoImpl;
-import es.uc3m.tiw.daos.ProfesorCursoDaoImpl;
-import es.uc3m.tiw.daos.SeccionCursoDaoImpl;
-import es.uc3m.tiw.daos.TipoOfertaDaoImpl;
-import es.uc3m.tiw.daos.UsuarioDaoImpl;
+import es.uc3m.tiw.daos.*;
 import es.uc3m.tiw.model.*;
 
 
@@ -48,22 +33,22 @@ public class InicioServlet extends HttpServlet {
 	@Resource
 	UserTransaction ut;
 	
-	AlumnoCursoDaoImpl alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
-	AlumnoLeccionDaoImpl alumnoLeccionDao = new AlumnoLeccionDaoImpl(em, ut);
-	BancoDaoImpl bancoDao = new BancoDaoImpl(em, ut);
-	CategoriaDaoImpl categoriaDao = new CategoriaDaoImpl(em, ut);
-	CursoDaoImpl cursoDao = new CursoDaoImpl(em, ut);
-	DificultadDaoImpl dificultadDao = new DificultadDaoImpl(em, ut);
-	DireccionDaoImpl direccionDao = new DireccionDaoImpl(em, ut);
-	LeccionCursoDaoImpl leccionCursoDao = new LeccionCursoDaoImpl(em, ut);
-	ListaDeseosDaoImpl listaDeseosDao = new ListaDeseosDaoImpl(em, ut);
-	LogroDaoImpl logroDao = new LogroDaoImpl(em, ut);
-	MaterialLeccionDaoImpl materialLeccionDao = new MaterialLeccionDaoImpl(em, ut);
-	OfertaDaoImpl ofertaDao = new OfertaDaoImpl(em, ut);
-	ProfesorCursoDaoImpl profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
-	SeccionCursoDaoImpl seccionCursoDao = new SeccionCursoDaoImpl(em, ut);
-	TipoOfertaDaoImpl tipoOfertaDao = new TipoOfertaDaoImpl(em, ut);
-	UsuarioDaoImpl usuarioDao = new UsuarioDaoImpl(em, ut);
+	AlumnoCursoDao alumnoCursoDao;
+	AlumnoLeccionDao alumnoLeccionDao;
+	BancoDao bancoDao;
+	CategoriaDao categoriaDao;
+	CursoDao cursoDao;
+	DificultadDao dificultadDao;
+	DireccionDao direccionDao;
+	LeccionCursoDao leccionCursoDao;
+	ListaDeseosDao listaDeseosDao;
+	LogroDao logroDao;
+	MaterialLeccionDao materialLeccionDao;
+	OfertaDao ofertaDao;
+	ProfesorCursoDao profesorCursoDao;
+	SeccionCursoDao seccionCursoDao;
+	TipoOfertaDao tipoOfertaDao;
+	UsuarioDao usuarioDao;
 	
     private static final boolean DESTACADO = true;
     private static final boolean NODESTACADO = false;

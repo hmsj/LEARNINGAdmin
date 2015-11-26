@@ -10,6 +10,8 @@ public interface AlumnoLeccionDao {
 
 	public abstract void removeAlumnoLeccion (AlumnoLeccion alumnoLeccion) throws Exception;
 
+	public abstract AlumnoLeccion modifyAlumnoLeccion(AlumnoLeccion alumnoLeccion) throws Exception;
+
 	public abstract List<AlumnoLeccion> findAll() throws Exception;
 	
 	public abstract AlumnoLeccion findByUsername(String alumnoLeccionUsername) throws Exception;

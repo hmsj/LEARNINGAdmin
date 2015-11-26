@@ -42,7 +42,7 @@ public class MaterialLeccionDaoImpl implements MaterialLeccionDao{
 	}
 
 	@Override
-	public MaterialLeccion findById(int idMaterial) throws Exception {
+	public MaterialLeccion findById(Long idMaterial) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(MaterialLeccion.class, new Long(idMaterial));
 	}

@@ -32,7 +32,16 @@ public class DireccionDaoImpl implements DireccionDao{
 	}
 
 	@Override
-	public Direccion findById(int idDireccion) throws Exception {
+	public Direccion modifyDireccion(Direccion direccion) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.merge(direccion);
+		ut.commit();
+		return direccion;
+	}
+	
+	@Override
+	public Direccion findById(Long idDireccion) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(Direccion.class, new Long(idDireccion));
 	}

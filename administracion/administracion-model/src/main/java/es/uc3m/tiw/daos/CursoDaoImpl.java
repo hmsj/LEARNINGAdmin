@@ -40,6 +40,15 @@ public class CursoDaoImpl implements CursoDao{
 	}
 
 	@Override
+	public Curso modifyCurso(Curso curso) throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.merge(curso);
+		ut.commit();
+		return curso;
+	}
+	
+	@Override
 	public Curso findById(Long idCurso) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(Curso.class, new Long(idCurso));

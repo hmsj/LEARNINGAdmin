@@ -34,6 +34,16 @@ public class AlumnoLeccionDaoImpl implements AlumnoLeccionDao{
 	}
 
 	@Override
+	public AlumnoLeccion modifyAlumnoLeccion(AlumnoLeccion alumnoLeccion)
+			throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.merge(alumnoLeccion);
+		ut.commit();
+		return alumnoLeccion;
+	}	
+	
+	@Override
 	public List<AlumnoLeccion> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		List<AlumnoLeccion> listadoAlumnosLeccion = em.createQuery("SELECT a FROM AlumnoLeccion a", AlumnoLeccion.class).getResultList();
@@ -45,6 +55,6 @@ public class AlumnoLeccionDaoImpl implements AlumnoLeccionDao{
 			throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(AlumnoLeccion.class, new String(alumnoLeccionUsername));
-	}	
-	
+	}
+
 }

@@ -37,8 +37,8 @@ public class RegistroServlet extends HttpServlet {
 	@Resource
 	private UserTransaction ut;
 
-	private UsuarioDaoImpl usuarioDao;
-	private DireccionDaoImpl direccionDao;
+	private UsuarioDao usuarioDao;
+	private DireccionDao direccionDao;
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -52,6 +52,8 @@ public class RegistroServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
+		usuarioDao = new UsuarioDaoImpl(em, ut);
+		direccionDao = new DireccionDaoImpl(em, ut);
 		try {
 			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {

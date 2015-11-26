@@ -11,8 +11,10 @@ public interface ListaDeseosDao {
 
 	public abstract void removeListaDeseos (ListaDeseos listaDeseos) throws Exception;
 
+	public abstract ListaDeseos modifyListaDeseos(ListaDeseos listaDeseos) throws Exception;
+
 	public abstract List<ListaDeseos> findAll() throws Exception;
 	
-	public abstract ListaDeseos findById(int idListaDeseos) throws Exception;
+	public abstract ListaDeseos findById(Long idListaDeseos) throws Exception;
 
 }

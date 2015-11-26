@@ -16,5 +16,9 @@ public interface ProfesorCursoDao {
 
 	public abstract ProfesorCurso comprobarProfesorInvitado(String profeInvUsername,
 			long idCurso) throws Exception;
-
+	
+	public abstract ProfesorCurso comprobarProfesorTitular(String profeTitUsername,
+			long idCurso) throws Exception;
+	
+	public abstract List<ProfesorCurso> listadoProfesInvitados(long idCurso) throws Exception;
 }

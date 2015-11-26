@@ -10,8 +10,11 @@ public interface LeccionCursoDao {
 
 	public abstract void removeLeccion (LeccionCurso leccionCurso) throws Exception;
 
+	public abstract LeccionCurso modifyLeccionCurso(LeccionCurso leccionCurso) throws Exception;
+
 	public abstract List<LeccionCurso> findAll() throws Exception;
 	
-	public abstract LeccionCurso findById (int idLeccion) throws Exception;
+	public abstract LeccionCurso findById (Long idLeccion) throws Exception;
 
+	
 }

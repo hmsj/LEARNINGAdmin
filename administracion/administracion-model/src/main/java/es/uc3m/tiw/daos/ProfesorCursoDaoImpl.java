@@ -37,7 +37,7 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 	@Override
 	public List<ProfesorCurso> findAll() throws Exception {
 		// TODO Auto-generated method stub
-		List<ProfesorCurso> listadoProfesores = em.createQuery("SELECT p from ProfesorCurso p", ProfesorCurso.class).getResultList();
+		List<ProfesorCurso> listadoProfesores = em.createQuery("SELECT p FROM ProfesorCurso p", ProfesorCurso.class).getResultList();
 		return listadoProfesores;
 	}
 
@@ -53,7 +53,24 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 			throws Exception {
 		// TODO Auto-generated method stub
 		ProfesorCurso profeInvitado = null;
-		profeInvitado = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idUsuario.username='"+profeInvUsername+"' and p.idCurso='"+idCurso +"'", ProfesorCurso.class).getSingleResult();
+		profeInvitado = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idUsuario.username='"+profeInvUsername+"' AND p.idCurso='"+ idCurso +"' AND p.titular='"+ false +"'", ProfesorCurso.class).getSingleResult();
 		return profeInvitado;
+	}
+
+	@Override
+	public ProfesorCurso comprobarProfesorTitular(String profeTitUsername,
+			long idCurso) throws Exception {
+		// TODO Auto-generated method stub
+		ProfesorCurso profeTitular = null;
+		profeTitular = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idUsuario.username='"+profeTitUsername+"' AND p.idCurso='"+ idCurso +"' AND p.titular='"+ true +"'", ProfesorCurso.class).getSingleResult();
+		return profeTitular;
+	}
+
+	@Override
+	public List<ProfesorCurso> listadoProfesInvitados(long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<ProfesorCurso> listadoProfesoresInvitados = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idCurso.idCurso='"+ idCurso +"'AND p.titular='"+ false +"'", ProfesorCurso.class).getResultList();
+		return listadoProfesoresInvitados;
 	}
 }

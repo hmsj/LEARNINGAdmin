@@ -35,7 +35,7 @@ public class LogroDaoImpl implements LogroDao{
 	@Override
 	public Logro findById(int idLogro) throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(Logro.class, new Long(idLogro));
+		return em.find(Logro.class, new Integer(idLogro));
 	}
 	
 }

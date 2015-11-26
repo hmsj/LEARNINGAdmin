@@ -16,14 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
-import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
-import es.uc3m.tiw.daos.CategoriaDaoImpl;
-import es.uc3m.tiw.daos.CursoDaoImpl;
-import es.uc3m.tiw.daos.DificultadDaoImpl;
-import es.uc3m.tiw.daos.LeccionCursoDaoImpl;
-import es.uc3m.tiw.daos.MaterialLeccionDaoImpl;
-import es.uc3m.tiw.daos.ProfesorCursoDaoImpl;
-import es.uc3m.tiw.daos.SeccionCursoDaoImpl;
+import es.uc3m.tiw.daos.*;
 import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.Categoria;
 import es.uc3m.tiw.model.Curso;
@@ -66,14 +59,14 @@ public class CursosServlet extends HttpServlet {
 	@Resource
 	private UserTransaction ut;
 
-	private CursoDaoImpl cursoDao;
-	private CategoriaDaoImpl categoriaDao;
-	private SeccionCursoDaoImpl seccionCursoDao;
-	private LeccionCursoDaoImpl leccionCursoDao;
-	private MaterialLeccionDaoImpl materialLeccionDao;
-	private AlumnoCursoDaoImpl alumnoCursoDao;
-	private ProfesorCursoDaoImpl profeDao;
-	private DificultadDaoImpl dificultadDao;
+	private CursoDao cursoDao;
+	private CategoriaDao categoriaDao;
+	private SeccionCursoDao seccionCursoDao;
+	private LeccionCursoDao leccionCursoDao;
+	private MaterialLeccionDao materialLeccionDao;
+	private AlumnoCursoDao alumnoCursoDao;
+	private ProfesorCursoDao profesorCursoDao;
+	private DificultadDao dificultadDao;
 
 	String forwardJSP = "";
 
@@ -89,6 +82,13 @@ public class CursosServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+		cursoDao = new CursoDaoImpl(em, ut);
+		seccionCursoDao = new SeccionCursoDaoImpl(em, ut);
+		leccionCursoDao = new LeccionCursoDaoImpl(em, ut);
+		materialLeccionDao = new MaterialLeccionDaoImpl(em, ut);
+		categoriaDao = new CategoriaDaoImpl(em, ut);
+		dificultadDao = new DificultadDaoImpl(em, ut);
 		try {
 			cursos = cursoDao.findAll();
 		} catch (Exception e) {
@@ -126,7 +126,7 @@ public class CursosServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			profesoresCurso = profeDao.findAll();
+			profesoresCurso = profesorCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -345,7 +345,7 @@ public class CursosServlet extends HttpServlet {
 						nombreProfesor = request.getParameter("target");
 						ProfesorCurso profe=null;
 						try {
-							profe = profeDao.findByUsername(nombreProfesor);
+							profe = profesorCursoDao.findByUsername(nombreProfesor);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

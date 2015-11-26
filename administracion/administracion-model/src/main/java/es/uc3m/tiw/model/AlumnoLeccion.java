@@ -22,10 +22,10 @@ public class AlumnoLeccion implements Serializable{
 	@Column(nullable=true)
 	private double notaLeccion;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Usuario idUsuario;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private LeccionCurso idLeccion;
 
 	public AlumnoLeccion() {

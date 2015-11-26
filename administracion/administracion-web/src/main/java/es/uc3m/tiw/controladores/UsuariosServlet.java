@@ -47,13 +47,13 @@ public class UsuariosServlet extends HttpServlet {
 	@Resource
 	private UserTransaction ut;
 
-	private CursoDaoImpl cursoDao;
-	private AlumnoCursoDaoImpl alumnoCursoDao;
-	private UsuarioDaoImpl usuarioDao;
-	private BancoDaoImpl bancoDao;
-	private DireccionDaoImpl direccionDao;
-	private LogroDaoImpl logroDao;
-	private DificultadDaoImpl dificultadDao;
+	private CursoDao cursoDao;
+	private AlumnoCursoDao alumnoCursoDao;
+	private UsuarioDao usuarioDao;
+	private BancoDao bancoDao;
+	private DireccionDao direccionDao;
+	private LogroDao logroDao;
+	private DificultadDao dificultadDao;
 
 	String forwardJSP = "";
 
@@ -69,6 +69,11 @@ public class UsuariosServlet extends HttpServlet {
 	public void init(ServletConfig contexto) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(contexto);
+		cursoDao = new CursoDaoImpl(em, ut);
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+		usuarioDao = new UsuarioDaoImpl(em, ut);
+		logroDao = new LogroDaoImpl(em, ut);
+		dificultadDao = new DificultadDaoImpl(em, ut);
 		try {
 			cursos = cursoDao.findAll();
 		} catch (Exception e) {

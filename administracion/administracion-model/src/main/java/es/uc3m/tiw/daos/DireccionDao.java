@@ -8,6 +8,8 @@ public interface DireccionDao {
 
 	public abstract void removeDireccion (Direccion direccion) throws Exception;
 	
-	public abstract Direccion findById(int idDireccion) throws Exception;
+	public abstract Direccion modifyDireccion(Direccion direccion) throws Exception;
+
+	public abstract Direccion findById(Long idDireccion) throws Exception;
 
 }

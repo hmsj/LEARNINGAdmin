@@ -22,13 +22,13 @@ public class ProfesorCurso implements Serializable{
 	@Column(nullable=false)
 	private boolean titular;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Usuario idUsuario;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Curso idCurso;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Banco idBanco;
 
 	public ProfesorCurso() {

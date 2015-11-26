@@ -12,5 +12,5 @@ public interface OfertaDao {
 
 	public abstract List<Oferta> findAll() throws Exception;
 	
-	public abstract Oferta findById(int idOferta) throws Exception;
+	public abstract Oferta findById(Long idOferta) throws Exception;
 }

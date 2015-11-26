@@ -34,6 +34,16 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 	}
 
 	@Override
+	public LeccionCurso modifyLeccionCurso(LeccionCurso leccionCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.merge(leccionCurso);
+		ut.commit();
+		return leccionCurso;
+	}
+	
+	@Override
 	public List<LeccionCurso> findAll() throws Exception {
 		// TODO Auto-generated method stub
 		List<LeccionCurso> listadoLeccionesCurso = em.createQuery("SELECT l from LeccionCurso l",LeccionCurso.class).getResultList();
@@ -41,7 +51,7 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 	}
 
 	@Override
-	public LeccionCurso findById(int idLeccion) throws Exception {
+	public LeccionCurso findById(Long idLeccion) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(LeccionCurso.class, new Long(idLeccion));
 	}

@@ -35,6 +35,6 @@ public class TipoOfertaDaoImpl implements TipoOfertaDao{
 	@Override
 	public TipoOferta findById(int idTipoOferta) throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(TipoOferta.class, new Long(idTipoOferta));
+		return em.find(TipoOferta.class, new Integer(idTipoOferta));
 	}
 }

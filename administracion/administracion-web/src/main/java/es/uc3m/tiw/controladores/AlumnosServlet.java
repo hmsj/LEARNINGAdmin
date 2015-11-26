@@ -33,7 +33,7 @@ public class AlumnosServlet extends HttpServlet {
 	private EntityManager em;
 	@Resource
 	private UserTransaction ut;
-	private AlumnoCursoDaoImpl alumnoCursoDao;
+	private AlumnoCursoDao alumnoCursoDao;
     /**
      * @see HttpServlet#HttpServlet()
      */

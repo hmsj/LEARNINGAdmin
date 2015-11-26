@@ -41,9 +41,19 @@ public class ListaDeseosDaoImpl implements ListaDeseosDao{
 	}
 
 	@Override
-	public ListaDeseos findById(int idListaDeseos) throws Exception {
+	public ListaDeseos modifyListaDeseos(ListaDeseos listaDeseos)
+			throws Exception {
+		// TODO Auto-generated method stub
+		ut.begin();
+		em.merge(listaDeseos);
+		ut.commit();
+		return listaDeseos;
+	}	
+	
+	@Override
+	public ListaDeseos findById(Long idListaDeseos) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(ListaDeseos.class, new Long(idListaDeseos));
-	}	
+	}
 	
 }

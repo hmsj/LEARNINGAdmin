@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 	@Column(nullable = false)
 	private boolean admin;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Direccion idDireccion;
 
 	public Usuario() {
