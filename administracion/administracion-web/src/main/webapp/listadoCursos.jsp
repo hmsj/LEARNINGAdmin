@@ -99,17 +99,17 @@
 																		${curso.profesor_titular }</li>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
+																	${curso.precioInicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -134,7 +134,7 @@
 						<!--End Features Section -->
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 2 }">
+					<c:when test="${categoria.idCategoria == 2 }">
 						<section id="cat2" class="parallax-section-1">
 						<div class="container">
 							<div>
@@ -144,7 +144,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 2 }">
+										<c:if test="${curso.categoria.idCategoria == 2 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -164,17 +164,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -198,7 +198,7 @@
 						</section>
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 3 }">
+					<c:when test="${categoria.idCategoria == 3 }">
 						<section id="cat3">
 						<div class="container">
 							<div>
@@ -208,7 +208,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 3 }">
+										<c:if test="${curso.categoria.idCategoria == 3 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -228,17 +228,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -262,7 +262,7 @@
 						</section>
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 4 }">
+					<c:when test="${categoria.idCategoria == 4 }">
 						<section id="cat4" class="parallax-section-2">
 						<div class="container">
 							<div>
@@ -272,7 +272,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 4 }">
+										<c:if test="${curso.categoria.idCategoria == 4 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -292,17 +292,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -326,7 +326,7 @@
 						</section>
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 5 }">ç
+					<c:when test="${categoria.idCategoria == 5 }">ç
 						<section id="cat5">
 						<div class="container">
 							<div>
@@ -336,7 +336,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 5 }">
+										<c:if test="${curso.categoria.idCategoria == 5 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -356,17 +356,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -390,7 +390,7 @@
 						</section>
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 6 }">
+					<c:when test="${categoria.idCategoria == 6 }">
 						<section id="cat6" class="parallax-section-3">
 						<div class="container">
 							<div>
@@ -400,7 +400,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 6 }">
+										<c:if test="${curso.categoria.idCategoria == 6 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -420,17 +420,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>
@@ -454,7 +454,7 @@
 						</section>
 					</c:when>
 
-					<c:when test="${categoria.idcategoria == 7 }">
+					<c:when test="${categoria.idCategoria == 7 }">
 						<section id="cat7">
 						<div class="container">
 							<div>
@@ -464,7 +464,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idcategoria == 7 }">
+										<c:if test="${curso.categoria.idCategoria == 7 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -484,17 +484,17 @@
 																<li class="cbp-l-caption-desc">by
 																	${curso.profesor_titular }</li>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idcurso }"><i
+																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precio_inicial } €</li>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 1}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} €</li>
 																</c:if>
 																<c:if
-																	test="${curso.oferta.tipoOferta.idtipoOferta == 2}">
+																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
 																	<li class="cbp-l-caption-desc">Descuento:
 																		${curso.oferta.valor} %</li>
 																</c:if>

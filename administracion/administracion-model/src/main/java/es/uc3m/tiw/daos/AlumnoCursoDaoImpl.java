@@ -92,4 +92,12 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 		return listadoAlumnosCursado;
 	}
 
+	@Override
+	public AlumnoCurso comprobarAlumno(String nombreAlumno, long idCurso) {
+		// TODO Auto-generated method stub
+		AlumnoCurso alumno = null;
+		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+nombreAlumno+"' AND a.idCurso='"+idCurso+"'", AlumnoCurso.class).getSingleResult();
+		return alumno;
+	}
+
 }

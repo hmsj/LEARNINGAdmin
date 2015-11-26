@@ -26,14 +26,18 @@ import es.uc3m.tiw.model.*;
 public class AlumnosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AlumnoCurso alumnoCurso;
-       
+    private Usuario usuario;
+	
 	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
-
+	List<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
 	private UserTransaction ut;
+	
 	private AlumnoCursoDao alumnoCursoDao;
+	private UsuarioDao usuarioDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,9 +51,16 @@ public class AlumnosServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init(contexto);
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+		usuarioDao = new UsuarioDaoImpl(em, ut);
 		//alumnos = (ArrayList<Alumno>) this.getServletContext().getAttribute("alumnos");
 		try {
 			alumnosCurso = alumnoCursoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,6 +73,7 @@ public class AlumnosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession sesion = request.getSession(true);
+		sesion.setAttribute("usuarios", usuarios);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		String forwardJSP = "/listadoAlumnos.jsp";
 		forward(request, response, forwardJSP);

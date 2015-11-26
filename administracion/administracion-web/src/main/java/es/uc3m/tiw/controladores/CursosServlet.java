@@ -140,9 +140,11 @@ public class CursosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String idCursoParam = request.getParameter("idcurso");
+		String idCursoParam = request.getParameter("idCurso");
 		String mensaje = null;
 		HttpSession sesion = request.getSession(true);
+		sesion.setAttribute("categorias", categorias);
+		sesion.setAttribute("cursos", cursos);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		forwardJSP = "/listadoCursos.jsp";
 		String accion = request.getParameter("accion");
@@ -278,7 +280,7 @@ public class CursosServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String idCursoParam = request.getParameter("idcurso");
+		String idCursoParam = request.getParameter("idCurso");
 		String mensaje = null;
 		String accion = request.getParameter("accion");
 		if (idCursoParam != null && !"".equals(idCursoParam)) {

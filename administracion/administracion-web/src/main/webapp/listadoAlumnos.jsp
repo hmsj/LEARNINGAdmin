@@ -42,7 +42,7 @@
 							data-splitout="none" data-elementdelay="0.1"
 							data-endelementdelay="0.1" data-endspeed="300"
 							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<h2 class="home-heading op-1">Alumnos DokuLearning</h2>
+							<h2 class="home-heading op-1">Usuarios DokuLearning</h2>
 						</div></li>
 
 				</ul>
@@ -73,7 +73,7 @@
 			<div class="row">
 				<c:if test="${not empty usuarios }">
 					<c:forEach items="${usuarios }" var="usuario">
-						<div class="col-md-6 col-sm-4 team-member">
+						<div class="col-md-4 col-sm-4 team-member">
 							<div class="effect effects wow fadeInUp">
 								<div class="img">
 									<c:choose>

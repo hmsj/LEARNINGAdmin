@@ -50,7 +50,7 @@
                 <div class="container"> 
                 	
                     <div class="col-md-12 text-center">
-                        <h3 class="section-title white wow fadeInUp">Administracion</h3> 
+                        <h3 class="section-title white wow fadeInUp"><br><br>Administracion</h3> 
                         <p class="subheading grey wow fadeInUp">Configure los <span class="highlight">datos</span> deseados.</p>
                     </div>
                     
