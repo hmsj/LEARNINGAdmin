@@ -25,13 +25,13 @@ import es.uc3m.tiw.model.*;
 @WebServlet("/registro")
 public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Usuario usuario;
 	private Direccion direccion;
-	
+
 	List<Usuario> usuarios = new ArrayList<Usuario>();
 	List<Direccion> direcciones = new ArrayList<Direccion>();
-	
+
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
@@ -39,7 +39,7 @@ public class RegistroServlet extends HttpServlet {
 
 	private UsuarioDao usuarioDao;
 	private DireccionDao direccionDao;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -87,16 +87,31 @@ public class RegistroServlet extends HttpServlet {
 		String forwardJSP = "";
 		HttpSession sesion = request.getSession(true);
 
-		if (request.getParameter("nombre") != null
-				&& !"".equalsIgnoreCase(request.getParameter("nombre"))) {
-			nuevoUsuario.setNombre(request.getParameter("nombre"));
-			if (request.getParameter("apellidos") != null
-					&& !"".equalsIgnoreCase(request.getParameter("apellidos"))) {
-				nuevoUsuario.setApellido(request.getParameter("apellidos"));
-				if (request.getParameter("username") != null
+		if (request.getParameter("username") != null
+				&& !"".equalsIgnoreCase(request.getParameter("username"))) {
+			Usuario userUsername = null;
+			try {
+				userUsername = usuarioDao.findByUsername(request
+						.getParameter("username"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (userUsername != null) {
+				forwardJSP = "/signup.jsp";
+				String mensaje = "El username ya existe, por favor elija otro";
+				sesion.setAttribute("mensaje", mensaje);
+				forward(request, response, forwardJSP);
+			} else {
+				nuevoUsuario.setUsername(request.getParameter("username"));
+			}
+			if (request.getParameter("nombre") != null
+					&& !"".equalsIgnoreCase(request.getParameter("nombre"))) {
+				nuevoUsuario.setNombre(request.getParameter("nombre"));
+				if (request.getParameter("apellidos") != null
 						&& !"".equalsIgnoreCase(request
-								.getParameter("username"))) {
-					nuevoUsuario.setUsername(request.getParameter("username"));
+								.getParameter("apellidos"))) {
+					nuevoUsuario.setApellido(request.getParameter("apellidos"));
 					if (request.getParameter("email") != null
 							&& !"".equalsIgnoreCase(request
 									.getParameter("email"))) {
@@ -156,7 +171,8 @@ public class RegistroServlet extends HttpServlet {
 			}
 			if (request.getParameter("numero") != null
 					&& !"".equalsIgnoreCase(request.getParameter("numero"))) {
-				nuevaDireccion.setNumero(Integer.parseInt(request.getParameter("numero")));
+				nuevaDireccion.setNumero(Integer.parseInt(request
+						.getParameter("numero")));
 			}
 			if (request.getParameter("piso") != null
 					&& !"".equalsIgnoreCase(request.getParameter("piso"))) {
@@ -167,8 +183,10 @@ public class RegistroServlet extends HttpServlet {
 				nuevaDireccion.setTelefono(request.getParameter("telefono"));
 			}
 			if (request.getParameter("codigoPostal") != null
-					&& !"".equalsIgnoreCase(request.getParameter("codigoPostal"))) {
-				nuevaDireccion.setCodigoPostal(request.getParameter("codigoPostal"));
+					&& !"".equalsIgnoreCase(request
+							.getParameter("codigoPostal"))) {
+				nuevaDireccion.setCodigoPostal(request
+						.getParameter("codigoPostal"));
 			}
 			// usuarios.add(nuevoUsuario);
 			Direccion dirCreated = null;
@@ -178,7 +196,7 @@ public class RegistroServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(dirCreated!=null){
+			if (dirCreated != null) {
 				nuevoUsuario.setIdDireccion(nuevaDireccion);
 			}
 			nuevoUsuario.setAdmin(false);
@@ -189,18 +207,18 @@ public class RegistroServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (userCreated!=null){
-			forwardJSP = "/principal.jsp";
-			sesion.setAttribute("usuario", nuevoUsuario);
-			sesion.setAttribute("acceso", "ok");
-			forward(request, response, forwardJSP);
-			}else{
+			if (userCreated != null) {
+				forwardJSP = "/principal.jsp";
+				sesion.setAttribute("usuario", nuevoUsuario);
+				sesion.setAttribute("acceso", "ok");
+				forward(request, response, forwardJSP);
+			} else {
 				forwardJSP = "/signup.jsp";
 				String mensaje = "Se ha producido un error al crear el perfil";
 				sesion.setAttribute("mensaje", mensaje);
 				forward(request, response, forwardJSP);
 			}
-			
+
 		}
 	}
 

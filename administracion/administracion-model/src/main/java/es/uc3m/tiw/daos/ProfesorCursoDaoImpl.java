@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.model.AlumnoCurso;
+import es.uc3m.tiw.model.Curso;
 import es.uc3m.tiw.model.ProfesorCurso;
 
 public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
@@ -72,5 +73,12 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 		// TODO Auto-generated method stub
 		List<ProfesorCurso> listadoProfesoresInvitados = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idCurso.idCurso='"+ idCurso +"'AND p.titular='"+ false +"'", ProfesorCurso.class).getResultList();
 		return listadoProfesoresInvitados;
+	}
+
+	@Override
+	public List<ProfesorCurso> cursosByProfe(String username) throws Exception {
+		// TODO Auto-generated method stub
+		List<ProfesorCurso> listadoCursosProfe = em.createQuery("SELECT p.idCurso FROM ProfesorCurso p WHERE p.username='"+ username+"'AND p.titular='"+true+"'", ProfesorCurso.class).getResultList();
+		return listadoCursosProfe;
 	}
 }

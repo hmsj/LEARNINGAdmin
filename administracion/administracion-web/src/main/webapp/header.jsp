@@ -21,7 +21,7 @@
 		<div class="collapse navbar-collapse" id="main-nav">
 			<ul class="nav navbar-nav  navbar-right">
 
-				<li><a class="to-section" href="principal.jsp">Home</a></li>
+				<li><a class="to-section" href="inicio">Home</a></li>
 
 				<c:choose>
 					<c:when test="${sessionScope.usuario != null }">

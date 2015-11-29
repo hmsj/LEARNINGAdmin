@@ -18,20 +18,7 @@
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 </head>
-<script>
-function mostrarPago(eleccion)
-{
-	if (eleccion == 'true')
-	{
-		document.getElementById("pagos").style.display = "";
-	}
-	else
-	{
-		document.getElementById("pagos").style.display = "none";
-		document.getElementById("paypal").checked = "";
-	}
-}
-</script>
+
 <body>
 	<!--Start Header-->
 	<header> <nav class="navbar navbar-default" role="navigation">
@@ -82,31 +69,32 @@ function mostrarPago(eleccion)
 				<h2 class="section-title wow fadeInUp">REGISTRATE Y DISFRUTA</h2>
 			</div>
 
+			
+				
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<c:if test="${not empty mensajeError }">
+				<c:if test="${not empty mensaje }">
 					<div id="message">
-						<p class="error_message">${mensajeError }</p>
+						<p class="error_message">${mensaje }</p>
 					</div>
 				</c:if>
 				<form method="post" action="registro"
 					name="signupform" id="signupform">
-					<label for="tipouser">Selecciona uno de los siguientes
-						roles:</label>
-					<fieldset>
-						Alumno:<input name="tipouser" type="radio" id="tipouser"
-							value="alumno" checked="checked" onclick="mostrarPago('false');"> Profesor<input
-							name="tipouser" type="radio" id="tipouser" value="profesor" onclick="mostrarPago('true');">
-					</fieldset>
 					<fieldset>
 						<input name="nombre" type="text" id="nombre" placeholder="Nombre*" />
-						<input name="apellidos" type="text" id="apellidos"
-							placeholder="Apellidos*" /> <input name="username" type="text"
-							id="username" placeholder="Nombre de usuario*" /> <input
-							name="email" type="email" id="email" placeholder="Email*" /> <input
-							name="password" type="password" id="password"
-							placeholder="Contraseña*" /> <input name="telefono" type="tel"
-							id="telefono" placeholder="Telefono"> <input name="edad"
-							type="number" id="edad" placeholder="Edad" />
+						<input name="apellidos" type="text" id="apellidos" placeholder="Apellidos*" /> 
+						<input name="username" type="text" id="username" placeholder="Nombre de usuario*" /> 
+						<input name="email" type="email" id="email" placeholder="Email*" />
+						<input name="password" type="password" id="password" placeholder="Contraseña*" />
+						<input name="edad" type="number" id="edad" placeholder="Edad" />				    
+					</fieldset>
+					<fieldset>
+						<input name="telefono" type="tel" id="telefono" placeholder="Telefono" />
+						<input name="pais" type="text" id="pais" placeholder="Pais" />
+						<input name="ciudad" type="text" id="ciudad" placeholder="Ciudad"/>
+						<input name="calle" type="text" id="calle" placeholder="Calle"/>
+						<input name="numero" type="number" id="numero" placeholder="Numero" />
+						<input name="piso" type="text" id="piso" placeholder="Piso"/>
+						<input name="codigoPostal" type="text" id="codigoPostal" placeholder="Codigo Postal"/>
 					</fieldset>
 					<fieldset>
 						<textarea name="intereses" cols="40" rows="3" id="intereses"
@@ -114,9 +102,8 @@ function mostrarPago(eleccion)
 						<textarea name="descripcion" cols="40" rows="3" id="descripcion"
 							placeholder="Descripcion"></textarea>
 					</fieldset>
-					<fieldset id="pagos" style="display: none;">
-						<label for="pagos">Permite el uso de sus datos para sus
-							cobros</label> <input name="paypal" type="checkbox" id="paypal">
+					<fieldset>
+						<input type="file" name="imgUsuario" size="60" placeholder="Seleccione una imagen"/>
 					</fieldset>
 					<input type="submit" class="submit" id="submit"
 						value="CREAR USUARIO" />
