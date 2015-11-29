@@ -38,15 +38,34 @@
 	background: #B2CC02;
 	text-decoration: none;
 }
+
+.ok_message {
+    top: -10px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    color: black;
+    -webkit-border-radius: 3px;
+    background-color: #21D213;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<div class="site-wrapper content">
-
+		
 		<!-- Start Get Connected -->
             <section id="get-connected" class="parallax-section-4">
+            <c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
+					</div>
+				</c:if>
                 <div class="container"> 
                 	
                     <div class="col-md-12 text-center">

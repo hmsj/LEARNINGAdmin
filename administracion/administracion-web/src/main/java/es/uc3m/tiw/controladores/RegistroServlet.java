@@ -1,5 +1,6 @@
 package es.uc3m.tiw.controladores;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.*;
@@ -23,15 +26,21 @@ import es.uc3m.tiw.model.*;
  * Servlet implementation class RegistroServlet
  */
 @WebServlet("/registro")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50,
+location="/")// 50MB
 public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private static final String SAVE_DIR = "administracion-web/src/main/webapp/img/clients";
+	
 	private Usuario usuario;
 	private Direccion direccion;
 
 	List<Usuario> usuarios = new ArrayList<Usuario>();
 	List<Direccion> direcciones = new ArrayList<Direccion>();
-
+	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
@@ -81,10 +90,14 @@ public class RegistroServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String inicialPath = request.getServletContext().getRealPath("");
+		String savePath = inicialPath + File.separator + SAVE_DIR;
+		
 		Usuario nuevoUsuario = new Usuario();
 		Direccion nuevaDireccion = new Direccion();
 		boolean estaVacio = false;
 		String forwardJSP = "";
+		String mensaje="";
 		HttpSession sesion = request.getSession(true);
 
 		if (request.getParameter("username") != null
@@ -99,8 +112,8 @@ public class RegistroServlet extends HttpServlet {
 			}
 			if (userUsername != null) {
 				forwardJSP = "/signup.jsp";
-				String mensaje = "El username ya existe, por favor elija otro";
-				sesion.setAttribute("mensaje", mensaje);
+				mensaje = "El username ya existe, por favor elija otro";
+				request.setAttribute("mensaje", mensaje);
 				forward(request, response, forwardJSP);
 			} else {
 				nuevoUsuario.setUsername(request.getParameter("username"));
@@ -139,7 +152,7 @@ public class RegistroServlet extends HttpServlet {
 
 		if (estaVacio) {
 			forwardJSP = "/signup.jsp";
-			String mensaje = "Debe rellenar los datos marcados con *";
+			mensaje = "Debe rellenar los datos marcados con *";
 			request.setAttribute("mensaje", mensaje);
 			forward(request, response, forwardJSP);
 		} else {
@@ -157,6 +170,17 @@ public class RegistroServlet extends HttpServlet {
 				nuevoUsuario
 						.setDescripcion(request.getParameter("descripcion"));
 			}
+			
+			/*if(request.getParameter("imgUsuario") != null && "".equalsIgnoreCase(request.getParameter("imgUsuario"))){
+				File fileSaveDir = new File(savePath);
+				if(!fileSaveDir.exists()){
+					fileSaveDir.mkdir();
+				}
+				for (Part part : request.getParts()) {
+					String fileName = extractFileName(part);
+					part.write(savePath + File.separator + fileName);
+				}
+			}*/
 			if (request.getParameter("pais") != null
 					&& !"".equalsIgnoreCase(request.getParameter("pais"))) {
 				nuevaDireccion.setPais(request.getParameter("pais"));
@@ -209,13 +233,13 @@ public class RegistroServlet extends HttpServlet {
 			}
 			if (userCreated != null) {
 				forwardJSP = "/principal.jsp";
-				sesion.setAttribute("usuario", nuevoUsuario);
-				sesion.setAttribute("acceso", "ok");
+				mensaje = "Usuario registrado correctamente";
+				request.setAttribute("mensajeOK", mensaje);
 				forward(request, response, forwardJSP);
 			} else {
 				forwardJSP = "/signup.jsp";
-				String mensaje = "Se ha producido un error al crear el perfil";
-				sesion.setAttribute("mensaje", mensaje);
+				mensaje = "Se ha producido un error al crear el perfil";
+				request.setAttribute("mensaje", mensaje);
 				forward(request, response, forwardJSP);
 			}
 
@@ -234,6 +258,18 @@ public class RegistroServlet extends HttpServlet {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
+	
+	private String extractFileName(Part part) {
+		// TODO Auto-generated method stub
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				return s.substring(s.indexOf("=") + 2, s.length() - 1);
+			}
+		}
+		return "";
 	}
 
 }
