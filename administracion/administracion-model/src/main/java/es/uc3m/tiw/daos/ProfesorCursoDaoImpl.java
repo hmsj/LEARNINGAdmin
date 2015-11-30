@@ -76,6 +76,14 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 	}
 
 	@Override
+	public List<ProfesorCurso> listadoProfesTitulares()
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<ProfesorCurso> listadoProfesoresTitulares = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.titular='"+ true +"'", ProfesorCurso.class).getResultList();
+		return listadoProfesoresTitulares;
+	}
+	
+	@Override
 	public List<ProfesorCurso> cursosByProfe(String username) throws Exception {
 		// TODO Auto-generated method stub
 		List<ProfesorCurso> listadoCursosProfe = em.createQuery("SELECT p.idCurso FROM ProfesorCurso p WHERE p.username='"+ username+"'AND p.titular='"+true+"'", ProfesorCurso.class).getResultList();

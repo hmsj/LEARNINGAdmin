@@ -94,28 +94,33 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<c:forEach items="${profesoresCurso }" var="profesor">
-																	<li class="cbp-l-caption-desc">by
-																		${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
-
 															</ul>
 														</div>
 													</div>
@@ -139,12 +144,12 @@
 						<div class="container">
 							<div>
 								<h2 class="content-title white wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria}</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 2 }">
+										<c:if test="${curso.idCategoria.idCategoria == 2 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -161,32 +166,40 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
 
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular }</h4>
+													<h4 style="color: white;"></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -203,12 +216,12 @@
 						<div class="container">
 							<div>
 								<h2 class="content-title wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria}</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 3 }">
+										<c:if test="${curso.idCategoria.idCategoria == 3 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -225,32 +238,40 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
 
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular }</h4>
+													<h4></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -267,12 +288,12 @@
 						<div class="container">
 							<div>
 								<h2 class="content-title white wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria}</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 4 }">
+										<c:if test="${curso.idCategoria.idCategoria == 4 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -289,32 +310,40 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
 
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular }</h4>
+													<h4 style="color: white;"></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -324,19 +353,19 @@
 							</div>
 						</div>
 						</section>
-					</c:when>
+					</c:when> 
 
-					<c:when test="${categoria.idCategoria == 5 }">ç
+					<c:when test="${categoria.idCategoria == 5 }">
 						<section id="cat5">
 						<div class="container">
 							<div>
 								<h2 class="content-title wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria}</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 5 }">
+										<c:if test="${curso.idCategoria.idCategoria == 5 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -353,32 +382,39 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
-
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular }</h4>
+													<h4></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -395,12 +431,12 @@
 						<div class="container">
 							<div>
 								<h2 class="content-title white wow fadeInUp">Cursos de
-									${categoria.descripcion_categoria}</h2>
+									${categoria.descripcionCategoria}</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 6 }">
+										<c:if test="${curso.idCategoria.idCategoria == 6 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -417,32 +453,39 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
-
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;">${curso.profesor_titular }</h4>
+													<h4 style="color: white;"></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -459,12 +502,12 @@
 						<div class="container">
 							<div>
 								<h2 class="content-title wow fadeInUp">
-									${categoria.descripcion_categoria} cursos</h2>
+									${categoria.descripcionCategoria} cursos</h2>
 							</div>
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-										<c:if test="${curso.categoria.idCategoria == 7 }">
+										<c:if test="${curso.idCategoria.idCategoria == 7 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
@@ -481,32 +524,39 @@
 														<div class="overlay">
 															<ul class="expand">
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
-																<li class="cbp-l-caption-desc">by
-																	${curso.profesor_titular }</li>
+																<c:forEach items="${profesoresTitulares }"
+																	var="profesor">
+																	<c:if
+																		test="${profesor.idCurso.idCurso == curso.idCurso}">
+																		<li class="cbp-l-caption-desc">by
+																			${profesor.idUsuario.username }</li>
+																	</c:if>
+																</c:forEach>
 																<li class="cbp-l-icon"><a
 																	href="cursos?idcurso=${curso.idCurso }"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
-																	${curso.precio_inicial } €</li>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 1}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} €</li>
+																	${curso.precioInicial } €</li>
+																<c:if test="${not empty curso.idPromocion }">
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} €</li>
+																	</c:if>
+																	<c:if
+																		test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2}">
+																		<li class="cbp-l-caption-desc">Descuento:
+																			${curso.idPromocion.valor} %</li>
+																	</c:if>
+																	<%-- <li class="cbp-l-caption-desc">Precio final:
+																		${curso.precio_final } €</li> --%>
 																</c:if>
-																<c:if
-																	test="${curso.oferta.tipoOferta.idTipoOferta == 2}">
-																	<li class="cbp-l-caption-desc">Descuento:
-																		${curso.oferta.valor} %</li>
-																</c:if>
-																<li class="cbp-l-caption-desc">Precio final:
-																	${curso.precio_final } €</li>
-
 															</ul>
 														</div>
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4>${curso.profesor_titular }</h4>
+													<h4></h4>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
@@ -516,7 +566,7 @@
 							</div>
 						</div>
 						</section>
-					</c:when>
+					</c:when> 
 				</c:choose>
 			</c:forEach>
 		</c:if>

@@ -75,7 +75,7 @@
 						<p class="error_message">${mensajeError }</p>
 					</div>
 				</c:if>
-				<form method="post" action="oferta" name="cuponform" id="cuponform">
+				<form method="post" action="promocion" name="cuponform" id="cuponform">
 					<label for="tipoCupon">Tipo de cupon</label> <br /> <select
 						id="tipoCupon" name="tipoCupon">
 						<option value="" selected="selected">- Seleccione el tipo
@@ -84,28 +84,27 @@
 						<option value="porcentaje">Porcentaje</option>
 					</select>
 					<fieldset>
-						<label for="valorOferta">Valor de cupon</label> <br /> 
-							<input name="valorOferta" type="text" id="valorOferta"
+						<label for="valorPromocion">Valor de la promocion</label> <br /> 
+							<input name="valorPromocion" type="text" id="valorPromocion"
 							placeholder="Valor del cupon" />
-							<label for="cursoOferta">Curso</label>
+							<label for="cursoPromocion">Curso</label>
 							<br />
-							<select id="cursoOferta" name="cursoOferta">
+							<select id="cursoPromocion" name="cursoPromocion">
 								<option value="" selected="selected">- Seleccione el
 									curso sobre el que aplicar el descuento -</option>
 								<%-- 							<c:forEach items="${cursos }" var="curso"> --%>
 								<%-- 								<option value="windows">${curso.getTitulo }</option> --%>
 								<%-- 							</c:forEach> --%>
 						</select>
-							<label for="fechaFinOferta">Fecha de finalizacion del
+							<label for="fechaFinPromocion">Fecha de finalizacion del
 								cupon</label>
 							<br />
-							<input type="date" name="fechaFinOferta">
+							<input type="date" name="fechaFinPromocion">
 					</fieldset>
 
-					<input type="submit" class="submit" id="submit" value="CREAR CUPON" />
+					<input type="submit" class="submit" id="submit" value="CREAR PROMOCION" />
 				</form>
 			</div>
-
 		</div>
 	</div>
 	</section>

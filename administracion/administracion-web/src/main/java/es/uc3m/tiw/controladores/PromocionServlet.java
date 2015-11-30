@@ -14,16 +14,16 @@ import es.uc3m.tiw.model.Usuario;
 
 
 /**
- * Servlet implementation class OfertaServlet
+ * Servlet implementation class PromocionServlet
  */
-@WebServlet("/oferta")
-public class OfertaServlet extends HttpServlet {
+@WebServlet("/promocion")
+public class PromocionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OfertaServlet() {
+    public PromocionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class OfertaServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession sesion = request.getSession(true);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
-		String forwardJSP = "/oferta.jsp";
+		String forwardJSP = "/promocion.jsp";
 		forward(request, response, forwardJSP);
 		
 	}

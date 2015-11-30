@@ -54,6 +54,8 @@ public class CursosServlet extends HttpServlet {
 	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
 	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
 	List<Dificultad> dificultades = new ArrayList<Dificultad>();
+	List<ProfesorCurso> profesoresTitulares = new ArrayList<ProfesorCurso>();
+	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
@@ -131,6 +133,12 @@ public class CursosServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			profesoresTitulares = profesorCursoDao.listadoProfesTitulares();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -145,6 +153,7 @@ public class CursosServlet extends HttpServlet {
 		HttpSession sesion = request.getSession(true);
 		sesion.setAttribute("categorias", categorias);
 		sesion.setAttribute("cursos", cursos);
+		sesion.setAttribute("profesoresTitulares", profesoresTitulares);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		forwardJSP = "/listadoCursos.jsp";
 		String accion = request.getParameter("accion");
