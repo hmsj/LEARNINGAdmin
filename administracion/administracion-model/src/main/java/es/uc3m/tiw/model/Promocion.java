@@ -11,12 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Oferta implements Serializable{
+public class Promocion implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idOferta;
+	private Long idPromocion;
 	
 	@Column(nullable=false)
 	private double valor;
@@ -25,26 +25,26 @@ public class Oferta implements Serializable{
 	private String fechaFin;
 	
 	@ManyToOne
-	private TipoOferta tipoOferta;
+	private TipoPromocion tipoPromocion;
 
-	public Oferta() {
+	public Promocion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Oferta(double valor, String fechaFin, TipoOferta tipoOferta) {
+	public Promocion(double valor, String fechaFin, TipoPromocion tipoPromocion) {
 		super();
 		this.valor = valor;
 		this.fechaFin = fechaFin;
-		this.tipoOferta = tipoOferta;
+		this.tipoPromocion = tipoPromocion;
 	}
 
-	public Long getIdOferta() {
-		return idOferta;
+	public Long getIdPromocion() {
+		return idPromocion;
 	}
 
-	public void setIdOferta(Long idOferta) {
-		this.idOferta = idOferta;
+	public void setIdPromocion(Long idPromocion) {
+		this.idPromocion = idPromocion;
 	}
 
 	public double getValor() {
@@ -63,12 +63,12 @@ public class Oferta implements Serializable{
 		this.fechaFin = fechaFin;
 	}
 
-	public TipoOferta getTipoOferta() {
-		return tipoOferta;
+	public TipoPromocion getTipoPromocion() {
+		return tipoPromocion;
 	}
 
-	public void setTipoOferta(TipoOferta tipoOferta) {
-		this.tipoOferta = tipoOferta;
+	public void setTipoPromocion(TipoPromocion tipoPromocion) {
+		this.tipoPromocion = tipoPromocion;
 	}
 
 }

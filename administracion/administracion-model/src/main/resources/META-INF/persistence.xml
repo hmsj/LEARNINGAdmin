@@ -13,11 +13,12 @@
 	<class>es.uc3m.tiw.model.ListaDeseos</class>
 	<class>es.uc3m.tiw.model.Logro</class>
 	<class>es.uc3m.tiw.model.MaterialLeccion</class>
-	<class>es.uc3m.tiw.model.Oferta</class>
 	<class>es.uc3m.tiw.model.ProfesorCurso</class>
 	<class>es.uc3m.tiw.model.SeccionCurso</class>
-	<class>es.uc3m.tiw.model.TipoOferta</class>
 	<class>es.uc3m.tiw.model.Usuario</class>
+	<class>es.uc3m.tiw.model.TipoPromocion</class>
+	<class>es.uc3m.tiw.model.Promocion</class>
+	<class>es.uc3m.tiw.model.Vale</class>
 	<properties>
 		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 	</properties>

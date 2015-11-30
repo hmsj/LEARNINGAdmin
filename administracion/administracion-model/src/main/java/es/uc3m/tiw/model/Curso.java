@@ -38,8 +38,11 @@ public class Curso implements Serializable{
 	@Column(nullable=true)
 	private String imagen;
 	
-	@OneToOne
-	private Oferta idOferta;
+	@OneToOne(optional = true) 
+	private Promocion idPromocion;
+	
+	@OneToOne(optional = true) 
+	private Vale idVale;
 	
 	@OneToOne
 	private Categoria idCategoria;
@@ -53,7 +56,7 @@ public class Curso implements Serializable{
 	}
 
 	public Curso(String titulo, String descripcion, double precioInicial,
-			boolean estado, boolean destacado, String imagen, Oferta idOferta,
+			boolean estado, boolean destacado, String imagen, Promocion idPromocion, Vale idVale,
 			Categoria idCategoria, Dificultad idDificultad) {
 		super();
 		this.titulo = titulo;
@@ -62,7 +65,8 @@ public class Curso implements Serializable{
 		this.estado = estado;
 		this.destacado = destacado;
 		this.imagen = imagen;
-		this.idOferta = idOferta;
+		this.idPromocion = idPromocion;
+		this.idVale = idVale;
 		this.idCategoria = idCategoria;
 		this.idDificultad = idDificultad;
 	}
@@ -123,12 +127,20 @@ public class Curso implements Serializable{
 		this.imagen = imagen;
 	}
 
-	public Oferta getIdOferta() {
-		return idOferta;
+	public Promocion getIdPromocion() {
+		return idPromocion;
 	}
 
-	public void setIdOferta(Oferta idOferta) {
-		this.idOferta = idOferta;
+	public void setIdPromocion(Promocion idPromocion) {
+		this.idPromocion = idPromocion;
+	}
+	
+	public Vale getIdVale() {
+		return idVale;
+	}
+
+	public void setIdVale(Vale idVale) {
+		this.idVale = idVale;
 	}
 
 	public Categoria getIdCategoria() {
