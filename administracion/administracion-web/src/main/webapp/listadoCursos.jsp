@@ -52,7 +52,7 @@
 			<div class="home-bottom">
 				<div class="container text-center">
 					<div class="move bounce">
-						<a href="#features" class="ion-ios-arrow-down btn-scroll"></a>
+						<a href="#features" class=""></a>
 					</div>
 				</div>
 			</div>
@@ -77,6 +77,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 1 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -93,6 +94,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -130,6 +137,7 @@
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -149,6 +157,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 2 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -165,6 +174,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -203,6 +218,7 @@
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -221,6 +237,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 3 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -237,6 +254,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -275,6 +298,7 @@
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -293,6 +317,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 4 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -309,6 +334,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -347,6 +378,7 @@
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</c:if>
@@ -365,6 +397,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 5 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -381,6 +414,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -419,6 +458,7 @@
 												</div>
 											</div>
 										</c:if>
+										</c:if>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -436,6 +476,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 6 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -452,6 +493,12 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -490,6 +537,7 @@
 												</div>
 											</div>
 										</c:if>
+										</c:if>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -507,6 +555,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
+									<c:if test="${curso.validado }">
 										<c:if test="${curso.idCategoria.idCategoria == 7 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -523,6 +572,14 @@
 														</c:choose>
 														<div class="overlay">
 															<ul class="expand">
+															
+															<c:if test="${curso.destacado }">
+															<li class="cbp-l-caption-desc white"> DESTACADO<br>
+																<img src="img/assets/Estrella_destacado.png"
+																	alt="" style="width:30px;height:30px;"/><br>
+															</li>
+															</c:if>
+															
 																<li class="cbp-l-caption-title">${curso.titulo }</li>
 																<c:forEach items="${profesoresTitulares }"
 																	var="profesor">
@@ -560,6 +617,7 @@
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
+										</c:if>
 										</c:if>
 									</c:forEach>
 								</c:if>

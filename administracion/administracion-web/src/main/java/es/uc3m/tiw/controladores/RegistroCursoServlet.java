@@ -316,7 +316,7 @@ public class RegistroCursoServlet extends HttpServlet {
 					&& !"".equalsIgnoreCase(request.getParameter("imgCurso"))) {
 				nuevoCurso.setImagen(request.getParameter("imgCurso"));
 			}
-			nuevoCurso.setEstado(false);
+			nuevoCurso.setValidado(false);
 			nuevoCurso.setDestacado(false);
 
 			// cursos.add(nuevoCurso);
