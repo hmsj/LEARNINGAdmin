@@ -15,5 +15,7 @@ public interface UsuarioDao {
 	public abstract void removeUsuario (Usuario usuario) throws Exception;
 	
 	public abstract Usuario findByUsername(String username) throws Exception;
+	
+	public abstract Usuario findById(Long id) throws Exception;
 
 }

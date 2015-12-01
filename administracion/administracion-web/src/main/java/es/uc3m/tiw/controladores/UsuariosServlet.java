@@ -42,6 +42,8 @@ public class UsuariosServlet extends HttpServlet {
 	List<Logro> logros = new ArrayList<Logro>();
 	List<Dificultad> dificultades = new ArrayList<Dificultad>();
 
+	List<AlumnoCurso> alumnosEnCursos = new ArrayList<AlumnoCurso>();
+	List<AlumnoCurso> alumnosCursados = new ArrayList<AlumnoCurso>(); 
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
@@ -104,6 +106,18 @@ public class UsuariosServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			alumnosEnCursos = alumnoCursoDao.listadoAlumnosEnCurso();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			alumnosCursados = alumnoCursoDao.listadoAlumnosCursado();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -114,28 +128,36 @@ public class UsuariosServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
-		String mensaje = "";
+		String mensajeOK = "";
 		HttpSession sesion = request.getSession(true);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
-		if (usuarioLogado != null) {
-			if (username != null && !"".equals(username)
-					&& usuarioLogado.getUsername().equals(username)) {
-				// TipoUsuario tipoUsuario = comprobarUsuario(usuarioLogado);
-				// Alumno alumnoLogado = obtenerAlumno(usuarioLogado);
+		String accion=request.getParameter("accion");
+		String mensajeError = "";
+		usuario = null;
+		if (usuarioLogado != null && usuarioLogado.isAdmin()) {
+			if (accion==null || "".equalsIgnoreCase(accion)){
+				if(request.getParameter("idUsuario")!=null && !"".equalsIgnoreCase(request.getParameter("idUsuario"))){
 				try {
-					usuarioLogado = usuarioDao.findByUsername(username);
+					usuario = usuarioDao.findById(Long.parseLong(request.getParameter("idUsuario")));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				sesion.setAttribute("alumno", usuarioLogado);
-				// mensaje = "Es un usuario alumno";
-				request.setAttribute("mensaje", mensaje);
-				forwardJSP = "/editUser.jsp";
+				if (usuario!=null) {
+					request.setAttribute("usuario", usuario);
+					request.setAttribute("alumnosEnCursos", alumnosEnCursos);
+					request.setAttribute("alumnosCursados", alumnosCursados);
+					forwardJSP = "/editUser.jsp";
+				}else {
+					mensajeError="Se ha producido un error al acceder a los datos";
+					request.setAttribute("mensajeError", mensajeError);
+					forwardJSP = "/listadoAlumnos.jsp";
+				}
+				}	
 
 			} else {
-				mensaje = "Debe entrar al sistema para acceder a sus datos";
-				request.setAttribute("mensaje", mensaje);
+				mensajeError = "No tiene permiso para acceder a estos datos";
+				request.setAttribute("mensajeError", mensajeError);
 				forwardJSP = "/login.jsp";
 			}
 			forward(request, response, forwardJSP);

@@ -78,14 +78,14 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 	}
 	
 	@Override
-	public List<AlumnoCurso> listadoAlumnosEnCurso(long idCurso) throws Exception {
+	public List<AlumnoCurso> listadoAlumnosEnUnCurso(long idCurso) throws Exception {
 		// TODO Auto-generated method stub
 		List<AlumnoCurso> listadoAlumnosEnCurso = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idCurso.idCurso='"+ idCurso +"'AND a.enCurso='"+ true +"'", AlumnoCurso.class).getResultList();
 		return listadoAlumnosEnCurso;
 	}
 
 	@Override
-	public List<AlumnoCurso> listadoAlumnosCursado(long idCurso)
+	public List<AlumnoCurso> listadoAlumnosUnCursado(long idCurso)
 			throws Exception {
 		// TODO Auto-generated method stub
 		List<AlumnoCurso> listadoAlumnosCursado = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idCurso.idCurso='"+ idCurso +"'AND a.enCurso='"+ false +"'", AlumnoCurso.class).getResultList();
@@ -93,11 +93,26 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 	}
 
 	@Override
-	public AlumnoCurso comprobarAlumno(String nombreAlumno, long idCurso) {
+	public AlumnoCurso comprobarAlumno(String nombreAlumno, long idCurso) throws Exception{
 		// TODO Auto-generated method stub
 		AlumnoCurso alumno = null;
 		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+nombreAlumno+"' AND a.idCurso='"+idCurso+"'", AlumnoCurso.class).getSingleResult();
 		return alumno;
+	}
+	
+	@Override
+	public List<AlumnoCurso> listadoAlumnosEnCurso() throws Exception {
+		// TODO Auto-generated method stub
+		List<AlumnoCurso> listadoAlumnosEnTodosCursos = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.enCurso='"+ true +"'", AlumnoCurso.class).getResultList();
+		return listadoAlumnosEnTodosCursos;
+	}
+
+	@Override
+	public List<AlumnoCurso> listadoAlumnosCursado()
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<AlumnoCurso> listadoAlumnosCursado = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.enCurso='"+ false +"'", AlumnoCurso.class).getResultList();
+		return listadoAlumnosCursado;
 	}
 
 }

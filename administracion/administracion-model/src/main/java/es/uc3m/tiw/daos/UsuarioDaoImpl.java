@@ -53,5 +53,11 @@ public class UsuarioDaoImpl implements UsuarioDao{
 		// TODO Auto-generated method stub
 		return em.find(Usuario.class, new String(username));
 	}
+
+	@Override
+	public Usuario findById(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		return em.find(Usuario.class, new Long(id));
+	}
 	
 }

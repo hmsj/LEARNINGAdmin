@@ -42,6 +42,12 @@
 							data-splitout="none" data-elementdelay="0.1"
 							data-endelementdelay="0.1" data-endspeed="300"
 							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
+							<c:if test="${not empty mensajeError }">
+								<br>
+								<div id="message">
+									<p class="error_message">${mensajeError }</p>
+								</div>
+							</c:if>
 							<h2 class="home-heading op-1">Usuarios DokuLearning</h2>
 						</div></li>
 
@@ -52,7 +58,7 @@
 			<div class="home-bottom">
 				<div class="container text-center">
 					<div class="move bounce">
-						<a href="#features" class="ion-ios-arrow-down btn-scroll"></a>
+						<a href="#features" class=""></a>
 					</div>
 				</div>
 			</div>
@@ -78,8 +84,7 @@
 								<div class="img">
 									<c:choose>
 										<c:when test="${not empty usuario.imagen }">
-											<img src="${usuario.imagen }" class="img-responsive"
-												alt="" />
+											<img src="${usuario.imagen }" class="img-responsive" alt="" />
 										</c:when>
 										<c:otherwise>
 											<img src="img/portfolio/1.jpg" class="img-responsive" alt="" />
@@ -88,6 +93,15 @@
 									<div class="overlay">
 										<ul class="expand">
 											<li class="cbp-l-caption-title">${usuario.username }</li>
+											<li class="social-icon"><a
+												href="usuarios?idUsuario=${usuario.idUsuario }"
+												title="Ver perfil"><i class="ion-ios-information"></i></a></li>
+											<li class="social-icon"><a
+												href="usuarios?idUsuario=${usuario.idUsuario }&accion=deleteUser"
+												title="Eliminar usuario"><i class="ion-trash-a"></i></a></li>
+											<li class="social-icon"><a
+												href="usuarios?idUsuario=${usuario.idUsuario }"
+												title="Editar perfil"><i class="ion-edit"></i></a></li>
 											<!--<c:if test="${not empty alumno.curso_actual.titulo }">
 												<li class="cbp-l-caption-desc">Curso actual
 													${alumno.curso_actual.titulo }</li>

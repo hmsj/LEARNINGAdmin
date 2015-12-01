@@ -20,10 +20,14 @@ public interface AlumnoCursoDao {
 
 	public abstract AlumnoCurso comprobarAlumnoEnCurso(String alumnoUsername, long idCurso) throws Exception;
 	
-	public abstract List<AlumnoCurso> listadoAlumnosEnCurso(long idCurso) throws Exception;
+	public abstract List<AlumnoCurso> listadoAlumnosEnUnCurso(long idCurso) throws Exception;
 	
-	public abstract List<AlumnoCurso> listadoAlumnosCursado(long idCurso) throws Exception;
+	public abstract List<AlumnoCurso> listadoAlumnosUnCursado(long idCurso) throws Exception;
 
 	public abstract AlumnoCurso comprobarAlumno(String nombreAlumno,
-			long idCurso);
+			long idCurso) throws Exception;
+
+	public abstract List<AlumnoCurso> listadoAlumnosEnCurso() throws Exception;
+
+	public abstract List<AlumnoCurso> listadoAlumnosCursado() throws Exception;
 }
