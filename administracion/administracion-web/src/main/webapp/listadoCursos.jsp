@@ -14,7 +14,28 @@
 
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-
+<style type="text/css">
+.boton {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: #7E7B7B;
+	font-size: 14px;
+	background: #F6F7F7;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+	font-weight: 700;
+	line-height: 1.6;
+	margin: 0 5px 0 5px;
+	padding: 10px 22px;
+	text-align: center;
+}
+.boton:hover {
+	background: #B2CC02;
+	text-decoration: none;
+}
+</style>
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 </head>
@@ -54,7 +75,7 @@
 					<div class="move bounce">
 						<a href="#features" class=""></a>
 					</div>
-				</div>
+				</div>				
 			</div>
 
 		</div>

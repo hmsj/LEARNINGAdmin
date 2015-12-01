@@ -40,14 +40,18 @@
 }
 
 .ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
     top: -10px;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     line-height: 22px;
     padding: 3px 15px 3px 15px;
-    color: black;
-    -webkit-border-radius: 3px;
-    background-color: #21D213;
+    background-color: #B2CC02;
     background-image: url(../img/error.gif);
     background-position: 10px center;
     background-repeat: no-repeat;
@@ -61,14 +65,16 @@
 		
 		<!-- Start Get Connected -->
             <section id="get-connected" class="parallax-section-4">
-            <c:if test="${not empty mensajeOK }">
+            
+                <div class="container"> 
+                	
+                    <div class="col-md-12 text-center">
+                    <c:if test="${not empty mensajeOK }">
+                    <br>
 					<div id="message">
 						<p class="ok_message">${mensajeOK }</p>
 					</div>
 				</c:if>
-                <div class="container"> 
-                	
-                    <div class="col-md-12 text-center">
                         <h3 class="section-title white wow fadeInUp"><br><br>Administracion</h3> 
                         <p class="subheading grey wow fadeInUp">Configure los <span class="highlight">datos</span> deseados.</p>
                     </div>

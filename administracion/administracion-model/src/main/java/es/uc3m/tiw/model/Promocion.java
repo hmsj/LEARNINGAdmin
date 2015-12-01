@@ -18,6 +18,9 @@ public class Promocion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idPromocion;
 	
+	@Column(unique = true)
+	private String nombrePromocion;
+	
 	@Column(nullable=false)
 	private double valor;
 	
@@ -32,11 +35,13 @@ public class Promocion implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Promocion(double valor, String fechaFin, TipoPromocion tipoPromocion) {
+	public Promocion(String nombrePromocion, double valor, String fechaFin, TipoPromocion tipoPromocion) {
 		super();
+		this.nombrePromocion = nombrePromocion;
 		this.valor = valor;
 		this.fechaFin = fechaFin;
 		this.tipoPromocion = tipoPromocion;
+		
 	}
 
 	public Long getIdPromocion() {
@@ -46,7 +51,15 @@ public class Promocion implements Serializable{
 	public void setIdPromocion(Long idPromocion) {
 		this.idPromocion = idPromocion;
 	}
+	
+	public String getNombrePromocion() {
+		return nombrePromocion;
+	}
 
+	public void setNombrePromocion(String nombrePromocion) {
+		this.nombrePromocion = nombrePromocion;
+	}
+	
 	public double getValor() {
 		return valor;
 	}

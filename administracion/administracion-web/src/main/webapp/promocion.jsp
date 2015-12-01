@@ -75,8 +75,12 @@
 						<p class="error_message">${mensajeError }</p>
 					</div>
 				</c:if>
-				<form method="post" action="promocion" name="cuponform" id="cuponform">
-					<label for="tipoCupon">Tipo de cupon</label> <br /> <select
+				<form method="post" action="promocion" name="cuponform"
+					id="cuponform">
+					<label for="nombrePromocion">Nombre de la
+						promocion</label> <br /> <input type="text" name="nombrePromocion"
+						placeholder="Nombre de la promocion" /> <label
+						for="tipoCupon">Tipo de cupon</label> <br /> <select
 						id="tipoCupon" name="tipoCupon">
 						<option value="" selected="selected">- Seleccione el tipo
 							de cupon -</option>
@@ -84,25 +88,16 @@
 						<option value="porcentaje">Porcentaje</option>
 					</select>
 					<fieldset>
-						<label for="valorPromocion">Valor de la promocion</label> <br /> 
-							<input name="valorPromocion" type="text" id="valorPromocion"
-							placeholder="Valor del cupon" />
-							<label for="cursoPromocion">Curso</label>
-							<br />
-							<select id="cursoPromocion" name="cursoPromocion">
-								<option value="" selected="selected">- Seleccione el
-									curso sobre el que aplicar el descuento -</option>
-								<%-- 							<c:forEach items="${cursos }" var="curso"> --%>
-								<%-- 								<option value="windows">${curso.getTitulo }</option> --%>
-								<%-- 							</c:forEach> --%>
-						</select>
-							<label for="fechaFinPromocion">Fecha de finalizacion del
-								cupon</label>
-							<br />
-							<input type="date" name="fechaFinPromocion">
+						<label for="valorPromocion">Valor de la promocion</label> <br />
+						<input name="valorPromocion" type="text" id="valorPromocion"
+							placeholder="Valor de la promocion" /> <label
+							for="fechaFinPromocion">Fecha de finalizacion de la
+							promocion</label> <br /> <input type="text" name="fechaFinPromocion"
+							placeholder="Fecha de finalizacion de la promocion" />
 					</fieldset>
 
-					<input type="submit" class="submit" id="submit" value="CREAR PROMOCION" />
+					<input type="submit" class="submit" id="submit"
+						value="CREAR PROMOCION" />
 				</form>
 			</div>
 		</div>

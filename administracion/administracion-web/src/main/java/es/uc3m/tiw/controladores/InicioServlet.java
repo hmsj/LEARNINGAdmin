@@ -191,7 +191,7 @@ public class InicioServlet extends HttpServlet {
 		}
 		
 		
-		Promocion promocion1 = new Promocion(30.0,"31/12/2015", tipoPromocion1);
+		Promocion promocion1 = new Promocion("Promocion Inicial",30.0,"31/12/2015", tipoPromocion1);
 		try {
 			promocionDao.createPromocion(promocion1);
 		} catch (Exception e1) {

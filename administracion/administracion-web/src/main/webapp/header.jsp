@@ -36,7 +36,7 @@
 							<c:if test="${sessionScope.usuario.admin }">
 								<li><a href="nuevoCurso">Añadir curso</a></li>
 								<li><a href="registro">Añadir usuario</a></li>
-								<li><a href="oferta">Añadir promocion</a></li>
+								<li><a href="promocion">Añadir promocion</a></li>
 							</c:if>
 					</c:when>
 					<c:otherwise>
