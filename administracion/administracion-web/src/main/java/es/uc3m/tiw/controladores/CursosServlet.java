@@ -178,7 +178,7 @@ public class CursosServlet extends HttpServlet {
 							nombreAlumno = request.getParameter("target");
 							AlumnoCurso alumn = null;
 							try {
-								alumn = alumnoCursoDao.comprobarAlumno(
+								alumn = alumnoCursoDao.comprobarAlumnoEnCurso(
 										nombreAlumno, idCurso);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
@@ -310,7 +310,7 @@ public class CursosServlet extends HttpServlet {
 						nombreAlumno = request.getParameter("target");
 						AlumnoCurso alumn = null;
 						try {
-							alumn = alumnoCursoDao.comprobarAlumno(nombreAlumno, idCurso);
+							alumn = alumnoCursoDao.comprobarAlumnoEnCurso(nombreAlumno, idCurso);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
