@@ -43,405 +43,85 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<section id="price-list" class="parallax-section-6">
+	<div class="container">
+		<div class="col-md-12 text-center">
+			<h3 class="section-title white wow fadeInUp ">${curso.titulo }</h3>
 
-	<!-- Start Home Revolution Slider Parallax Section -->
-	<section id="home-revolution-slider">
-	<div class="hero">
-		<div class="tp-banner-container">
-			<div class="tp-banner">
-				<ul>
-					<!-- SLIDE 1 -->
-					<li data-transition="fade" data-slotamount="7"
-						data-masterspeed="2000"
-						data-thumb="img/backgrounds/bg-home-fullscreen.jpg"
-						data-delay="10000" data-saveperformance="on"
-						data-title="We Are Vossen"><c:choose>
-							<c:when test="${not empty sessionScope.curso.imagen }">
-								<img src="${sessionScope.curso.imagen }" alt="slidebg1"
-									data-bgposition="center top" data-bgfit="cover"
-									data-bgrepeat="no-repeat">
-							</c:when>
-							<c:otherwise>
-								<img src="img/portfolio/1.jpg" alt="slidebg1"
-									data-bgposition="center top" data-bgfit="cover"
-									data-bgrepeat="no-repeat">
-							</c:otherwise>
-						</c:choose> <!-- Home Heading -->
-						<div class="tp-caption sft" data-x="center" data-y="260"
-							data-speed="1200" data-start="1100"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<h2 class="home-heading op-1">${sessionScope.curso.titulo }</h2>
-						</div> <!-- Home Subheading -->
-						<div class="tp-caption home-subheading sft fadeout"
-							data-x="center" data-y="360" data-speed="1200" data-start="1350"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
-							<c:forEach
-								items="${profesoresCurso.idCurso.idCurso == sessionScope.curso.idCurso }"
-								var="profesor">
-								<div class="op-1">${profesor.idUsuario.username }</div>
-							</c:forEach>
-						</div> <!-- Home Button -->
-						<div class="tp-caption home-button sft fadeout" data-x="center"
-							data-y="400" data-speed="1200" data-start="1550"
-							data-easing="Power3.easeInOut" data-splitin="none"
-							data-splitout="none" data-elementdelay="0.1"
-							data-endelementdelay="0.1" data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
+			<div class="row wow fadeInUp">
+
+				<div class="col-md-6 col-sm-6 text-center">
+					<c:if test="${not empty mensajeError }">
+						<div id="message">
+							<p class="error_message">${mensajeError }</p>
+						</div>
+					</c:if>
+					<c:if test="${not empty mensajeOK }">
+						<div id="message">
+							<p class="ok_message">${mensajeOK }</p>
+						</div>
+					</c:if>
+					<div class="price-box">
+						<div class="price-table">
+							<h3 class="label">Imagen</h3>
 							<c:choose>
-								<c:when test="${sessionScope.usuario != null }">
-
-									<c:choose>
-										<c:when test="${not empty mensaje1 }">
-											<div class="op-1">
-												<a href="price-list" class="btn btn-primary btn-scroll">ENTRAR</a>
-											</div>
-										</c:when>
-										<c:when test="${not empty mensaje2 }">
-											<div class="op-1">
-												<a href="#services" class="btn btn-primary btn-scroll">VER
-													DATOS</a>
-											</div>
-										</c:when>
-										<c:when test="${not empty mensaje3 }">
-											<div class="op-1">
-												<a href="#" class="btn btn-primary btn-scroll">MATRICULATE</a>
-											</div>
-										</c:when>
-										<c:when test="${not empty mensaje }">
-											<div class="op-1">
-												<div class="error">${mensaje }</div>
-												<a href="#" class="btn btn-primary btn-scroll">MATRICULATE</a>
-											</div>
-										</c:when>
-
-										<c:otherwise>
-											<c:forEach items="${profesoresCurso }" var="profesor">
-												<c:if
-													test="${sessionScope.usuario.idUsuario == profesor.idUsuario.idUsuario && sessionScope.curso.idCurso == profesor.idCurso.idCurso}">
-													<div class="op-1">
-														<div class="error">${mensaje }</div>
-														<a href="#" class="btn btn-primary btn-scroll">AÑADIR
-															UN ALUMNO</a>
-													</div>
-												</c:if>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-
+								<c:when test="${not empty curso.imagen  }">
+									<img src="${curso.imagen }" alt="${curso.titulo}"
+										data-bgposition="center top" data-bgfit="cover"
+										data-bgrepeat="no-repeat">
 								</c:when>
 								<c:otherwise>
-									<div class="op-1">
-										<a href="login" class="btn btn-primary btn-scroll">ACCEDER</a>
+									<div class="row text-center wow fadeInUp">
+										<ul class="connected-icons text-center">
+											<li class="connected-icon"><span
+												class="icon ion-ios-bookmarks size-6x highlight"></span></li>
+										</ul>
 									</div>
 								</c:otherwise>
 							</c:choose>
-						</div></li>
-				</ul>
-				<div class="tp-bannertimer"></div>
-			</div>
-
-			<div class="home-bottom">
-				<div class="container text-center">
-					<div class="move bounce">
-						<a href="#features" class="ion-ios-arrow-down btn-scroll"></a>
+							<span class="feature no-border"></span>
+						</div>
 					</div>
 				</div>
+				
+				<div class="col-md-6 col-sm-6 text-center">
+				<div class="price-box">
+					<div class="price-table">
+						<h3 class="label">Datos del curso</h3>
+						<p class="features grey">
+							<span class="feature"> <span class="highlight">Titulo:</span> ${curso.titulo}</span>
+							<span class="feature"> <span class="highlight">Profesor titular:</span></span> 
+							<span class="feature"> <span class="highlight">Descripcion:</span> ${curso.descripcion}</span>
+							<span class="feature"> <span class="highlight">Categoria:</span> ${curso.idCategoria.descripcionCategoria}</span>
+							<span class="feature"> <span class="highlight">Dificultad:</span> ${curso.idDificultad.descripcionDificultad}</span>
+							<span class="feature"> <span class="highlight">Precio Inicial:</span> ${curso.precioInicial}</span>
+							<span class="feature"> <span class="highlight">Promocion:</span> ${curso.idPromocion.valor} 
+								<c:if test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1 }"> € </c:if> 
+								<c:if test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 2 }"> % </c:if>
+							</span>
+							<span class="feature"> <span class="highlight">Precio Final:</span> </span>
+							<c:if test="${sessionScope.usuario.admin }">
+								<span class="feature"> <span class="highlight">Estado:</span> 
+									<c:choose>
+										<c:when test="${curso.validado }">
+											Validado
+										</c:when>
+										<c:otherwise>
+											No validado
+											<ul>
+												<li class="social-icon">
+													<a href="#"><i class="ion-checkmark-circled"></i></a>
+												</li>
+											</ul>
+											
+										</c:otherwise>
+									</c:choose>
+								</span>
+							</c:if>
 			</div>
-
 		</div>
 	</div>
 	</section>
-	<!-- End Home Revolution Slider Parallax Section -->
-
-	<div class="site-wrapper content">
-
-		<section id="services">
-		<div class="container">
-
-			<div class="col-md-12 text-center">
-				<h3 class="section-title wow fadeInUp">Descricpcion del curso</h3>
-				<p class="subheading wow fadeInUp">
-					<span class="highlight">${sessionScope.curso.titulo }</span>
-				</p>
-			</div>
-			<div class="row text-center wow fadeInUp">
-				<div class="service">
-					<span class="icon-eyeglasses size-6x"></span>
-					<div class="service-info">
-						<p class="service-description">${sessionScope.curso.descripcion }</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		</section>
-
-
-		<section id="alumnosMatriculados">
-		<div class="container">
-			<div class="col-md-12 text-center">
-				<h3 class="section-title wow fadeInUp">Alumnos matriculados</h3>
-				<p class="subheading wow fadeInUp">
-					<span class="highlight">Estos son los alumnos matriculados
-						en el curso ${sessionScope.curso.titulo }</span>
-				</p>
-				<c:if test="${not empty mensaje }">
-					<div id="message">
-						<p class="error_message">${mensaje }</p>
-					</div>
-				</c:if>
-			</div>
-			<div class="row">
-				<c:if test="${not empty alumnosCurso }">
-					<c:forEach items="${alumnosCurso }" var="alumnoCurso">
-						<c:if
-							test="${alumnoCurso.idcurso == sessionScope.curso.idcurso && alumnoCurso.enCurso}">
-							<div class="col-md-3 col-sm-6 team-member">
-								<div class="effect effects wow fadeInUp">
-									<div class="img">
-										<c:choose>
-											<c:when test="${not empty alumnoCurso.idUsuario.imagen }">
-												<img src="${alumnoCurso.idUsuario.imagen }"
-													class="img-responsive" alt="" />
-											</c:when>
-											<c:otherwise>
-												<img src="img/clients/client-1.png" class="img-responsive"
-													alt="" />
-											</c:otherwise>
-										</c:choose>
-										<div class="overlay">
-											<ul class="expand">
-												<li class="social-icon"><a
-													href="usuarios?idusuario=${alumnoCurso.idUsuario.username }"><i
-														class="icon-eye"></i></a></li>
-
-
-												<c:if test="${sessionScope.usuario.admin }">
-													<li class="social-icon"><a
-														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=modifyAlumno&target=${alumnoCurso.IdUsuario.username }"><i
-															class="ion-edit"></i></a></li>
-
-													<li class="social-icon"><a
-														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=deleteAlumno&target=${alumnoCurso.IdUsuario.username }"><i
-															class="ion-trash-a"></i></a></li>
-												</c:if>
-
-											</ul>
-											<a class="close-overlay hidden">x</a>
-										</div>
-									</div>
-								</div>
-								<div class="member-info wow fadeInUp">
-									<h4></h4>
-									<p>${alumnoCurso.idUsuario.username }</p>
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
-				</c:if>
-				<c:if test="${sessionScope.usuario.admin }">
-					<div class="col-md-12 text-center">
-						<p class="subheading wow fadeInUp">
-							<span class="highlight">Añada un nuevo alumno al curso</span>
-						</p>
-					</div>
-					<div id="contact">
-						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-							<form method="post" action="cursos" name="addAlumnform"
-								id="addAlumnform">
-								<select name="target" id="target">
-									<c:forEach items="${usuarios }" var="usuario">
-										<option value="${usuario.username }">
-											${usuario.username }</option>
-									</c:forEach>
-								</select> <input name="accion" id="accion" type="hidden"
-									value="addAlumno" /> <input name="idcurso" id="idcurso"
-									type="hidden" value="${sessionScope.curso.idcurso }" /> <input
-									type="submit" class="submit" id="submit" value="AÑADIR ALUMNO" />
-							</form>
-						</div>
-					</div>
-				</c:if>
-			</div>
-		</div>
-		</section>
-		<section id="price-list" class="parallax-section-6">
-		<div class="container">
-			<div class="col-md-12 text-center">
-				<h3 class="section-title white wow fadeInUp">Temario</h3>
-			</div>
-			<div class="row wow fadeInUp">
-				<c:choose>
-					<c:when test="${not empty seccionesCurso }">
-						<c:forEach items="${seccionesCurso }" var="seccion">
-							<c:if
-								test="${seccion.idCurso.idCurso == sessionScope.curso.idcurso }">
-								<div class="col-md-3 col-sm-6 price-list-box">
-									<div class="price-box">
-										<div class="price-table">
-											<h3 class="label">${seccion.titulo }</h3>
-											<c:if test="${not empty lecciones }">
-												<c:forEach items="${lecciones }" var="leccion">
-													<c:if
-														test="${leccion.idSeccion.idSeccion == seccion.idSeccion }">
-														<p class="price grey">
-															<span class="pricing">${leccion.titulo }
-														</p>
-														<c:if test="${not empty sessionScope.usuario }">
-															<c:forEach items="${alumnosCurso }" var="alumno">
-																<c:if
-																	test="${sessionScope.usuario.username == alumno.idUsuario.username && sessionScope.curso.idCurso == alumno.idCurso.idCurso && alumno.enCurso}">
-																	<c:if test="${not empty materiales }">
-																		<c:forEach items="${materiales }" var="material">
-																			<p class="features grey">
-																				<a class="feature" href="${material.archivo }">${material.titulo }</a>
-																			</p>
-																		</c:forEach>
-																	</c:if>
-																</c:if>
-															</c:forEach>
-														</c:if>
-													</c:if>
-												</c:forEach>
-											</c:if>
-										</div>
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</c:when>
-				</c:choose>
-			</div>
-		</div>
-		</section>
-
-		<section id="profesoresCurso">
-		<div class="container">
-			<div class="col-md-12 text-center">
-				<h3 class="section-title wow fadeInUp">Profesores del curso</h3>
-				<p class="subheading wow fadeInUp">
-					<span class="highlight">Estos son los profesores del curso
-						${sessionScope.curso.titulo }</span>
-				</p>
-			</div>
-			<div class="row">
-				<c:if test="${not empty profesoresCurso }">
-					<c:forEach items="${profesoresCurso }" var="profesor">
-						<c:if
-							test="${profesor.idCurso.idCurso == sessionScope.curso.idcurso }">
-							<div class="col-md-4 col-sm-4 team-member">
-								<div class="effect effects wow fadeInUp">
-									<div class="img">
-										<c:choose>
-											<c:when test="${not empty profesor.idUsuario.imagen }">
-												<img src="${profesor.idUsuario.imagen }"
-													class="img-responsive" alt="" />
-											</c:when>
-											<c:otherwise>
-												<img src="img/clients/client-1.png" class="img-responsive"
-													alt="" />
-											</c:otherwise>
-										</c:choose>
-										<div class="overlay">
-											<ul class="expand">
-												<li class="social-icon"><a
-													href="usuarios?idusuario=${alumno.idUsuario.username }"><i
-														class="icon-eye"></i></a></li>
-
-												<c:if test="${sessionScope.usuario.admin }">
-													<li class="social-icon"><a
-														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=modifyAlumno&target=${alumno.username.username }"><i
-															class="ion-edit"></i></a></li>
-
-													<li class="social-icon"><a
-														href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=deleteAlumno&target=${alumno.username.username }"><i
-															class="ion-trash-a"></i></a></li>
-												</c:if>
-											</ul>
-											<a class="close-overlay hidden">x</a>
-										</div>
-									</div>
-								</div>
-								<div class="member-info wow fadeInUp">
-									<h4>${profesor.idUsuario.username }</h4>
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
-				</c:if>
-				<c:if test="${sessionScope.usuario.admin }">
-					<div class="col-md-12 text-center">
-						<p class="subheading wow fadeInUp">
-							<span class="highlight">Añada un profesor invitado al
-								curso</span>
-						</p>
-					</div>
-					<div id="contact">
-						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-							<form method="post" action="cursos" name="addProfeform"
-								id="addProfeform">
-								<select name="targetprofe" id="targetprofe">
-									<c:forEach items="${usuarios }" var="usuario">
-										<option value="${usuario.username }">
-											${usuario.username }</option>
-									</c:forEach>
-								</select> <input name="accionprofe" id="accionprofe" type="hidden"
-									value="addProfe" /> <input name="idcursoprofe"
-									id="idcursoprofe" type="hidden"
-									value="${sessionScope.curso.idcurso }" /> <input type="submit"
-									class="submit" id="submitprofe" value="AÑADIR PROFESOR" />
-							</form>
-						</div>
-					</div>
-				</c:if>
-			</div>
-		</div>
-		</section>
-
-		<!-- Start Footer 1 -->
-		<footer id="footer">
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-md-6 col-sm-12">
-						<p>
-							© 2015 Vossen Theme by <a href="inicio" class="logo">Vossen
-								Design.</a> All Rights Reserved.
-						</p>
-					</div>
-					<div class="col-md-6 col-sm-12">
-						<ul id="social-icons">
-							<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-							<li><a href="#"><i
-									class="icon ion-social-instagram-outline"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-skype"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-dropbox"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-vimeo"></i></a></li>
-							<li><a href="#"><i class="icon ion-social-youtube"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Footer Copyright --> </footer>
-		<!-- End Footer 1 -->
-
-		<!-- Start Back To Top -->
-		<a id="back-to-top"><i class="icon ion-chevron-up"></i></a>
-		<!-- End Back To Top -->
-
-	</div>
-	<!-- End Site Wrapper -->
 
 	<!-- jQuery -->
 	<script src="js/plugins/jquery.min.js"></script>

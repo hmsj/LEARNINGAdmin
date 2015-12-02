@@ -46,6 +46,8 @@
 				${usuario.apellido }</h3>
 		</div>
 		<div class="row wow fadeInUp">
+			
+			<div class="col-md-6 col-sm-6 text-center">
 			<c:if test="${not empty mensajeError }">
 				<div id="message">
 					<p class="error_message">${mensajeError }</p>
@@ -56,7 +58,6 @@
 					<p class="ok_message">${mensajeOK }</p>
 				</div>
 			</c:if>
-			<div class="col-md-6 col-sm-6 text-center">
 				<div class="price-box">
 					<div class="price-table">
 						<h3 class="label">Imagen</h3>

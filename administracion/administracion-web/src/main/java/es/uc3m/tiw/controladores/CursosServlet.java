@@ -151,9 +151,9 @@ public class CursosServlet extends HttpServlet {
 		String idCursoParam = request.getParameter("idCurso");
 		String mensaje = null;
 		HttpSession sesion = request.getSession(true);
-		sesion.setAttribute("categorias", categorias);
-		sesion.setAttribute("cursos", cursos);
-		sesion.setAttribute("profesoresTitulares", profesoresTitulares);
+		request.setAttribute("categorias", categorias);
+		request.setAttribute("cursos", cursos);
+		request.setAttribute("profesoresTitulares", profesoresTitulares);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		forwardJSP = "/listadoCursos.jsp";
 		String accion = request.getParameter("accion");

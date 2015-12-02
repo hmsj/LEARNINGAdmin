@@ -205,8 +205,8 @@ public class UsuariosServlet extends HttpServlet {
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		String accion=request.getParameter("accion");
 		String mensajeError = "";
-		Usuario usuarioAntiguo = new Usuario();
-		Direccion direccionAntigua = new Direccion();
+		Usuario usuarioAntiguo = null;
+		Direccion direccionAntigua = null;
 		try {
 			usuarioAntiguo = usuarioDao.findById(Long.parseLong(request.getParameter("idUsuario")));
 		} catch (Exception e) {
@@ -219,18 +219,18 @@ public class UsuariosServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Usuario usuarioModificado = new Usuario();
-		Direccion direccionModificada = new Direccion();
-		
+		Usuario usuarioModificado = null;
+		Direccion direccionModificada = null;
+		Usuario usuarioNuevo = new Usuario();
 		if(usuarioLogado != null && usuarioLogado.isAdmin()){
 			if(accion!=null && !"".equalsIgnoreCase(accion) && accion=="modifyUser"){
-				if(request.getParameter("idUsuario")!=null && !"".equalsIgnoreCase(request.getParameter("idUsuario"))){
+				if(request.getParameter("idUsuario")!=null && !"".equals(request.getParameter("idUsuario"))){
 					if(request.getParameter("nombreEdit")!=null && !"".equalsIgnoreCase(request.getParameter("nombreEdit")) && !request.getParameter("nombreEdit").equalsIgnoreCase(usuarioAntiguo.getNombre())){
 						usuarioModificado.setNombre(request.getParameter("nombreEdit"));
 					}else{
 						usuarioModificado.setNombre(usuarioAntiguo.getNombre());
 					}
-					if(!request.getParameter("apellidoEdit").equalsIgnoreCase(usuarioAntiguo.getApellido())){
+					if(request.getParameter("apellidoEdit")!=null && !"".equalsIgnoreCase(request.getParameter("apellidoEdit")) && !request.getParameter("apellidoEdit").equalsIgnoreCase(usuarioAntiguo.getApellido())){
 						usuarioModificado.setApellido(request.getParameter("apellidoEdit"));
 					}else{
 						usuarioModificado.setApellido(usuarioAntiguo.getApellido());
@@ -252,62 +252,76 @@ public class UsuariosServlet extends HttpServlet {
 					}
 					if(!request.getParameter("edadEdit").equals(usuarioAntiguo.getEdad())){
 						usuarioModificado.setEdad(Integer.parseInt(request.getParameter("edadEdit")));
+					}else{
+						usuarioModificado.setEdad(usuarioAntiguo.getEdad());
 					}
 					if(!request.getParameter("phoneEdit").equalsIgnoreCase(direccionAntigua.getTelefono())){
 						direccionModificada.setTelefono(request.getParameter("phoneEdit"));
+					}else{
+						direccionModificada.setTelefono(direccionAntigua.getTelefono());
 					}
 					if(!request.getParameter("paisEdit").equalsIgnoreCase(direccionAntigua.getPais())){
 						direccionModificada.setPais(request.getParameter("paisEdit"));
+					}else{
+						direccionModificada.setPais(direccionAntigua.getPais());
 					}
 					if(!request.getParameter("ciudadEdit").equalsIgnoreCase(direccionAntigua.getCiudad())){
 						direccionModificada.setCiudad(request.getParameter("ciudadEdit"));
+					}else{
+						direccionModificada.setCiudad(direccionAntigua.getCiudad());
 					}
 					if(!request.getParameter("calleEdit").equalsIgnoreCase(direccionAntigua.getCalle())){
 						direccionModificada.setCalle(request.getParameter("calleEdit"));
+					}else{
+						direccionModificada.setCalle(direccionAntigua.getCalle());
 					}
 					if(!request.getParameter("numeroEdit").equals(direccionAntigua.getNumero())){
 						direccionModificada.setNumero(Integer.parseInt(request.getParameter("numeroEdit")));
+					}else{
+						direccionModificada.setNumero(direccionAntigua.getNumero());
 					}
 					if(!request.getParameter("pisoEdit").equalsIgnoreCase(direccionAntigua.getPiso())){
 						direccionModificada.setPiso(request.getParameter("pisoEdit"));
+					}else{
+						direccionModificada.setPiso(direccionAntigua.getPiso());
 					}
 					if(!request.getParameter("codigoPostalEdit").equalsIgnoreCase(direccionAntigua.getCodigoPostal())){
 						direccionModificada.setCodigoPostal(request.getParameter("codigoPostalEdit"));
+					}else{
+						direccionModificada.setCodigoPostal(direccionAntigua.getCodigoPostal());
 					}
-					if(!request.getParameter("interesEdit").equalsIgnoreCase(usuarioAntiguo.getIntereses())){
-						usuarioModificado.setIntereses(request.getParameter("interesEdit"));
-					}
-					if(!request.getParameter("descripcionEdit").equalsIgnoreCase(usuarioAntiguo.getIntereses())){
-						usuarioModificado.setIntereses(request.getParameter("descripcionEdit"));
-					}
-					if(!direccionAntigua.equals(direccionModificada)){
+					if(!direccionModificada.equals(direccionAntigua)){
 						usuarioModificado.setIdDireccion(direccionModificada);
+					}else{
+						usuarioModificado.setIdDireccion(direccionAntigua);
 					}
-				}
-				try {
-					usuario = usuarioDao.modifyUsuario(usuarioModificado);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(usuario!=null){
-					mensajeOK = "Se ha modificado el usuario correctamente";
-					request.setAttribute("usuario", usuario);
-					request.setAttribute("alumnoEnCurso", alumnoEnCurso);
-					request.setAttribute("alumnoCursados", alumnoCursados);
-					request.setAttribute("profesorTitular", profesorTitular);
+					if(!usuarioAntiguo.isAdmin()){
+						usuarioModificado.setAdmin(false);
+					}else{
+						usuarioModificado.setAdmin(true);
+					}
+					
+					try {
+						usuarioNuevo = usuarioDao.modifyUsuario(usuarioModificado);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					mensajeOK = "Datos modificados correctamente";
+					request.setAttribute("usuario", usuarioNuevo);
 					request.setAttribute("mensajeOK", mensajeOK);
 					forwardJSP = "/editUser.jsp";
 				}else{
-					mensajeError = "No se ha podido actualizar el perfil";
-					request.setAttribute("usuario", usuario);
-					request.setAttribute("alumnoEnCurso", alumnoEnCurso);
-					request.setAttribute("alumnoCursados", alumnoCursados);
-					request.setAttribute("profesorTitular", profesorTitular);
+					mensajeError = "No ha seleccionado ningun usuario";
 					request.setAttribute("mensajeError", mensajeError);
 					forwardJSP = "/editUser.jsp";
 				}
+			}else{
+				mensajeError = "No ha seleccionado ninguna accion";
+				request.setAttribute("mensajeError", mensajeError);
+				forwardJSP = "/editUser.jsp";
 			}
+			
 		}else {
 			mensajeError = "No tiene permiso para realizar esta accion";
 			request.setAttribute("mensajeError", mensajeError);
