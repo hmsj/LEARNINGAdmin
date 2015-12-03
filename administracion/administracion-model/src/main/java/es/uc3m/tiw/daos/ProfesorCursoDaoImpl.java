@@ -75,6 +75,14 @@ public class ProfesorCursoDaoImpl implements ProfesorCursoDao{
 		List<ProfesorCurso> listadoProfesoresInvitados = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idCurso.idCurso='"+ idCurso +"'AND p.titular='"+ false +"'", ProfesorCurso.class).getResultList();
 		return listadoProfesoresInvitados;
 	}
+	
+	@Override
+	public ProfesorCurso ProfeTitularCurso(long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		ProfesorCurso profeTitular = em.createQuery("SELECT p FROM ProfesorCurso p WHERE p.idCurso.idCurso='"+ idCurso +"'AND p.titular='"+ true +"'", ProfesorCurso.class).getSingleResult();
+		return profeTitular;
+	}
 
 	@Override
 	public List<ProfesorCurso> listadoProfesTitulares()

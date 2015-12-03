@@ -167,7 +167,7 @@ public class UsuariosServlet extends HttpServlet {
 				}
 				}	
 
-			}else if(accion!=null && !"".equalsIgnoreCase(accion) && accion=="deleteUser"){
+			}else if(accion=="deleteUser"){
 				if(request.getParameter("idUsuario")!=null && !"".equalsIgnoreCase(request.getParameter("idUsuario"))){
 					Usuario usuarioDelete = null;
 					try {

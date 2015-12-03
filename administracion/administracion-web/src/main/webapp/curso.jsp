@@ -72,10 +72,12 @@
 								</c:when>
 								<c:otherwise>
 									<div class="row text-center wow fadeInUp">
-										<ul class="connected-icons text-center">
+										<!-- <ul class="connected-icons text-center">
 											<li class="connected-icon"><span
 												class="icon ion-ios-bookmarks size-6x highlight"></span></li>
-										</ul>
+										</ul> -->
+										<img src="img/portfolio/1.jpg" class="img-responsive"
+																	alt="" />
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -90,7 +92,7 @@
 						<h3 class="label">Datos del curso</h3>
 						<p class="features grey">
 							<span class="feature"> <span class="highlight">Titulo:</span> ${curso.titulo}</span>
-							<span class="feature"> <span class="highlight">Profesor titular:</span></span> 
+							<span class="feature"> <span class="highlight">Profesor titular:</span> ${profesorTitularCurso.idUsuario.nombre } ${profesorTitularCurso.idUsuario.apellido }</span> 
 							<span class="feature"> <span class="highlight">Descripcion:</span> ${curso.descripcion}</span>
 							<span class="feature"> <span class="highlight">Categoria:</span> ${curso.idCategoria.descripcionCategoria}</span>
 							<span class="feature"> <span class="highlight">Dificultad:</span> ${curso.idDificultad.descripcionDificultad}</span>
@@ -107,14 +109,21 @@
 											Validado
 										</c:when>
 										<c:otherwise>
-											No validado
-											<ul>
-												<li class="social-icon">
-													<a href="#"><i class="ion-checkmark-circled"></i></a>
-												</li>
-											</ul>
-											
+											No validado <a href="#" title="Validar Curso"><i class="icon ion-checkmark-circled"></i></a>	
 										</c:otherwise>
+									</c:choose>
+								</span>
+								<span class="feature"> <span class="highlight">Destacado:</span> 
+									<c:choose>
+										<c:when test="${curso.destacado }">
+											Si <a href="#" title="Quitar Destacado"><i class="icon ion-ios-star"></i></a>
+										</c:when>
+										<c:otherwise>
+											No 
+											<c:if test="${curso.validado }">
+												<a href="#" title="Hacer Destacado"><i class="icon ion-ios-star-outline"></i></a>
+											</c:if>
+											</c:otherwise>
 									</c:choose>
 								</span>
 							</c:if>

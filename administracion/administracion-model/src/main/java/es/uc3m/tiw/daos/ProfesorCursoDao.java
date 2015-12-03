@@ -23,6 +23,8 @@ public interface ProfesorCursoDao {
 			long idCurso) throws Exception;
 	
 	public abstract List<ProfesorCurso> listadoProfesInvitadosUnCurso(long idCurso) throws Exception;
+	
+	public abstract ProfesorCurso ProfeTitularCurso(long idCurso) throws Exception; 
 
 	public abstract List<ProfesorCurso> listadoProfesTitulares() throws Exception;
 	

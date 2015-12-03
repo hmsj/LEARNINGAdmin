@@ -70,8 +70,6 @@ public class CursosServlet extends HttpServlet {
 	private ProfesorCursoDao profesorCursoDao;
 	private DificultadDao dificultadDao;
 
-	String forwardJSP = "";
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -91,6 +89,8 @@ public class CursosServlet extends HttpServlet {
 		materialLeccionDao = new MaterialLeccionDaoImpl(em, ut);
 		categoriaDao = new CategoriaDaoImpl(em, ut);
 		dificultadDao = new DificultadDaoImpl(em, ut);
+		profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
+		
 		try {
 			cursos = cursoDao.findAll();
 		} catch (Exception e) {
@@ -149,15 +149,52 @@ public class CursosServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String idCursoParam = request.getParameter("idCurso");
-		String mensaje = null;
+		String mensajeOK = "";
+		String mensajeError = "";
 		HttpSession sesion = request.getSession(true);
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("cursos", cursos);
 		request.setAttribute("profesoresTitulares", profesoresTitulares);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
-		forwardJSP = "/listadoCursos.jsp";
+		String forwardJSP = "";
 		String accion = request.getParameter("accion");
-		if (idCursoParam != null && !"".equals(idCursoParam)) {
+		
+		if(usuarioLogado!=null && usuarioLogado.isAdmin()){
+			if(accion==null || "".equalsIgnoreCase(accion)){
+				if(idCursoParam!=null && !"".equalsIgnoreCase(idCursoParam)){
+					Long idCurso = Long.parseLong(idCursoParam);
+					Curso course = null;
+					try {
+						course  = cursoDao.findById(idCurso);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (course!=null){
+						ProfesorCurso profesorTitularCurso = null;
+						try {
+							profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(idCurso);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						request.setAttribute("curso", course);
+						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
+						request.setAttribute("profesoresCurso", profesoresCurso);
+						forwardJSP = "/curso.jsp";
+					}else {
+						mensajeError = "Se ha producido un error al acceder a los datos";
+						request.setAttribute("mensajeError", mensajeError);
+						forwardJSP = "/curso.jsp";
+					}
+				}else{
+					forwardJSP = "/listadoCursos.jsp";
+				}
+			}
+		}
+		
+		
+		/*if (idCursoParam != null && !"".equals(idCursoParam)) {
 			long idCurso = Integer.parseInt(idCursoParam);
 			Curso course = null;
 			try {
@@ -167,7 +204,7 @@ public class CursosServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (course != null) {
-				if (usuarioLogado != null) {
+				if (usuarioLogado != null && usuarioLogado.isAdmin()) {
 					// TipoUsuario tipoUser = comprobarUsuario(usuarioLogado);
 					if (accion != null
 							&& "deleteAlumno".equalsIgnoreCase(accion)) {
@@ -191,21 +228,7 @@ public class CursosServlet extends HttpServlet {
 									mensaje = "El alumno no está matriculado en este curso";
 
 								if (mensaje == null) {
-									for (int i = 0; i < alumnosCurso.size(); i++) {
-										if (alumnosCurso
-												.get(i)
-												.getIdUsuario()
-												.getUsername()
-												.equalsIgnoreCase(
-														alumn.getIdUsuario()
-																.getUsername())) {
-											alumnosCurso.get(i).setEnCurso(false);
-											this.getServletContext()
-													.setAttribute("alumnos",
-															alumnosCurso);
-											mensaje = "El alumno se ha eliminado del curso";
-										}
-									}
+									// TODO Llamar metodo para eliminar alumnos
 								}
 							} else {
 								mensaje = "El alumno que desea eliminar no existe en el sistema";
@@ -216,7 +239,7 @@ public class CursosServlet extends HttpServlet {
 						forwardJSP = "/curso.jsp";
 					} else if (accion != null
 							&& "modifyTem".equalsIgnoreCase(accion)) {
-
+						
 					} else if (accion != null
 							&& "deleteTem".equalsIgnoreCase(accion)) {
 
@@ -229,36 +252,10 @@ public class CursosServlet extends HttpServlet {
 							nombreProfesor = request.getParameter("target");
 							ProfesorCurso profeAyudante = null;//profeDao.comprobarProfesorInvitado(nombreProfesor, idCurso);
 							if (profeAyudante != null) {
-								/*boolean yaEnCurso = comprobarProfesorYaEnCurso(
-										profe, course);*/
+								boolean yaEnCurso = comprobarProfesorYaEnCurso(
+										profe, course);
 								if (profeAyudante.isTitular()) {
-									for (int i = 0; i < profesoresCurso.size(); i++) {
-										if (course.getIdCurso() == profesoresCurso
-												.get(i).getIdCurso().getIdCurso()) {
-											if (profeAyudante
-													.getIdUsuario()
-													.getUsername()
-													.equalsIgnoreCase(
-															profesoresCurso
-																	.get(i)
-																	.getIdUsuario()
-																	.getUsername())) {
-												// un profesor no podria
-												// eliminar al profesor titular
-												// del curso salvo el
-												// administrador
-												if (!profesoresCurso.get(i)
-														.isTitular()) {
-													profesoresCurso.remove(i);
-													mensaje = "El profesor ya se ha eliminado del curso";
-													this.getServletContext()
-															.setAttribute(
-																	"profesores",
-																	profesoresCurso);
-												} 
-											}
-										}
-									}
+									// TODO Llamar metodo DAO para eliminar profesor invitado
 								} else {
 									mensaje = "El profesor ya esta dado de alta en el curso";
 								}
@@ -271,14 +268,12 @@ public class CursosServlet extends HttpServlet {
 						forwardJSP = "/curso.jsp";
 					} 
 				} else {
-					sesion.setAttribute("curso", course);
+					request.setAttribute("curso", course);
 					forwardJSP = "/curso.jsp";
 				}
 			}
-		}
-		if (mensaje != null) {
-			request.setAttribute("mensaje", mensaje);
-		}
+		}*/
+		
 		forward(request, response, forwardJSP);
 	}
 
@@ -290,9 +285,15 @@ public class CursosServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String idCursoParam = request.getParameter("idCurso");
-		String mensaje = null;
+		String mensajeOK = "";
+		String mensajeError = "";
 		String accion = request.getParameter("accion");
-		if (idCursoParam != null && !"".equals(idCursoParam)) {
+		HttpSession sesion = request.getSession(true);
+		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
+		
+		
+		
+		/*if (idCursoParam != null && !"".equals(idCursoParam)) {
 			long idCurso = Integer.parseInt(idCursoParam);
 			Curso course = null;
 			try {
@@ -388,7 +389,7 @@ public class CursosServlet extends HttpServlet {
 		if (mensaje != null) {
 			request.setAttribute("mensaje", mensaje);
 		}
-		forward(request, response, forwardJSP);
+		forward(request, response, forwardJSP);*/
 	}
 
 	/* Metodo para redirigir a los jsp */

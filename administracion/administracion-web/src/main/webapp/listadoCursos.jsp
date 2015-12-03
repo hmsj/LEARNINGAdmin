@@ -98,7 +98,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 1 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -131,7 +131,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -154,12 +154,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4>${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -178,7 +182,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 2 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -211,7 +215,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -235,12 +239,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;"></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4 style="color: white;">${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -258,7 +266,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 3 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -291,7 +299,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -315,12 +323,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4>${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -338,7 +350,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 4 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -371,7 +383,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -395,12 +407,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;"></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4 style="color: white;">${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -418,7 +434,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 5 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -451,7 +467,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -474,12 +490,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4>${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -497,7 +517,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 6 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -530,7 +550,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -553,12 +573,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4 style="color: white;"></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4 style="color: white;">${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>									
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
@@ -576,7 +600,7 @@
 							<div class="row">
 								<c:if test="${not empty cursos }">
 									<c:forEach items="${cursos }" var="curso">
-									<c:if test="${curso.validado }">
+									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 7 }">
 											<div class="col-md-6 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
@@ -611,7 +635,7 @@
 																	</c:if>
 																</c:forEach>
 																<li class="cbp-l-icon"><a
-																	href="cursos?idcurso=${curso.idCurso }"><i
+																	href="cursos?idCurso=${curso.idCurso }" title="Ver Curso"><i
 																		class="icon-info"></i></a></li>
 																<li class="cbp-l-caption-desc">Precio inicial:
 																	${curso.precioInicial } €</li>
@@ -634,12 +658,16 @@
 													</div>
 												</div>
 												<div class="member-info wow fadeInUp">
-													<h4></h4>
+													<c:forEach items="${profesoresTitulares }" var="profesor">	
+														<c:if test="${profesor.idCurso.idCurso == curso.idCurso}">
+															<h4>${profesor.idUsuario.nombre } ${profesor.idUsuario.apellido }</h4>
+														</c:if>
+													</c:forEach>
 													<p>${curso.descripcion }</p>
 												</div>
 											</div>
 										</c:if>
-										</c:if>
+										<%-- </c:if> --%>
 									</c:forEach>
 								</c:if>
 							</div>
