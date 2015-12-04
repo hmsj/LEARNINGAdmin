@@ -76,8 +76,7 @@
 											<li class="connected-icon"><span
 												class="icon ion-ios-bookmarks size-6x highlight"></span></li>
 										</ul> -->
-										<img src="img/portfolio/1.jpg" class="img-responsive"
-																	alt="" />
+										<img src="img/portfolio/1.jpg" class="img-responsive" alt="${curso.titulo }" />
 									</div>
 								</c:otherwise>
 							</c:choose>
@@ -131,7 +130,278 @@
 		</div>
 	</div>
 	</section>
+	
+	<section id="contact">
+	<div class="container">
+		<div class="row">
 
+			<div class="col-md-12">
+				<h2 class="section-title wow fadeInUp">EDITA LOS DATOS</h2>
+			</div>
+
+			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+				
+				<form method="post" action="cursos?idCurso=${curso.idCurso }&accion=modifyCurso" name="cursoEditForm"
+					id="cursoEditForm">
+
+					<fieldset>
+						<input name="tituloEditCurso" type="text" id="tituloEditCurso"
+							value="${curso.titulo }"/>
+						<select name="categoriaEditCurso" id="categoriaEditCurso">
+							<option value="${curso.idCategoria.idCategoria }" selected="selected"> ${curso.idCategoria.descripcionCategoria }</option>
+							<c:forEach items="${categorias }" var="categoria">
+								<option value="${categoria.idCategoria }"> ${categoria.descripcionCategoria }</option>
+							</c:forEach>
+						</select>
+						<select name="dificultadEditCurso" id="dificultadEditCurso">
+							<option value="${curso.idDificultad.idDificultad }" selected="selected">${curso.idDificultad.descripcionDificultad }</option>
+							<c:forEach items="${dificultades }" var="dificultad">
+								<option value="${dificultad.idDificultad }"> ${dificultad.descripcionDificultad }</option>
+							</c:forEach>
+						</select>
+						<input name="precioEditCurso" type="text" id="precioEditCurso"
+							placeholder="Precio del curso*" />
+						<c:choose>
+							<c:when test="${not empty curso.descripcion }">
+								<textarea name="descripcionEdit" cols="40" rows="3"
+									id="descripcionEdit" value="${curso.descripcion }"></textarea>
+							</c:when>
+							<c:otherwise>
+								<textarea name="descripcionEditCurso" cols="40" rows="3"
+									id="descripcionEditCurso" placeholder="Descripcion"></textarea>
+							</c:otherwise>
+						</c:choose>
+							
+						<input type="file" name="imgEditCurso" size="60" placeholder="Seleccione una imagen para el curso"/>
+       
+					</fieldset>
+					<input type="submit" class="submit" id="submit"
+						value="MODIFICAR CURSO" />
+				</form>	
+			</div>
+		</div>
+	</div>
+	</section>
+	
+	<section id="alumnosMatriculados" class="parallax-section-1">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title wow fadeInUp white">Alumnos matriculados</h3>
+				<p class="subheading wow fadeInUp">
+					<c:if test="${not empty listadoAlumnosCurso }">
+					<span class="highlight">Estos son los alumnos matriculados
+						en el ${curso.titulo }</span>
+					</c:if>
+					<c:if test="${empty listadoAlumnosCurso }">
+						<span class="highlight">No hay alumnos matriculados en el ${curso.titulo }</span>
+					</c:if>
+				</p>
+				
+			</div>
+			<div class="row">
+				<c:if test="${not empty listadoAlumnosCurso }">
+					<c:forEach items="${listadoAlumnosCurso }" var="alumnoCurso">
+					
+							<div class="col-md-3 col-sm-6 team-member">
+								<div class="effect effects wow fadeInUp">
+									<div class="img">
+										<c:choose>
+											<c:when test="${not empty alumnoCurso.idUsuario.imagen }">
+												<img src="${alumnoCurso.idUsuario.imagen }"
+													class="img-responsive" alt="" />
+											</c:when>
+											<c:otherwise>
+												<img src="img/clients/sinfoto.jpeg" style="margin: auto;" class="img-responsive"
+													alt="" />
+											</c:otherwise>
+										</c:choose>
+										<div class="overlay">
+											<ul class="expand">
+												<li class="social-icon"><a
+													href="usuarios?idUsuario=${alumnoCurso.idUsuario.idUsuario }"><i
+														class="icon-eye"></i></a></li>
+
+
+												<c:if test="${sessionScope.usuario.admin }">
+													<li class="social-icon"><a
+														href="usuarios?idUsuario=${alumnoCurso.idUsuario.idUsuario }"><i
+															class="ion-edit"></i></a></li>
+
+													<li class="social-icon"><a
+														href="cursos?idCurso=${curso.idCurso }&accion=deleteAlumno&target=${alumnoCurso.idUsuario.username }"><i
+															class="ion-trash-a"></i></a></li>
+												</c:if>
+
+											</ul>
+											<a class="close-overlay hidden">x</a>
+										</div>
+									</div>
+								</div>
+								<div class="member-info wow fadeInUp">
+									<h4 style="color: white;">${alumnoCurso.idUsuario.nombre } ${alumnoCurso.idUsuario.apellido }</h4>
+									<p>${alumnoCurso.idUsuario.username }</p>
+								</div>
+							</div>
+						
+					</c:forEach>
+				</c:if>
+				<c:if test="${sessionScope.usuario.admin }">
+					<div class="col-md-12 text-center">
+						<p class="subheading wow fadeInUp">
+							<span class="highlight">Añada un nuevo alumno al curso</span>
+						</p>
+					</div>
+					<div id="contact">
+						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+							<form method="post" action="cursos" name="addAlumnform"
+								id="addAlumnform">
+								<select name="target" id="target">
+									<c:forEach items="${usuarios }" var="usuario">
+										<option value="${usuario.username }">
+											${usuario.username }</option>
+									</c:forEach>
+								</select> <input name="accion" id="accion" type="hidden"
+									value="addAlumno" /> <input name="idcurso" id="idcurso"
+									type="hidden" value="${curso.idCurso }" /> <input
+									type="submit" class="submit" id="submit" value="AÑADIR ALUMNO" />
+							</form>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		</section>
+		
+		<section id="profesoresCurso">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title wow fadeInUp">Profesores del curso</h3>
+				<p class="subheading wow fadeInUp">
+					<span class="highlight">Estos son los profesores del ${sessionScope.curso.titulo }</span>
+				</p>
+			</div>
+			<div class="row">
+				<c:if test="${not empty profesoresInvitadosCurso }">
+					<c:forEach items="${profesoresInvitadosCurso }" var="profesorInvitado">
+						<div class="col-md-4 col-sm-4 team-member">
+							<div class="effect effects wow fadeInUp">
+								<div class="img">
+									<c:choose>
+										<c:when test="${not empty profesorInvitado.idUsuario.imagen }">
+											<img src="${profesorInvitado.idUsuario.imagen }"
+													class="img-responsive" alt="" />
+										</c:when>
+										<c:otherwise>
+											<img src="img/clients/sinfoto.jpeg" style="margin: auto;" class="img-responsive"
+													alt="" />
+										</c:otherwise>
+									</c:choose>
+									<div class="overlay">
+										<ul class="expand">
+											<li class="social-icon"><a
+												href="usuarios?idUsuario=${profesorInvitado.idUsuario.idUsuario }"><i
+													class="icon-eye"></i></a></li>
+
+											<c:if test="${sessionScope.usuario.admin }">
+												<li class="social-icon"><a
+													href="usuarios?idUsuario=${profesorInvitado.idUsuario.idUsuario }"><i
+														class="ion-edit"></i></a></li>
+
+												<li class="social-icon"><a
+													href="cursos?idcurso=${sessionScope.curso.idcurso }&accion=deleteAlumno&target=${alumno.idUsuario.idUsuario }"><i
+														class="ion-trash-a"></i></a></li>
+											</c:if>
+										</ul>
+										<a class="close-overlay hidden">x</a>
+									</div>
+								</div>
+							</div>
+							<div class="member-info wow fadeInUp">
+								<h4>${profesorInvitado.idUsuario.nombre } ${profesorInvitado.idUsuario.apellido }</h4>
+								<p>${profesorInvitado.idUsuario.username }</p>
+							</div>
+						</div>	
+					</c:forEach>
+				</c:if>
+				<c:if test="${sessionScope.usuario.admin }">
+					<div class="col-md-12 text-center">
+						<p class="subheading wow fadeInUp">
+							<span class="highlight">Añada un profesor invitado al
+								curso</span>
+						</p>
+					</div>
+					<div id="contact">
+						<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+							<form method="post" action="cursos" name="addProfeform"
+								id="addProfeform">
+								<select name="targetprofe" id="targetprofe">
+									<c:forEach items="${usuarios }" var="usuario">
+										<option value="${usuario.username }">
+											${usuario.username }</option>
+									</c:forEach>
+								</select> <input name="accionprofe" id="accionprofe" type="hidden"
+									value="addProfe" /> <input name="idcursoprofe"
+									id="idcursoprofe" type="hidden"
+									value="${curso.idCurso }" /> <input type="submit"
+									class="submit" id="submitprofe" value="AÑADIR PROFESOR" />
+							</form>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+		</section>
+		
+		<section id="price-list" class="parallax-section-6">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title white wow fadeInUp">Temario</h3>
+			</div>
+			<div class="row wow fadeInUp">
+				<c:choose>
+					<c:when test="${not empty seccionesCurso }">
+						<c:forEach items="${seccionesCurso }" var="seccion">
+							<c:if
+								test="${seccion.idCurso.idCurso == sessionScope.curso.idcurso }">
+								<div class="col-md-3 col-sm-6 price-list-box">
+									<div class="price-box">
+										<div class="price-table">
+											<h3 class="label">${seccion.titulo }</h3>
+											<c:if test="${not empty leccionesCurso }">
+												<c:forEach items="${leccionesCurso }" var="leccion">
+													<c:if
+														test="${leccion.idSeccion.idSeccion == seccion.idSeccion }">
+														<p class="price grey">
+															<span class="pricing">${leccion.titulo }
+														</p>
+														<c:if test="${not empty sessionScope.usuario }">
+															<c:forEach items="${alumnosCurso }" var="alumno">
+																<c:if
+																	test="${sessionScope.usuario.username == alumno.idUsuario.username && sessionScope.curso.idCurso == alumno.idCurso.idCurso && alumno.enCurso}">
+																	<c:if test="${not empty materiales }">
+																		<c:forEach items="${materiales }" var="material">
+																			<p class="features grey">
+																				<a class="feature" href="${material.archivo }">${material.titulo }</a>
+																			</p>
+																		</c:forEach>
+																	</c:if>
+																</c:if>
+															</c:forEach>
+														</c:if>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</div>
+		</div>
+		</section>
+		
 	<!-- jQuery -->
 	<script src="js/plugins/jquery.min.js"></script>
 	<script src="js/plugins/smoothscroll.min.js"></script>

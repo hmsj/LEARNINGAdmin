@@ -55,6 +55,7 @@ public class CursosServlet extends HttpServlet {
 	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
 	List<Dificultad> dificultades = new ArrayList<Dificultad>();
 	List<ProfesorCurso> profesoresTitulares = new ArrayList<ProfesorCurso>();
+	List<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
@@ -69,6 +70,8 @@ public class CursosServlet extends HttpServlet {
 	private AlumnoCursoDao alumnoCursoDao;
 	private ProfesorCursoDao profesorCursoDao;
 	private DificultadDao dificultadDao;
+	private UsuarioDao usuarioDao;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -90,6 +93,7 @@ public class CursosServlet extends HttpServlet {
 		categoriaDao = new CategoriaDaoImpl(em, ut);
 		dificultadDao = new DificultadDaoImpl(em, ut);
 		profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
+		usuarioDao = new UsuarioDaoImpl(em, ut);
 		
 		try {
 			cursos = cursoDao.findAll();
@@ -139,6 +143,18 @@ public class CursosServlet extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		try {
+			dificultades = dificultadDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			usuarios = usuarioDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -153,6 +169,7 @@ public class CursosServlet extends HttpServlet {
 		String mensajeError = "";
 		HttpSession sesion = request.getSession(true);
 		request.setAttribute("categorias", categorias);
+		request.setAttribute("dificultades", dificultades);
 		request.setAttribute("cursos", cursos);
 		request.setAttribute("profesoresTitulares", profesoresTitulares);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
@@ -173,14 +190,38 @@ public class CursosServlet extends HttpServlet {
 					if (course!=null){
 						ProfesorCurso profesorTitularCurso = null;
 						try {
-							profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(idCurso);
+							profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						List<AlumnoCurso> listadoAlumnosCurso = null;
+						try {
+							listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+						List<ProfesorCurso> profesoresInvitadosCurso = null;
+						try {
+							profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(course.getIdCurso());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						List<SeccionCurso> listadoSeccionesDelCurso = null;
+						try {
+							listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(course.getIdCurso());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
-						request.setAttribute("profesoresCurso", profesoresCurso);
+						request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
+						request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
+						request.setAttribute("usuarios", usuarios);
 						forwardJSP = "/curso.jsp";
 					}else {
 						mensajeError = "Se ha producido un error al acceder a los datos";

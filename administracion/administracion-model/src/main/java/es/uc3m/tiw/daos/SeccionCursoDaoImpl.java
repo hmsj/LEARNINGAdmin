@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
+import es.uc3m.tiw.model.LeccionCurso;
 import es.uc3m.tiw.model.SeccionCurso;
 
 public class SeccionCursoDaoImpl implements SeccionCursoDao{
@@ -44,5 +45,13 @@ public class SeccionCursoDaoImpl implements SeccionCursoDao{
 	public SeccionCurso findById(Long idSeccion) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(SeccionCurso.class, new Long(idSeccion));
+	}
+
+	@Override
+	public List<SeccionCurso> listadoSeccionesUnCurso(Long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<SeccionCurso> listadoSeccionesUnCurso= em.createQuery("SELECT s FROM SeccionCurso s WHERE s.idCurso ='"+ idCurso +"'",SeccionCurso.class).getResultList();
+		return listadoSeccionesUnCurso;
 	}
 }

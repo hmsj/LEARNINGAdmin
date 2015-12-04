@@ -69,17 +69,16 @@
 							</c:when>
 							<c:otherwise>
 								<div class="row text-center wow fadeInUp">
-									<ul class="connected-icons text-center">
+									<!-- <ul class="connected-icons text-center">
 										<li class="connected-icon"><span
 											class="icon ion-ios-person size-6x highlight"></span></li>
-									</ul>
+									</ul> -->
+									<img src="img/clients/sinfoto.jpeg" class="img-responsive" style="margin:auto;" alt="${usuario.username }">
 								</div>
-								<!-- 
-								 src="/img/clients/client-1.png"
-									alt="${sessionScope.usuario.username}"
-									data-bgposition="center top" data-bgfit="cover"
-									data-bgrepeat="no-repeat">
-									 -->
+								 
+								 
+								
+									 
 							</c:otherwise>
 						</c:choose>
 
@@ -137,7 +136,7 @@
 				<form method="post" action="usuarios?idUsuario=${usuario.idUsuario }&accion=modifyUser"
 					name="editUserform" id="editUserform">
 					<fieldset>
-						<input name="nombreEdit" type="text" id="nombreEdit" value="${usuario.nombre }" />
+						<input name="nombreEdit" type="text" id="nombreEdit" value= ${usuario.nombre } />
 						<input name="apellidoEdit" type="text" id="apellidoEdit" value="${usuario.apellido }" /> 
 						<input name="usernameEdit" type="text" id="usernameEdit" value="${usuario.username }" />
 						<input name="passwordEdit" type="password" id="passwordEdit" value="${usuario.password }" />

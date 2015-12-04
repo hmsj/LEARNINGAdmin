@@ -46,7 +46,7 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 	@Override
 	public List<LeccionCurso> findAll() throws Exception {
 		// TODO Auto-generated method stub
-		List<LeccionCurso> listadoLeccionesCurso = em.createQuery("SELECT l from LeccionCurso l",LeccionCurso.class).getResultList();
+		List<LeccionCurso> listadoLeccionesCurso = em.createQuery("SELECT l FROM LeccionCurso l",LeccionCurso.class).getResultList();
 		return listadoLeccionesCurso;
 	}
 
@@ -54,6 +54,14 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 	public LeccionCurso findById(Long idLeccion) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(LeccionCurso.class, new Long(idLeccion));
+	}
+
+	@Override
+	public List<LeccionCurso> ListadoLeccionesUnaSeccion(Long idSeccion)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<LeccionCurso> listadoLeccionesUnaSeccion= em.createQuery("SELECT l FROM LeccionCurso l WHERE l.idSeccion ='"+ idSeccion +"'",LeccionCurso.class).getResultList();
+		return listadoLeccionesUnaSeccion;
 	}
 	
 }

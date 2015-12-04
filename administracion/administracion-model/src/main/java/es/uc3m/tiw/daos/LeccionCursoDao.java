@@ -15,6 +15,7 @@ public interface LeccionCursoDao {
 	public abstract List<LeccionCurso> findAll() throws Exception;
 	
 	public abstract LeccionCurso findById (Long idLeccion) throws Exception;
-
+	
+	public abstract List<LeccionCurso> ListadoLeccionesUnaSeccion (Long idSeccion) throws Exception;
 	
 }
