@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.model.MaterialLeccion;
+import es.uc3m.tiw.model.SeccionCurso;
 
 public class MaterialLeccionDaoImpl implements MaterialLeccionDao{
 	private EntityManager em;
@@ -45,5 +46,13 @@ public class MaterialLeccionDaoImpl implements MaterialLeccionDao{
 	public MaterialLeccion findById(Long idMaterial) throws Exception {
 		// TODO Auto-generated method stub
 		return em.find(MaterialLeccion.class, new Long(idMaterial));
+	}
+
+	@Override
+	public List<MaterialLeccion> listadoMaterialesLeccion(Long idLeccion)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<MaterialLeccion> listadoMaterialesLeccion= em.createQuery("SELECT m FROM MaterialLeccion m WHERE m.idLeccion.idLeccion ='"+ idLeccion +"'",MaterialLeccion.class).getResultList();
+		return listadoMaterialesLeccion;
 	}
 }

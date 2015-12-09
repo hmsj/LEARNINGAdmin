@@ -216,12 +216,36 @@ public class CursosServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
+						List<LeccionCurso> listadoLeccionesDelCurso = null;
+						if(listadoSeccionesDelCurso!=null){
+							for (int i = 0; i < listadoSeccionesDelCurso.size(); i++) {
+								try {
+									listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnaSeccion(listadoSeccionesDelCurso.get(i).getIdSeccion());
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
+						List<MaterialLeccion> listadoMaterialesLeccion = null;
+						if(listadoLeccionesDelCurso!=null){
+							for (int i = 0; i < listadoLeccionesDelCurso.size(); i++) {
+								try {
+									listadoMaterialesLeccion = materialLeccionDao.listadoMaterialesLeccion(listadoLeccionesDelCurso.get(i).getIdLeccion());
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
 						request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
 						request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
 						request.setAttribute("usuarios", usuarios);
+						request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
+						request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
+						request.setAttribute("listadoMaterialesLeccion", listadoMaterialesLeccion);
 						forwardJSP = "/curso.jsp";
 					}else {
 						mensajeError = "Se ha producido un error al acceder a los datos";

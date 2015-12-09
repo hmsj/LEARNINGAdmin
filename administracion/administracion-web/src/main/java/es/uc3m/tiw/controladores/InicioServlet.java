@@ -272,8 +272,10 @@ public class InicioServlet extends HttpServlet {
 		}
 		
 		MaterialLeccion material1 = new MaterialLeccion("Material1", "Descripcion material 1", "/", leccion1); 
+		MaterialLeccion material2 = new MaterialLeccion("Material2", "Descripcion material 2", "/", leccion1); 
 		try {
 			materialLeccionDao.createMaterialLeccion(material1);
+			materialLeccionDao.createMaterialLeccion(material2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

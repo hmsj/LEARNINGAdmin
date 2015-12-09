@@ -51,7 +51,7 @@ public class SeccionCursoDaoImpl implements SeccionCursoDao{
 	public List<SeccionCurso> listadoSeccionesUnCurso(Long idCurso)
 			throws Exception {
 		// TODO Auto-generated method stub
-		List<SeccionCurso> listadoSeccionesUnCurso= em.createQuery("SELECT s FROM SeccionCurso s WHERE s.idCurso ='"+ idCurso +"'",SeccionCurso.class).getResultList();
+		List<SeccionCurso> listadoSeccionesUnCurso= em.createQuery("SELECT s FROM SeccionCurso s WHERE s.idCurso.idCurso ='"+ idCurso +"'",SeccionCurso.class).getResultList();
 		return listadoSeccionesUnCurso;
 	}
 }
