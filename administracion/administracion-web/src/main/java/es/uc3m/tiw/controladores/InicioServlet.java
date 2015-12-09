@@ -256,8 +256,10 @@ public class InicioServlet extends HttpServlet {
 		}	
 			
 		SeccionCurso seccion1 = new SeccionCurso("Seccion1", "Descripcion seccion1", curso1);
+		SeccionCurso seccion2 = new SeccionCurso("Seccion2", "Descripcion seccion2", curso1);
 		try {
 			seccionCursoDao.createSeccionCurso(seccion1);
+			seccionCursoDao.createSeccionCurso(seccion2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
