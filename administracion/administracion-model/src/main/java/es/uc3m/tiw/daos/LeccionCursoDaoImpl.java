@@ -63,5 +63,13 @@ public class LeccionCursoDaoImpl implements LeccionCursoDao{
 		List<LeccionCurso> listadoLeccionesUnaSeccion= em.createQuery("SELECT l FROM LeccionCurso l WHERE l.idSeccion.idSeccion ='"+ idSeccion +"'",LeccionCurso.class).getResultList();
 		return listadoLeccionesUnaSeccion;
 	}
+
+	@Override
+	public List<LeccionCurso> ListadoLeccionesUnCurso(Long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<LeccionCurso> listadoLeccionesUnCurso= em.createQuery("SELECT l FROM LeccionCurso l WHERE l.idSeccion.idCurso.idCurso ='"+ idCurso +"'",LeccionCurso.class).getResultList();
+		return listadoLeccionesUnCurso;
+	}
 	
 }

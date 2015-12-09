@@ -18,4 +18,6 @@ public interface LeccionCursoDao {
 	
 	public abstract List<LeccionCurso> ListadoLeccionesUnaSeccion (Long idSeccion) throws Exception;
 	
+	public abstract List<LeccionCurso> ListadoLeccionesUnCurso (Long idCurso) throws Exception;
+
 }

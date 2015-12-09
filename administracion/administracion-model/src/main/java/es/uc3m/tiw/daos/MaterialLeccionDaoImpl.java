@@ -55,4 +55,12 @@ public class MaterialLeccionDaoImpl implements MaterialLeccionDao{
 		List<MaterialLeccion> listadoMaterialesLeccion= em.createQuery("SELECT m FROM MaterialLeccion m WHERE m.idLeccion.idLeccion ='"+ idLeccion +"'",MaterialLeccion.class).getResultList();
 		return listadoMaterialesLeccion;
 	}
+
+	@Override
+	public List<MaterialLeccion> listadoMaterialesCurso(Long idCurso)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<MaterialLeccion> listadoMaterialesCurso= em.createQuery("SELECT m FROM MaterialLeccion m WHERE m.idLeccion.idSeccion.idCurso.idCurso ='"+ idCurso +"'",MaterialLeccion.class).getResultList();
+		return listadoMaterialesCurso;
+	}
 }

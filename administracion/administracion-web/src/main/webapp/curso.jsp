@@ -103,7 +103,7 @@
 								</span> <span class="feature"> <span class="highlight">Dificultad:</span>
 									${curso.idDificultad.descripcionDificultad}
 								</span> <span class="feature"> <span class="highlight">Precio
-										Inicial:</span> ${curso.precioInicial}
+										Inicial:</span> ${curso.precioInicial} €
 								</span> <span class="feature"> <span class="highlight">Promocion:</span>
 									${curso.idPromocion.valor} <c:if
 										test="${curso.idPromocion.tipoPromocion.idTipoPromocion == 1 }"> € </c:if>
@@ -143,6 +143,24 @@
 						</div>
 					</div>
 				</div>
+				<br>
+		<div class="row" id="contact">
+			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
+				<form method="post"
+					action="cursos?idCurso=${curso.idCurso }&accion=applyPromo"
+					name="applyPromoForm" id="applyPromoForm">
+					<select name="promoCurso" id=""promoCurso"">
+							<option value="0" selected="selected"> Seleccione una promocion</option>
+							<c:forEach items="${listadoPromociones }" var="promocion">
+								<option value="${promocion.idPromocion }"> ${promocion.nombrePromocion }</option>
+							</c:forEach>
+					</select>
+					
+					<input type="submit" class="submit" id="submit"
+						value="APLICAR PROMOCION" />
+				</form>
+			</div>
+		</div>
 	</section>
 
 	<section id="contact">
@@ -400,15 +418,18 @@
 									<h3 class="label">${seccion.titulo }</h3>
 									<c:if test="${not empty listadoLeccionesDelCurso }">
 										<c:forEach items="${listadoLeccionesDelCurso }" var="leccion">
+										<c:if test="${leccion.idSeccion.idSeccion == seccion.idSeccion }">
 											<p class="price grey">
 												<span class="pricing" style="font-size: medium;">${leccion.titulo }</span>
 											</p>
 											<c:if test="${not empty sessionScope.usuario }">
 												<c:if test="${not empty listadoMaterialesLeccion }">
 													<c:forEach items="${listadoMaterialesLeccion }" var="material">
+													<c:if test="${leccion.idLeccion == material.idLeccion.idLeccion }">
 														<p class="features grey">
 															<a class="feature" href="${material.fichero }">${material.titulo }</a>
 														</p>
+														</c:if>
 													</c:forEach>
 												</c:if>
 											</c:if>
@@ -416,6 +437,7 @@
 												<a class="feature" href="${material.fichero }">Añadir material <i
 													class="icon ion-plus-round"></i></a>
 											</p>
+											</c:if>
 										</c:forEach>
 									</c:if>
 									<p class="price grey" style="border-top: 1px solid rgba(255, 255, 255, 0.15);">

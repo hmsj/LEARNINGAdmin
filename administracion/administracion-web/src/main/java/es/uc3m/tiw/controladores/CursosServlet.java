@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import es.uc3m.tiw.model.Dificultad;
 import es.uc3m.tiw.model.LeccionCurso;
 import es.uc3m.tiw.model.MaterialLeccion;
 import es.uc3m.tiw.model.ProfesorCurso;
+import es.uc3m.tiw.model.Promocion;
 import es.uc3m.tiw.model.SeccionCurso;
 import es.uc3m.tiw.model.Usuario;
 
@@ -31,12 +33,20 @@ import es.uc3m.tiw.model.Usuario;
  * Servlet implementation class CursosServlet
  */
 @WebServlet(value = "/cursos")
+@MultipartConfig(
+        fileSizeThreshold   = 1024 * 1024 * 2,  // 2 MB
+        maxFileSize         = 1024 * 1024 * 10, // 10 MB
+        maxRequestSize      = 1024 * 1024 * 50, // 50 MB
+        location            = "/"
+)
 public class CursosServlet extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5079331756861773626L;
 
+	private static final String UPLOAD_DIR = "img/courses";
+	
 	private Curso curso;
 	private Categoria categoria;
 	private SeccionCurso seccionCurso;
@@ -71,6 +81,7 @@ public class CursosServlet extends HttpServlet {
 	private ProfesorCursoDao profesorCursoDao;
 	private DificultadDao dificultadDao;
 	private UsuarioDao usuarioDao;
+	private PromocionDao promocionDao;
 	
 
 	/**
@@ -94,6 +105,7 @@ public class CursosServlet extends HttpServlet {
 		dificultadDao = new DificultadDaoImpl(em, ut);
 		profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
 		usuarioDao = new UsuarioDaoImpl(em, ut);
+		promocionDao = new PromocionDaoImpl(em, ut);
 		
 		try {
 			cursos = cursoDao.findAll();
@@ -217,26 +229,25 @@ public class CursosServlet extends HttpServlet {
 							e.printStackTrace();
 						}
 						List<LeccionCurso> listadoLeccionesDelCurso = null;
-						if(listadoSeccionesDelCurso!=null){
-							for (int i = 0; i < listadoSeccionesDelCurso.size(); i++) {
-								try {
-									listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnaSeccion(listadoSeccionesDelCurso.get(i).getIdSeccion());
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
+						try {
+							listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(course.getIdCurso());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
-						List<MaterialLeccion> listadoMaterialesLeccion = null;
-						if(listadoLeccionesDelCurso!=null){
-							for (int i = 0; i < listadoLeccionesDelCurso.size(); i++) {
-								try {
-									listadoMaterialesLeccion = materialLeccionDao.listadoMaterialesLeccion(listadoLeccionesDelCurso.get(i).getIdLeccion());
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
+						List<MaterialLeccion> listadoMaterialesDelCurso = null;
+						try {
+							listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(course.getIdCurso());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						List<Promocion> listadoPromociones = null;
+						try {
+							listadoPromociones = promocionDao.findAll();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
@@ -245,7 +256,8 @@ public class CursosServlet extends HttpServlet {
 						request.setAttribute("usuarios", usuarios);
 						request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
 						request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
-						request.setAttribute("listadoMaterialesLeccion", listadoMaterialesLeccion);
+						request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
+						request.setAttribute("listadoPromociones", listadoPromociones);
 						forwardJSP = "/curso.jsp";
 					}else {
 						mensajeError = "Se ha producido un error al acceder a los datos";

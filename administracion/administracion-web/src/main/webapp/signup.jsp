@@ -78,7 +78,7 @@
 					</div>
 				</c:if>
 				<form method="post" action="registro"
-					name="signupform" id="signupform">
+					name="signupform" id="signupform" enctype="multipart/form-data">
 					<fieldset>
 						<input name="nombre" type="text" id="nombre" placeholder="Nombre*" />
 						<input name="apellidos" type="text" id="apellidos" placeholder="Apellidos*" /> 
@@ -103,7 +103,7 @@
 							placeholder="Descripcion"></textarea>
 					</fieldset>
 					<fieldset>
-						<input type="file" name="imgUsuario" size="60" placeholder="Seleccione una imagen"/>
+						<input type="file" name="imgUsuario" placeholder="Seleccione una imagen"/>
 					</fieldset>
 					<input type="submit" class="submit" id="submit"
 						value="CREAR USUARIO" />

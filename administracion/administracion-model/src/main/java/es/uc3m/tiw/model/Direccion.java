@@ -17,16 +17,16 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idDireccion;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String pais;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String ciudad;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String calle;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private int numero;
 	
 	@Column(nullable=true)
@@ -35,7 +35,7 @@ private static final long serialVersionUID = 1L;
 	@Column(nullable=true)
 	private String telefono;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String codigoPostal;
 
 	public Direccion() {

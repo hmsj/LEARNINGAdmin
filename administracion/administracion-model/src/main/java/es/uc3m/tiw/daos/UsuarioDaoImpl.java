@@ -60,7 +60,9 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	@Override
 	public Usuario findByUsername(String username) throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(Usuario.class, new String(username));
+		Usuario usuario =null;
+		usuario = em.createQuery("SELECT u FROM Usuario u where u.username='"+username+"'",Usuario.class).getSingleResult();
+		return usuario;
 	}
 
 	@Override

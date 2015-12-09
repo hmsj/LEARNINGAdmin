@@ -28,12 +28,12 @@ import es.uc3m.tiw.model.*;
 @WebServlet("/registro")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 maxFileSize = 1024 * 1024 * 10, // 10MB
-maxRequestSize = 1024 * 1024 * 50,
-location="/")// 50MB
+maxRequestSize = 1024 * 1024 * 50, // 50MB
+location="/")
 public class RegistroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String SAVE_DIR = "administracion-web/src/main/webapp/img/clients";
+	private static final String SAVE_DIR = "img/clients";
 	
 	private Usuario usuario;
 	private Direccion direccion;
@@ -91,6 +91,7 @@ public class RegistroServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String inicialPath = request.getServletContext().getRealPath("");
+		
 		String savePath = inicialPath + File.separator + SAVE_DIR;
 		
 		Usuario nuevoUsuario = new Usuario();
@@ -171,16 +172,20 @@ public class RegistroServlet extends HttpServlet {
 						.setDescripcion(request.getParameter("descripcion"));
 			}
 			
-			/*if(request.getParameter("imgUsuario") != null && "".equalsIgnoreCase(request.getParameter("imgUsuario"))){
+			if(request.getParameter("imgUsuario") != null && !"".equalsIgnoreCase(request.getParameter("imgUsuario"))){
 				File fileSaveDir = new File(savePath);
 				if(!fileSaveDir.exists()){
 					fileSaveDir.mkdir();
 				}
+				
+				String fileName = null;
+				
 				for (Part part : request.getParts()) {
-					String fileName = extractFileName(part);
+					 fileName = extractFileName(part);
 					part.write(savePath + File.separator + fileName);
 				}
-			}*/
+				nuevoUsuario.setImagen(fileName);
+			}
 			if (request.getParameter("pais") != null
 					&& !"".equalsIgnoreCase(request.getParameter("pais"))) {
 				nuevaDireccion.setPais(request.getParameter("pais"));
@@ -261,7 +266,6 @@ public class RegistroServlet extends HttpServlet {
 	}
 	
 	private String extractFileName(Part part) {
-		// TODO Auto-generated method stub
 		String contentDisp = part.getHeader("content-disposition");
 		String[] items = contentDisp.split(";");
 		for (String s : items) {
