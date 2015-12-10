@@ -267,6 +267,29 @@ public class CursosServlet extends HttpServlet {
 				}else{
 					forwardJSP = "/listadoCursos.jsp";
 				}
+			}else if(accion=="validarCurso"){
+				if(request.getParameter("idCurso")!=null && !"".equalsIgnoreCase(request.getParameter("idCurso"))){
+					Curso cursoVal = null;
+					try {
+						cursoVal = cursoDao.findById(Long.parseLong(request.getParameter("idCurso")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+					if(cursoVal != null && !cursoVal.isValidado()){
+						cursoVal.setValidado(true);
+						try {
+							cursoDao.modifyCurso(cursoVal);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						mensajeOK = "Curso validado";
+						request.setAttribute("mensajeOK", mensajeOK);
+						forwardJSP = "/curso.jsp";
+					}
+				}
+				
 			}
 		}
 		

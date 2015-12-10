@@ -84,16 +84,16 @@
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<c:if test="${not empty mensaje }">
+				<c:if test="${not empty mensajeError }">
 					<div id="message">
-						<p class="error_message">${mensaje }</p>
+						<p class="error_message">${mensajeError }</p>
 					</div>
 				</c:if>
-				<form method="post" action="nuevoMaterial" name="materialForm"
-					id="materialForm">
+				<form method="post" action="material" name="materialForm"
+					id="materialForm" enctype="multipart/form-data">
 
 					<select name="leccionMaterial" id="leccionMaterial">
-							<option value="0" selected="selected"> Seleccione una seccion</option>
+							<option value="0" selected="selected"> Seleccione una leccion</option>
 							<c:forEach items="${listadoLeccionesCurso }" var="leccion">
 								<option value="${leccion.idLeccion }"> ${leccion.titulo }</option>
 							</c:forEach>
@@ -104,9 +104,9 @@
 							placeholder="Titulo del material" />
 						<textarea name="descripcionMaterial" cols="40" rows="3"
 							id="descripcionMaterial" placeholder="Descripcion del Material"></textarea>
-							<input name="ficheroMaterial" id="ficheroMaterial" type="file" placeholder="Elija el archivo que desea subir al curso">
+						<input name="file" type="file" placeholder="Elija el archivo que desea subir al curso">
 					</fieldset>
-					
+		
 					<input type="submit" class="submit" id="submit"
 						value="AÑADIR MATERIAL" />
 				</form>

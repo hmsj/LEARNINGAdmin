@@ -247,9 +247,11 @@ public class InicioServlet extends HttpServlet {
 	
 		ProfesorCurso profesor = new ProfesorCurso(true, usuario4, curso1, banco1);
 		ProfesorCurso profesor2 = new ProfesorCurso(false, usuario5, curso1, banco2);
+		ProfesorCurso profesor3 = new ProfesorCurso(true, usuario4, curso3, banco1);
 		try {
 			profesorCursoDao.createProfesorCurso(profesor);
 			profesorCursoDao.createProfesorCurso(profesor2);
+			profesorCursoDao.createProfesorCurso(profesor3);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

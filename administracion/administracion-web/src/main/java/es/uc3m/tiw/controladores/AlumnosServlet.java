@@ -53,6 +53,14 @@ public class AlumnosServlet extends HttpServlet {
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
 		usuarioDao = new UsuarioDaoImpl(em, ut);
 		//alumnos = (ArrayList<Alumno>) this.getServletContext().getAttribute("alumnos");
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession sesion = request.getSession(true);
 		try {
 			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
@@ -65,15 +73,7 @@ public class AlumnosServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession sesion = request.getSession(true);
-		sesion.setAttribute("usuarios", usuarios);
+		request.setAttribute("usuarios", usuarios);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		String forwardJSP = "/listadoAlumnos.jsp";
 		forward(request, response, forwardJSP);

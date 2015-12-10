@@ -109,7 +109,7 @@ public class RegistroServlet extends HttpServlet {
 						.getParameter("username"));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				userUsername = null;
 			}
 			if (userUsername != null) {
 				forwardJSP = "/signup.jsp";
@@ -172,20 +172,18 @@ public class RegistroServlet extends HttpServlet {
 						.setDescripcion(request.getParameter("descripcion"));
 			}
 			
-			if(request.getParameter("imgUsuario") != null && !"".equalsIgnoreCase(request.getParameter("imgUsuario"))){
-				File fileSaveDir = new File(savePath);
-				if(!fileSaveDir.exists()){
-					fileSaveDir.mkdir();
-				}
-				
-				String fileName = null;
-				
-				for (Part part : request.getParts()) {
-					 fileName = extractFileName(part);
-					part.write(savePath + File.separator + fileName);
-				}
-				nuevoUsuario.setImagen(fileName);
+			File fileSaveDir = new File(savePath);
+			if (!fileSaveDir.exists()) {
+				fileSaveDir.mkdir();
 			}
+			String fileName = "";
+			for (Part part : request.getParts()) {
+				fileName = extractFileName(part);
+				if (!"".equalsIgnoreCase(fileName))
+					part.write(savePath + File.separator + fileName);
+			}
+				nuevoUsuario.setImagen(savePath + File.separator + fileName);
+			
 			if (request.getParameter("pais") != null
 					&& !"".equalsIgnoreCase(request.getParameter("pais"))) {
 				nuevaDireccion.setPais(request.getParameter("pais"));

@@ -39,6 +39,24 @@
 	background: #B2CC02;
 	text-decoration: none;
 }
+
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
 </style>
 </head>
 <body>
@@ -119,27 +137,31 @@
 											Validado
 										</c:when>
 											<c:otherwise>
-											No validado <a href="#" title="Validar Curso"><i
+											No validado <a href="cursos?idCurso=${curso.idCurso }&accion=validarCurso" title="Validar Curso"><i
 													class="icon ion-checkmark-circled"></i></a>
 											</c:otherwise>
 										</c:choose>
 									</span>
-									<span class="feature"> <span class="highlight">Destacado:</span>
-										<c:choose>
-											<c:when test="${curso.destacado }">
-											Si <a href="#" title="Quitar Destacado"><i
-													class="icon ion-ios-star"></i></a>
-											</c:when>
-											<c:otherwise>
-											No 
-											<c:if test="${curso.validado }">
-													<a href="#" title="Hacer Destacado"><i
-														class="icon ion-ios-star-outline"></i></a>
-												</c:if>
-											</c:otherwise>
-										</c:choose>
-									</span>
 								</c:if>
+								<span class="feature"> <span class="highlight">Destacado:</span>
+									<c:choose>
+										<c:when test="${curso.destacado }">
+										Si <c:if test="${sessionScope.usuario.admin }">
+											<a href="#" title="Quitar Destacado"><i
+												class="icon ion-ios-star"></i></a>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+										No 
+											<c:if test="${curso.validado }">
+												<c:if test="${sessionScope.usuario.admin }">
+												<a href="#" title="Hacer Destacado"><i
+													class="icon ion-ios-star-outline"></i></a>
+												</c:if>
+											</c:if>
+										</c:otherwise>
+									</c:choose>
+								</span>
 						</div>
 					</div>
 				</div>
@@ -434,7 +456,7 @@
 												</c:if>
 											</c:if>
 											<p class="features grey">
-												<a class="feature" href="${material.fichero }">Añadir material <i
+												<a class="feature" href="material?idCurso=${curso.idCurso }">Añadir material <i
 													class="icon ion-plus-round"></i></a>
 											</p>
 											</c:if>

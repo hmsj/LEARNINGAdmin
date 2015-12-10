@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.uc3m.tiw</groupId>
 	<artifactId>administracion</artifactId>
-	<version>2.0</version>
+	<version>3.0</version>
 	<packaging>pom</packaging>
 	<name>TIW-Archetype</name>
 	<description>Proyecto de administracion de la aplicacion de E-Learning desarrollada para la asignatura TIW de la Universidad Carlos III</description>
