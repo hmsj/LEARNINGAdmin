@@ -285,7 +285,7 @@ public class InicioServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		try {
+		/*try {
 			cursos = cursoDao.findAll();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -296,7 +296,7 @@ public class InicioServlet extends HttpServlet {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		//double preciofinal = calcularPrecio(precioInicial, oferta1);
 	}
 

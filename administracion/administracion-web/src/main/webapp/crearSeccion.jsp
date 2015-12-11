@@ -15,6 +15,26 @@
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
+
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 
@@ -84,13 +104,18 @@
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<c:if test="${not empty mensaje }">
+				<c:if test="${not empty mensajeError }">
 					<div id="message">
-						<p class="error_message">${mensaje }</p>
+						<p class="error_message">${mensajeError }</p>
 					</div>
 				</c:if>
-				<form method="post" action="nuevaSeccion" name="seccionForm"
-					id="seccionForm">
+				<c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
+					</div>
+				</c:if>
+				<form method="post" action="material?accion=seccion" name="seccionForm"
+					id="seccionForm" enctype="multipart/form-data">
 
 					<fieldset>
 						<input name="tituloSeccion" type="text" id="tituloSeccion"
@@ -113,6 +138,8 @@
 							id="descripcionMaterial" placeholder="Descripcion del Material"></textarea>
 							<input name="ficheroMaterial" id="ficheroMaterial" type="file" placeholder="Elija el archivo que desea subir al curso">
 					</fieldset>
+					
+					<input name="idCurso" id="idCurso" type="hidden" value="${curso.idCurso }" />
 					
 					<input type="submit" class="submit" id="submit"
 						value="AÑADIR SECCION" />

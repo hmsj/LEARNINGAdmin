@@ -109,17 +109,50 @@ public class MaterialServlet extends HttpServlet {
 		HttpSession sesion = request.getSession(true);
 		String forwardJSP = "";
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
+		String accion = request.getParameter("accion");
+		String mensajeError ="";
+		Curso curso = null;
 		if(request.getParameter("idCurso")!=null && !"".equalsIgnoreCase(request.getParameter("idCurso"))){
-			List<LeccionCurso> listadoLeccionesCurso = null;
 			try {
-				listadoLeccionesCurso = leccionCursoDao.ListadoLeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
-			} catch (Exception e) {
+				curso = cursoDao.findById(Long.parseLong(request.getParameter("idCurso")));
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
-			if(listadoLeccionesCurso != null){
-				request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
-				forwardJSP = "/crearMaterial.jsp";
+			if(accion.equalsIgnoreCase("material")){
+				List<LeccionCurso> listadoLeccionesCurso = null;
+				try {
+					listadoLeccionesCurso = leccionCursoDao.ListadoLeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(listadoLeccionesCurso != null){
+					request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
+					request.setAttribute("curso", curso);
+					forwardJSP = "/crearMaterial.jsp";
+				}
+			}else if(accion.equalsIgnoreCase("leccion")){
+				List<SeccionCurso> listadoSeccionesCurso = null;
+				try {
+					listadoSeccionesCurso = seccionCursoDao.listadoSeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(listadoSeccionesCurso != null){
+					request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+					request.setAttribute("curso", curso);
+					forwardJSP = "/crearLeccion.jsp";
+				}
+			}else if(accion.equalsIgnoreCase("seccion")){
+				request.setAttribute("curso", curso);
+				forwardJSP = "/crearSeccion.jsp";
+			}else{
+				mensajeError = "Se ha producido un error";
+				request.setAttribute("mensajeError", mensajeError);
+				forwardJSP = "/principal.jsp";
+				forward(request, response, forwardJSP);
 			}
 		}
 		
@@ -144,144 +177,397 @@ public class MaterialServlet extends HttpServlet {
 		Curso curso = null;
 		LeccionCurso leccionCurso = null;
 		List<LeccionCurso> listadoLeccionesCurso = null;
+		List<SeccionCurso> listadoSeccionesCurso = null;
+		
 		String titulo = "";	
 		String descripcion = "";		
 		
 		String appPath = request.getServletContext().getRealPath("");
 		String savePath = appPath + File.separator + SAVE_DIR;
+		String accion = request.getParameter("accion");
 		
 		if(usuarioLogado!=null){
-			if(request.getParameter("leccionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("leccionMaterial"))){
-				try {
-					leccionCurso = leccionCursoDao.findById(Long.parseLong(request.getParameter("leccionMaterial")));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if(leccionCurso!=null){
+			if(accion.equalsIgnoreCase("material")){
+				if(request.getParameter("idCurso")!=null && !"".equalsIgnoreCase(request.getParameter("idCurso"))){
 					try {
-						curso = cursoDao.findById(leccionCurso.getIdSeccion().getIdCurso().getIdCurso());
+						listadoLeccionesCurso = leccionCursoDao.ListadoLeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				if(request.getParameter("tituloMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("tituloMaterial"))){
-					titulo = request.getParameter("tituloMaterial");
-					if(request.getParameter("descripcionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionMaterial"))){
-						descripcion = request.getParameter("descripcionMaterial");
-							File fileSaveDir = new File(savePath);
-							if (!fileSaveDir.exists()) {
-								fileSaveDir.mkdir();
-							}
-							String fileName = "";
-							for (Part part : request.getParts()) {
-								fileName = extractFileName(part);
-								if (!"".equalsIgnoreCase(fileName))
-									part.write(savePath + File.separator + fileName);
-							}
-							if(leccionCurso!=null && titulo!=null && !"".equalsIgnoreCase(titulo) && descripcion!=null && !"".equalsIgnoreCase(descripcion) && fileName!=null && !"".equalsIgnoreCase(fileName)){
-								nuevoMaterial = new MaterialLeccion(titulo, descripcion, fileName, leccionCurso);
-								try {
-									materialLeccionDao.createMaterialLeccion(nuevoMaterial);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+				if(request.getParameter("leccionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("leccionMaterial"))){
+					try {
+						leccionCurso = leccionCursoDao.findById(Long.parseLong(request.getParameter("leccionMaterial")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(leccionCurso!=null){
+						try {
+							curso = cursoDao.findById(leccionCurso.getIdSeccion().getIdCurso().getIdCurso());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					if(request.getParameter("tituloMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("tituloMaterial"))){
+						titulo = request.getParameter("tituloMaterial");
+						if(request.getParameter("descripcionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionMaterial"))){
+							descripcion = request.getParameter("descripcionMaterial");
+								File fileSaveDir = new File(savePath);
+								if (!fileSaveDir.exists()) {
+									fileSaveDir.mkdir();
 								}
-								mensajeOK = "Material añadido correctamente";
-								request.setAttribute("mensajeOK", mensajeOK);
-								if (curso!=null){
-									ProfesorCurso profesorTitularCurso = null;
+								String fileName = "";
+								for (Part part : request.getParts()) {
+									fileName = extractFileName(part);
+									if (!"".equalsIgnoreCase(fileName)){
+										part.write(savePath + File.separator + fileName);
+										break;
+									}
+								}
+								if(leccionCurso!=null && titulo!=null && !"".equalsIgnoreCase(titulo) && descripcion!=null && !"".equalsIgnoreCase(descripcion) && fileName!=null && !"".equalsIgnoreCase(fileName)){
+									nuevoMaterial.setTitulo(titulo);
+									nuevoMaterial.setDescripcion(descripcion);
+									nuevoMaterial.setFichero(savePath + File.separator + fileName);
+									nuevoMaterial.setIdLeccion(leccionCurso);
 									try {
-										profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(curso.getIdCurso());
+										materialLeccionDao.createMaterialLeccion(nuevoMaterial);
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-									List<AlumnoCurso> listadoAlumnosCurso = null;
-									try {
-										listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(curso.getIdCurso());
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									} 
-									List<ProfesorCurso> profesoresInvitadosCurso = null;
-									try {
-										profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(curso.getIdCurso());
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+									mensajeOK = "Material añadido correctamente";
+									request.setAttribute("mensajeOK", mensajeOK);
+									if (curso!=null){
+										ProfesorCurso profesorTitularCurso = null;
+										try {
+											profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(curso.getIdCurso());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										List<AlumnoCurso> listadoAlumnosCurso = null;
+										try {
+											listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(curso.getIdCurso());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} 
+										List<ProfesorCurso> profesoresInvitadosCurso = null;
+										try {
+											profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(curso.getIdCurso());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										List<SeccionCurso> listadoSeccionesDelCurso = null;
+										try {
+											listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(curso.getIdCurso());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										List<LeccionCurso> listadoLeccionesDelCurso = null;
+										try {
+											listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(curso.getIdCurso());
+										} catch (Exception e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
+										List<MaterialLeccion> listadoMaterialesDelCurso = null;
+										try {
+											listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(curso.getIdCurso());
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										List<Promocion> listadoPromociones = null;
+										try {
+											listadoPromociones = promocionDao.findAll();
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										request.setAttribute("curso", curso);
+										request.setAttribute("profesorTitularCurso", profesorTitularCurso);
+										request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
+										request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
+										request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
+										request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
+										request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
+										request.setAttribute("listadoPromociones", listadoPromociones);
+										forwardJSP = "/curso.jsp";
+										forward(request, response, forwardJSP);
 									}
-									List<SeccionCurso> listadoSeccionesDelCurso = null;
-									try {
-										listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(curso.getIdCurso());
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									List<LeccionCurso> listadoLeccionesDelCurso = null;
-									try {
-										listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(curso.getIdCurso());
-									} catch (Exception e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-									List<MaterialLeccion> listadoMaterialesDelCurso = null;
-									try {
-										listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(curso.getIdCurso());
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									List<Promocion> listadoPromociones = null;
-									try {
-										listadoPromociones = promocionDao.findAll();
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									request.setAttribute("curso", curso);
-									request.setAttribute("profesorTitularCurso", profesorTitularCurso);
-									request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
-									request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
-									request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
-									request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
-									request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
-									request.setAttribute("listadoPromociones", listadoPromociones);
-									forwardJSP = "/curso.jsp";
+									
+								}else{
+									mensajeError = "Debe rellenar todos los campos";
+									request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
+									request.setAttribute("mensajeError", mensajeError);
+									forwardJSP = "/crearMaterial.jsp";
 									forward(request, response, forwardJSP);
 								}
-								
-							}else{
-								mensajeError = "Debe rellenar todos los campos";
-								request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
-								request.setAttribute("mensajeError", mensajeError);
-								forwardJSP = "/crearMaterial.jsp";
-								forward(request, response, forwardJSP);
-							}
-					
+						
+						}else{
+							mensajeError = "Debe añadir una descripcion";
+							request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
+							request.setAttribute("mensajeError", mensajeError);
+							forwardJSP = "/crearMaterial.jsp";
+							forward(request, response, forwardJSP);
+						}
 					}else{
-						mensajeError = "Debe añadir una descripcion";
+						mensajeError = "Debe añadir un titulo";
 						request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
 						request.setAttribute("mensajeError", mensajeError);
 						forwardJSP = "/crearMaterial.jsp";
 						forward(request, response, forwardJSP);
 					}
 				}else{
-					mensajeError = "Debe añadir un titulo";
+					mensajeError = "Debe seleccionar una leccion del listado";
 					request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
 					request.setAttribute("mensajeError", mensajeError);
 					forwardJSP = "/crearMaterial.jsp";
 					forward(request, response, forwardJSP);
 				}
+			}else if(accion.equalsIgnoreCase("leccion")){
+				if(request.getParameter("idCurso")!=null && !"".equalsIgnoreCase(request.getParameter("idCurso"))){
+					try {
+						listadoSeccionesCurso = seccionCursoDao.listadoSeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				LeccionCurso nuevaLeccionCurso = new LeccionCurso();
+				if(request.getParameter("seccionLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("seccionLeccion"))){
+					SeccionCurso seccion = null;
+					try {
+						seccion = seccionCursoDao.findById(Long.parseLong(request.getParameter("seccionLeccion")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}					
+					nuevaLeccionCurso.setIdSeccion(seccion);
+					if(request.getParameter("tituloLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("tituloLeccion"))){
+						nuevaLeccionCurso.setTitulo(request.getParameter("tituloLeccion"));
+						if(request.getParameter("descripcionLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionLeccion"))){
+							nuevaLeccionCurso.setDescripcion(request.getParameter("descripcionLeccion"));
+							LeccionCurso leccion = null;
+							try {
+								leccion = leccionCursoDao.createLeccionCurso(nuevaLeccionCurso);
+							} catch (Exception e2) {
+								// TODO Auto-generated catch block
+								leccion = null;
+							}
+							if(leccion!=null){
+								nuevoMaterial.setIdLeccion(leccion);
+							}
+							if(request.getParameter("tituloMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("tituloMaterial"))){
+								titulo = request.getParameter("tituloMaterial");
+								if(request.getParameter("descripcionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionMaterial"))){
+									descripcion = request.getParameter("descripcionMaterial");
+										File fileSaveDir = new File(savePath);
+										if (!fileSaveDir.exists()) {
+											fileSaveDir.mkdir();
+										}
+										String fileName = "";
+										for (Part part : request.getParts()) {
+											fileName = extractFileName(part);
+											if (!"".equalsIgnoreCase(fileName)){
+												part.write(savePath + File.separator + fileName);
+												break;
+											}
+										}
+										if(titulo!=null && !"".equalsIgnoreCase(titulo) && descripcion!=null && !"".equalsIgnoreCase(descripcion) && fileName!=null && !"".equalsIgnoreCase(fileName)){
+											nuevoMaterial.setTitulo(titulo);
+											nuevoMaterial.setDescripcion(descripcion);
+											nuevoMaterial.setFichero(savePath + File.separator + fileName);
+											
+											try {
+												materialLeccionDao.createMaterialLeccion(nuevoMaterial);
+											} catch (Exception e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+											mensajeOK = "Leccion añadida correctamente";
+											request.setAttribute("mensajeOK", mensajeOK);
+											forwardJSP = "/principal.jsp";
+											forward(request, response, forwardJSP);
+											
+										}else{
+											mensajeError = "Debe rellenar todos los campos";
+											request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+											request.setAttribute("mensajeError", mensajeError);
+											forwardJSP = "/crearLeccion.jsp";
+											forward(request, response, forwardJSP);
+										}
+								
+								}else{
+									mensajeError = "Debe añadir una descripcion";
+									request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+									request.setAttribute("mensajeError", mensajeError);
+									forwardJSP = "/crearLeccion.jsp";
+									forward(request, response, forwardJSP);
+								}
+							}else{
+								mensajeError = "Debe añadir un titulo";
+								request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+								request.setAttribute("mensajeError", mensajeError);
+								forwardJSP = "/crearLeccion.jsp";
+								forward(request, response, forwardJSP);
+							}
+								
+						}else{
+							mensajeError = "Debe añadir una descripcion de leccion";
+							request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+							request.setAttribute("mensajeError", mensajeError);
+							forwardJSP = "/crearLeccion.jsp";
+							forward(request, response, forwardJSP);
+						}
+					}else{
+						mensajeError = "Debe añadir un titulo de leccion";
+						request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+						request.setAttribute("mensajeError", mensajeError);
+						forwardJSP = "/crearLeccion.jsp";
+						forward(request, response, forwardJSP);
+					}
+				}else{
+					mensajeError = "Debe seleccionar una seccion del listado";
+					request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+					request.setAttribute("mensajeError", mensajeError);
+					forwardJSP = "/crearLeccion.jsp";
+					forward(request, response, forwardJSP);
+				}
+			}else if(accion.equalsIgnoreCase("seccion")){
+				SeccionCurso nuevaSeccionCurso = new SeccionCurso();
+				LeccionCurso leccionSeccion = new LeccionCurso();
+				if(request.getParameter("idCurso")!=null && !"".equalsIgnoreCase(request.getParameter("idCurso"))){
+					Curso cursoSeccion = null;
+					try {
+						cursoSeccion = cursoDao.findById(Long.parseLong(request.getParameter("idCurso")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					nuevaSeccionCurso.setIdCurso(cursoSeccion);
+				}
+				if(request.getParameter("tituloSeccion")!=null && !"".equalsIgnoreCase(request.getParameter("tituloSeccion"))){
+					nuevaSeccionCurso.setTitulo(request.getParameter("tituloSeccion"));
+					if(request.getParameter("descripcionSeccion")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionSeccion"))){
+						nuevaSeccionCurso.setDescripcion(request.getParameter("descripcionSeccion"));
+						
+						SeccionCurso seccionCreada =  null;
+						try {
+							seccionCreada = seccionCursoDao.createSeccionCurso(nuevaSeccionCurso);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							seccionCreada =  null;
+						}
+						if(seccionCreada !=  null)
+							leccionSeccion.setIdSeccion(seccionCreada);
+						if(request.getParameter("tituloLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("tituloLeccion"))){
+							leccionSeccion.setTitulo(request.getParameter("tituloLeccion"));
+							if(request.getParameter("descripcionLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionLeccion"))){
+								leccionSeccion.setDescripcion(request.getParameter("descripcionLeccion"));
+								LeccionCurso leccion = null;
+								try {
+									leccion = leccionCursoDao.createLeccionCurso(leccionSeccion);
+								} catch (Exception e2) {
+									// TODO Auto-generated catch block
+									leccion = null;
+								}
+								if(leccion!=null){
+									nuevoMaterial.setIdLeccion(leccion);
+								}
+								if(request.getParameter("tituloMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("tituloMaterial"))){
+									titulo = request.getParameter("tituloMaterial");
+									if(request.getParameter("descripcionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("descripcionMaterial"))){
+										descripcion = request.getParameter("descripcionMaterial");
+											File fileSaveDir = new File(savePath);
+											if (!fileSaveDir.exists()) {
+												fileSaveDir.mkdir();
+											}
+											String fileName = "";
+											for (Part part : request.getParts()) {
+												fileName = extractFileName(part);
+												if (!"".equalsIgnoreCase(fileName)){
+													part.write(savePath + File.separator + fileName);
+													break;
+												}
+											}
+											if(titulo!=null && !"".equalsIgnoreCase(titulo) && descripcion!=null && !"".equalsIgnoreCase(descripcion) && fileName!=null && !"".equalsIgnoreCase(fileName)){
+												nuevoMaterial.setTitulo(titulo);
+												nuevoMaterial.setDescripcion(descripcion);
+												nuevoMaterial.setFichero(savePath + File.separator + fileName);
+												
+												try {
+													materialLeccionDao.createMaterialLeccion(nuevoMaterial);
+												} catch (Exception e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
+												mensajeOK = "Seccion añadida correctamente";
+												request.setAttribute("mensajeOK", mensajeOK);
+												forwardJSP = "/principal.jsp";
+												forward(request, response, forwardJSP);
+												
+											}else{
+												mensajeError = "Debe rellenar todos los campos";
+												request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+												request.setAttribute("mensajeError", mensajeError);
+												forwardJSP = "/crearLeccion.jsp";
+												forward(request, response, forwardJSP);
+											}
+									
+									}else{
+										mensajeError = "Debe añadir una descripcion";
+										request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+										request.setAttribute("mensajeError", mensajeError);
+										forwardJSP = "/crearLeccion.jsp";
+										forward(request, response, forwardJSP);
+									}
+								}else{
+									mensajeError = "Debe añadir un titulo";
+									request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+									request.setAttribute("mensajeError", mensajeError);
+									forwardJSP = "/crearLeccion.jsp";
+									forward(request, response, forwardJSP);
+								}
+									
+							}else{
+								mensajeError = "Debe añadir una descripcion de leccion";
+								request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+								request.setAttribute("mensajeError", mensajeError);
+								forwardJSP = "/crearLeccion.jsp";
+								forward(request, response, forwardJSP);
+							}
+						}else{
+							mensajeError = "Debe añadir un titulo de leccion";
+							request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
+							request.setAttribute("mensajeError", mensajeError);
+							forwardJSP = "/crearLeccion.jsp";
+							forward(request, response, forwardJSP);
+						}
+					}else{
+						mensajeError = "Debe añadir una descripcion de seccion";
+						request.setAttribute("mensajeError", mensajeError);
+						forwardJSP = "/crearSeccion.jsp";
+						forward(request, response, forwardJSP);
+					}
+				}else{
+					mensajeError = "Debe añadir un titulo de seccion";
+					request.setAttribute("mensajeError", mensajeError);
+					forwardJSP = "/crearSeccion.jsp";
+					forward(request, response, forwardJSP);
+				}
 			}else{
-				mensajeError = "Debe seleccionar una leccion del listado";
-				request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
+				mensajeError = "Se ha producido un error";
 				request.setAttribute("mensajeError", mensajeError);
-				forwardJSP = "/crearMaterial.jsp";
+				forwardJSP = "/principal.jsp";
 				forward(request, response, forwardJSP);
 			}
-			
 		}
 	}
 	

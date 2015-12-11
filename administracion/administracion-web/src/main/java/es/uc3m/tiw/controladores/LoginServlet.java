@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String forwardJSP = "";
-		String mensaje = "";
+		String mensajeError = "";
 		HttpSession sesion = request.getSession(true);
 		usuarioDao = new UsuarioDaoImpl(em, ut);
 		String usuario = request.getParameter("username");
@@ -93,8 +93,8 @@ public class LoginServlet extends HttpServlet {
 			sesion.setAttribute("usuario", user);
 			sesion.setAttribute("acceso", "ok");
 		} else {
-			mensaje = "Datos incorrectos";
-			request.setAttribute("mensaje", mensaje);
+			mensajeError = "Datos incorrectos";
+			request.setAttribute("mensajeError", mensajeError);
 			forwardJSP = "/login.jsp";
 		}
 

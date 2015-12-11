@@ -15,6 +15,26 @@
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
+
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 <style type="text/css">
@@ -456,31 +476,38 @@
 												</c:if>
 											</c:if>
 											<p class="features grey">
-												<a class="feature" href="material?idCurso=${curso.idCurso }">Añadir material <i
+												<a class="feature" href="material?idCurso=${curso.idCurso }&accion=material">Añadir material <i
 													class="icon ion-plus-round"></i></a>
 											</p>
 											</c:if>
 										</c:forEach>
 									</c:if>
 									<p class="price grey" style="border-top: 1px solid rgba(255, 255, 255, 0.15);">
-										<span class="pricing" style="font-size: medium;">Añadir leccion <a href="#" title="Añadir Leccion"><i
+										<span class="pricing" style="font-size: medium;">Añadir leccion <a href="material?idCurso=${curso.idCurso }&accion=leccion" title="Añadir Leccion"><i
 													class="icon ion-plus-circled"></i></a></span>
 									</p>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
+					<div class="col-md-3 col-sm-6 price-list-box">
+							<div class="price-box">
+								<div class="price-table">
+									<a href="material?idCurso=${curso.idCurso }&accion=seccion"><h3 class="label">AÑADE UNA SECCION</h3></a>		
+								</div>
+							</div>
+						</div>
 				</c:when>
 				<c:otherwise>
 					<div class="col-md-3 col-sm-6 price-list-box" style="margin-left: 37.5%; margin-right: 37%;">
 							<div class="price-box">
 								<div class="price-table">
-									<a href="#"><h3 class="label">AÑADE UNA SECCION</h3></a>
+									<a href="material?idCurso=${curso.idCurso }&accion=seccion"><h3 class="label">AÑADE UNA SECCION</h3></a>
 									<p class="price grey">
-										<a href="#"><span class="pricing" style="font-size: medium;">Añade una leccion</span></a>
+										<a href="material?idCurso=${curso.idCurso }&accion=leccion"><span class="pricing" style="font-size: medium;">Añade una leccion</span></a>
 									</p>
 									<p class="features grey">
-										<a class="feature" href="#">Añade un material</a>
+										<a class="feature" href="material?idCurso=${curso.idCurso }&accion=material">Añade un material</a>
 									</p>		
 								</div>
 							</div>

@@ -1,5 +1,6 @@
 package es.uc3m.tiw.controladores;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
@@ -45,12 +48,18 @@ import es.uc3m.tiw.model.SeccionCurso;
  * Servlet implementation class RegistroServlet
  */
 @WebServlet("/nuevoCurso")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10, // 10MB
+maxRequestSize = 1024 * 1024 * 50, // 50MB
+location="/")
 public class RegistroCursoServlet extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3114864424385386858L;
 
+	private static final String SAVE_DIR = "img/courses";
+	
 	private AlumnoCurso alumnoCurso;
 	private Curso curso;
 	private ProfesorCurso profesorCurso;
@@ -104,43 +113,15 @@ public class RegistroCursoServlet extends HttpServlet {
 		materialLeccionDao = new MaterialLeccionDaoImpl(em, ut);
 		categoriaDao = new CategoriaDaoImpl(em, ut);
 		dificultadDao = new DificultadDaoImpl(em, ut);
-		
-		try {
-			alumnosCurso = alumnoCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			cursos = cursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			profesoresCurso = profesorCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			seccionesCurso = seccionCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			leccionesCurso = leccionCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			materialesLeccion = materialLeccionDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		try {
 			categorias = categoriaDao.findAll();
 		} catch (Exception e) {
@@ -154,15 +135,7 @@ public class RegistroCursoServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		String forwardJSP = "/crearCurso.jsp";
 		request.getSession().setAttribute("categorias", categorias);
 		request.getSession().setAttribute("dificultades", dificultades);
@@ -176,6 +149,10 @@ public class RegistroCursoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String inicialPath = request.getServletContext().getRealPath("");
+		String savePath = inicialPath + File.separator + SAVE_DIR;
+		
 		Curso nuevoCurso = new Curso();
 		// Seccion nuevaSeccion = new Seccion();
 		// Leccion nuevaLeccion = new Leccion();
@@ -257,8 +234,8 @@ public class RegistroCursoServlet extends HttpServlet {
 						break;
 					default:
 						forwardJSP = "/crearCurso.jsp";
-						String mensaje = "No ha seleccionado una categoria para el curso";
-						sesion.setAttribute("mensaje", mensaje);
+						String mensajeError = "No ha seleccionado una categoria para el curso";
+						request.setAttribute("mensajeError", mensajeError);
 						forward(request, response, forwardJSP);
 						break;
 					}
@@ -266,14 +243,12 @@ public class RegistroCursoServlet extends HttpServlet {
 				if (request.getParameter("dificultadCurso") != null
 						&& !"".equalsIgnoreCase(request
 								.getParameter("dificultadCurso"))) {
-					nuevoCurso.setDescripcion(request
-							.getParameter("dificultadCurso"));
 					switch (Integer.parseInt(request
 							.getParameter("dificultadCurso"))) {
 					case 1:
 						try {
 							nuevoCurso.setIdDificultad(dificultadDao
-									.findById(1));
+									.findById(Integer.parseInt(request.getParameter("dificultadCurso"))));
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -282,7 +257,7 @@ public class RegistroCursoServlet extends HttpServlet {
 					case 2:
 						try {
 							nuevoCurso.setIdDificultad(dificultadDao
-									.findById(2));
+									.findById(Integer.parseInt(request.getParameter("dificultadCurso"))));
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -291,7 +266,7 @@ public class RegistroCursoServlet extends HttpServlet {
 					case 3:
 						try {
 							nuevoCurso.setIdDificultad(dificultadDao
-									.findById(3));
+									.findById(Integer.parseInt(request.getParameter("dificultadCurso"))));
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -299,8 +274,8 @@ public class RegistroCursoServlet extends HttpServlet {
 						break;
 					default:
 						forwardJSP = "/crearCurso.jsp";
-						String mensaje = "No ha introducido la dificultad del curso";
-						sesion.setAttribute("mensaje", mensaje);
+						String mensajeError = "No ha introducido la dificultad del curso";
+						request.setAttribute("mensajeError", mensajeError);
 						forward(request, response, forwardJSP);
 						break;
 					}
@@ -312,10 +287,18 @@ public class RegistroCursoServlet extends HttpServlet {
 							.getParameter("precioCurso")));
 				}
 			}
-			if (request.getParameter("imgCurso") != null
-					&& !"".equalsIgnoreCase(request.getParameter("imgCurso"))) {
-				nuevoCurso.setImagen(request.getParameter("imgCurso"));
+			File fileSaveDir = new File(savePath);
+			if (!fileSaveDir.exists()) {
+				fileSaveDir.mkdir();
 			}
+			String fileName = "";
+			for (Part part : request.getParts()) {
+				fileName = extractFileName(part);
+				if (!"".equalsIgnoreCase(fileName))
+					part.write(savePath + File.separator + fileName);
+			}
+			nuevoCurso.setImagen(savePath + File.separator + fileName);
+				
 			nuevoCurso.setValidado(false);
 			nuevoCurso.setDestacado(false);
 
@@ -324,17 +307,21 @@ public class RegistroCursoServlet extends HttpServlet {
 				cursoDao.createCurso(nuevoCurso);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				forwardJSP = "/crearCurso.jsp";
+				String mensajeError = "Se ha producido un error al crear el curso";
+				request.setAttribute("mensajeError", mensajeError);
+				forward(request, response, forwardJSP);
 			}
-			forwardJSP = "/curso.jsp";
-			String mensaje = "Se ha creado correctamente el curso";
-			sesion.setAttribute("mensaje", mensaje);
+			forwardJSP = "/principal.jsp";
+			String mensajeOK = "Se ha creado correctamente el curso";
+			request.setAttribute("mensajeOK", mensajeOK);
 			forward(request, response, forwardJSP);
 		}
-		forwardJSP = "/crearCurso.jsp";
+		/*forwardJSP = "/crearCurso.jsp";
 		String mensaje = "Se ha producido un error al crear el curso";
 		sesion.setAttribute("mensaje", mensaje);
-		forward(request, response, forwardJSP);
+		forward(request, response, forwardJSP);*/
 
 	}
 
@@ -350,6 +337,17 @@ public class RegistroCursoServlet extends HttpServlet {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
+	
+	private String extractFileName(Part part) {
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				return s.substring(s.indexOf("=") + 2, s.length() - 1);
+			}
+		}
+		return "";
 	}
 
 }

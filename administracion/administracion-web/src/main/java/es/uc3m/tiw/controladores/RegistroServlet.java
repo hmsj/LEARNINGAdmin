@@ -98,7 +98,7 @@ public class RegistroServlet extends HttpServlet {
 		Direccion nuevaDireccion = new Direccion();
 		boolean estaVacio = false;
 		String forwardJSP = "";
-		String mensaje="";
+		String mensajeError="";
 		HttpSession sesion = request.getSession(true);
 
 		if (request.getParameter("username") != null
@@ -113,8 +113,8 @@ public class RegistroServlet extends HttpServlet {
 			}
 			if (userUsername != null) {
 				forwardJSP = "/signup.jsp";
-				mensaje = "El username ya existe, por favor elija otro";
-				request.setAttribute("mensaje", mensaje);
+				mensajeError = "El username ya existe, por favor elija otro";
+				request.setAttribute("mensajeError", mensajeError);
 				forward(request, response, forwardJSP);
 			} else {
 				nuevoUsuario.setUsername(request.getParameter("username"));
@@ -153,8 +153,8 @@ public class RegistroServlet extends HttpServlet {
 
 		if (estaVacio) {
 			forwardJSP = "/signup.jsp";
-			mensaje = "Debe rellenar los datos marcados con *";
-			request.setAttribute("mensaje", mensaje);
+			mensajeError = "Debe rellenar los datos marcados con *";
+			request.setAttribute("mensajeError", mensajeError);
 			forward(request, response, forwardJSP);
 		} else {
 			if (request.getParameter("edad") != null
@@ -236,13 +236,13 @@ public class RegistroServlet extends HttpServlet {
 			}
 			if (userCreated != null) {
 				forwardJSP = "/principal.jsp";
-				mensaje = "Usuario registrado correctamente";
-				request.setAttribute("mensajeOK", mensaje);
+				String mensajeOK = "Usuario registrado correctamente";
+				request.setAttribute("mensajeOK", mensajeOK);
 				forward(request, response, forwardJSP);
 			} else {
 				forwardJSP = "/signup.jsp";
-				mensaje = "Se ha producido un error al crear el perfil";
-				request.setAttribute("mensaje", mensaje);
+				mensajeError = "Se ha producido un error al crear el perfil";
+				request.setAttribute("mensajeError", mensajeError);
 				forward(request, response, forwardJSP);
 			}
 

@@ -29,7 +29,7 @@ public class AlumnosServlet extends HttpServlet {
     private Usuario usuario;
 	
 	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
-	List<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
@@ -61,6 +61,7 @@ public class AlumnosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession sesion = request.getSession(true);
+		List<Usuario> usuarios = null;
 		try {
 			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
@@ -74,7 +75,6 @@ public class AlumnosServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("usuarios", usuarios);
-		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		String forwardJSP = "/listadoAlumnos.jsp";
 		forward(request, response, forwardJSP);
 		

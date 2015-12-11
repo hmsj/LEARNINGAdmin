@@ -15,6 +15,26 @@
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
+
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 </head>
@@ -54,9 +74,15 @@
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<div id="message"></div>
-				<c:if test="${not empty mensaje }">
-					<p class ="error_message">${mensaje }</p>				
+				<c:if test="${not empty mensajeError }">
+					<div id="message">
+						<p class="error_message">${mensajeError }</p>
+					</div>
+				</c:if>
+				<c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
+					</div>
 				</c:if>
 				<form method="post" action="login" name="loginform" id="loginform">
 					<fieldset>

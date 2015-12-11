@@ -15,6 +15,26 @@
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
+
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 
@@ -84,13 +104,18 @@
 			</div>
 
 			<div class="col-md-6 col-md-offset-3 text-center wow fadeInUp">
-				<c:if test="${not empty mensaje }">
+				<c:if test="${not empty mensajeError }">
 					<div id="message">
-						<p class="error_message">${mensaje }</p>
+						<p class="error_message">${mensajeError }</p>
+					</div>
+				</c:if>
+				<c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
 					</div>
 				</c:if>
 				<form method="post" action="nuevoCurso" name="cursoForm"
-					id="cursoForm">
+					id="cursoForm" enctype="multipart/form-data">
 
 					<fieldset>
 						<input name="tituloCurso" type="text" id="tituloCurso"
@@ -111,7 +136,7 @@
 							placeholder="Precio del curso*" />
 						<textarea name="descripcionCurso" cols="40" rows="3"
 							id="descripcionCurso" placeholder="Descripcion del curso"></textarea>
-						<input type="file" name="imgCurso" size="60" placeholder="Seleccione una imagen para el curso"/>
+						<input type="file" name="file" placeholder="Seleccione una imagen para el curso"/>
        
 					</fieldset>
 					<input type="submit" class="submit" id="submit"

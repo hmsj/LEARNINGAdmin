@@ -46,27 +46,7 @@ public class CursosServlet extends HttpServlet {
 	private static final long serialVersionUID = 5079331756861773626L;
 
 	private static final String UPLOAD_DIR = "img/courses";
-	
-	private Curso curso;
-	private Categoria categoria;
-	private SeccionCurso seccionCurso;
-	private LeccionCurso leccionCurso;
-	private MaterialLeccion materialLeccion;
-	private AlumnoCurso alumnoCurso;
-	private ProfesorCurso profesorCurso;
-	private Dificultad dificultad;
-
-	List<Curso> cursos = new ArrayList<Curso>();
-	List<Categoria> categorias = new ArrayList<Categoria>();
-	List<SeccionCurso> seccionesCurso = new ArrayList<SeccionCurso>();
-	List<LeccionCurso> leccionesCurso = new ArrayList<LeccionCurso>();
-	List<MaterialLeccion> materialesLeccion = new ArrayList<MaterialLeccion>();
-	List<AlumnoCurso> alumnosCurso = new ArrayList<AlumnoCurso>();
-	List<ProfesorCurso> profesoresCurso = new ArrayList<ProfesorCurso>();
-	List<Dificultad> dificultades = new ArrayList<Dificultad>();
-	List<ProfesorCurso> profesoresTitulares = new ArrayList<ProfesorCurso>();
-	List<Usuario> usuarios = new ArrayList<Usuario>();
-	
+		
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
 	@Resource
@@ -106,67 +86,6 @@ public class CursosServlet extends HttpServlet {
 		profesorCursoDao = new ProfesorCursoDaoImpl(em, ut);
 		usuarioDao = new UsuarioDaoImpl(em, ut);
 		promocionDao = new PromocionDaoImpl(em, ut);
-		
-		try {
-			cursos = cursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			categorias = categoriaDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			seccionesCurso = seccionCursoDao.findAll();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			leccionesCurso = leccionCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			materialesLeccion = materialLeccionDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			alumnosCurso = alumnoCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			profesoresCurso = profesorCursoDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			profesoresTitulares = profesorCursoDao.listadoProfesTitulares();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		try {
-			dificultades = dificultadDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			usuarios = usuarioDao.findAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -176,10 +95,82 @@ public class CursosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		List<Curso> cursos = null;
+		try {
+			cursos = cursoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Categoria> categorias = null;
+		try {
+			categorias = categoriaDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<SeccionCurso> seccionesCurso = null;
+		try {
+			seccionesCurso = seccionCursoDao.findAll();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		List<LeccionCurso> leccionesCurso = null;
+		try {
+			leccionesCurso = leccionCursoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<MaterialLeccion> materialesLeccion = null;
+		try {
+			materialesLeccion = materialLeccionDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<AlumnoCurso> alumnosCurso = null;
+		try {
+			alumnosCurso = alumnoCursoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<ProfesorCurso> profesoresCurso = null; 
+		try {
+			profesoresCurso = profesorCursoDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<ProfesorCurso> profesoresTitulares = null;
+		try {
+			profesoresTitulares = profesorCursoDao.listadoProfesTitulares();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		List<Dificultad> dificultades = null;
+		try {
+			dificultades = dificultadDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Usuario> usuarios = null;
+		try {
+			usuarios = usuarioDao.findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String idCursoParam = request.getParameter("idCurso");
 		String mensajeOK = "";
 		String mensajeError = "";
 		HttpSession sesion = request.getSession(true);
+		
 		request.setAttribute("categorias", categorias);
 		request.setAttribute("dificultades", dificultades);
 		request.setAttribute("cursos", cursos);

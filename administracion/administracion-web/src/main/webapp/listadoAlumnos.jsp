@@ -14,6 +14,25 @@
 
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
 
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
@@ -43,9 +62,13 @@
 							data-endelementdelay="0.1" data-endspeed="300"
 							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;">
 							<c:if test="${not empty mensajeError }">
-								<br>
 								<div id="message">
 									<p class="error_message">${mensajeError }</p>
+								</div>
+							</c:if>
+							<c:if test="${not empty mensajeOK }">
+								<div id="message">
+									<p class="ok_message">${mensajeOK }</p>
 								</div>
 							</c:if>
 							<h2 class="home-heading op-1">Usuarios DokuLearning</h2>

@@ -15,6 +15,26 @@
 <!-- Stlylesheet -->
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+.ok_message {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Montserrat, sans-serif;
+	color: black;
+    top: -10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 22px;
+    padding: 3px 15px 3px 15px;
+    background-color: #B2CC02;
+    background-image: url(../img/error.gif);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+}
+</style>
+
 <!-- Skin Color -->
 <link rel="stylesheet" href="css/colors/green.css" id="color-skins" />
 
@@ -89,7 +109,12 @@
 						<p class="error_message">${mensajeError }</p>
 					</div>
 				</c:if>
-				<form method="post" action="material" name="materialForm"
+				<c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
+					</div>
+				</c:if>
+				<form method="post" action="material?accion=material" name="materialForm"
 					id="materialForm" enctype="multipart/form-data">
 
 					<select name="leccionMaterial" id="leccionMaterial">
@@ -106,7 +131,9 @@
 							id="descripcionMaterial" placeholder="Descripcion del Material"></textarea>
 						<input name="file" type="file" placeholder="Elija el archivo que desea subir al curso">
 					</fieldset>
-		
+					
+					<input name="idCurso" id="idCurso" type="hidden" value="${curso.idCurso }" />
+					
 					<input type="submit" class="submit" id="submit"
 						value="AÑADIR MATERIAL" />
 				</form>
