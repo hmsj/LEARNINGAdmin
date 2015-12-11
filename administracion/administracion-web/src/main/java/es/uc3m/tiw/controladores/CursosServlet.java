@@ -175,6 +175,7 @@ public class CursosServlet extends HttpServlet {
 		request.setAttribute("dificultades", dificultades);
 		request.setAttribute("cursos", cursos);
 		request.setAttribute("profesoresTitulares", profesoresTitulares);
+		
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
 		String forwardJSP = "";
 		String accion = request.getParameter("accion");
@@ -256,6 +257,7 @@ public class CursosServlet extends HttpServlet {
 						forwardJSP = "/curso.jsp";
 					}
 				}else{
+					
 					forwardJSP = "/listadoCursos.jsp";
 				}
 			}else if(accion=="validarCurso"){

@@ -297,7 +297,7 @@ public class RegistroCursoServlet extends HttpServlet {
 				if (!"".equalsIgnoreCase(fileName))
 					part.write(savePath + File.separator + fileName);
 			}
-			nuevoCurso.setImagen(savePath + File.separator + fileName);
+			nuevoCurso.setImagen(SAVE_DIR + File.separator + fileName);
 				
 			nuevoCurso.setValidado(false);
 			nuevoCurso.setDestacado(false);
