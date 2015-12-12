@@ -1,6 +1,7 @@
 package es.uc3m.tiw.controladores;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -50,6 +51,7 @@ public class InicioServlet extends HttpServlet {
 	SeccionCursoDao seccionCursoDao;
 	TipoPromocionDao tipoPromocionDao;
 	UsuarioDao usuarioDao;
+	PedidoDao pedidoDao;
 	
     private static final boolean DESTACADO = true;
     private static final boolean NODESTACADO = false;
@@ -81,6 +83,7 @@ public class InicioServlet extends HttpServlet {
 		seccionCursoDao = new SeccionCursoDaoImpl(em, ut);
 		tipoPromocionDao = new TipoPromocionDaoImpl(em, ut);
 		usuarioDao = new UsuarioDaoImpl(em, ut);
+    	pedidoDao = new PedidoDaoImpl(em, ut);
     	
     	TipoPromocion tipoPromocion1 = new TipoPromocion(1, "Fijo");
 		TipoPromocion tipoPromocion2 = new TipoPromocion(2, "Porcentaje");
@@ -232,10 +235,22 @@ public class InicioServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-
-		AlumnoCurso alumno1 = new AlumnoCurso(0, true, usuario1, curso1, null);
-		AlumnoCurso alumno2 = new AlumnoCurso(6.5, false, usuario2, curso1, logro3);
-		AlumnoCurso alumno3 = new AlumnoCurso(8, false, usuario3, curso2, logro4);
+		
+		Pedido pedido1 = new Pedido("ORDER20151101102010PM", 550, "BANCO20151101102032PM", "A1545857581465294529", new Date(2015,11,1));
+		Pedido pedido2 = new Pedido("ORDER20150101102010PM", 550, "BANCO20150101102032PM", "A1545857581465294529", new Date(2015,1,1));
+		Pedido pedido3 = new Pedido("ORDER20150901102010PM", 550, "BANCO20150901102032PM", "A1545857581465294529", new Date(2015,9,1));
+		try {
+			pedidoDao.createPedido(pedido1);
+			pedidoDao.createPedido(pedido2);
+			pedidoDao.createPedido(pedido3);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		AlumnoCurso alumno1 = new AlumnoCurso(0, true, usuario1, curso1, null, pedido1);
+		AlumnoCurso alumno2 = new AlumnoCurso(6.5, false, usuario2, curso1, logro3, pedido2);
+		AlumnoCurso alumno3 = new AlumnoCurso(8, false, usuario3, curso2, logro4, pedido3);
 		try {
 			alumnoCursoDao.createAlumnoCurso(alumno1);
 			alumnoCursoDao.createAlumnoCurso(alumno2);

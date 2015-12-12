@@ -23,9 +23,16 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-           
             <scope>provided</scope>
         </dependency>
+        
+       	<dependency>
+	  		<groupId>es.uc3m.tiw.model</groupId>
+	  		<artifactId>administracion-model</artifactId>
+	  		<version>3.0</version>
+	  		<scope>provided</scope>
+  		</dependency> 
+       
     </dependencies>
 
     <build>

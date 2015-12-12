@@ -27,6 +27,9 @@ public class AlumnoCurso implements Serializable{
 	
 	@ManyToOne
 	private Logro idLogro;
+	
+	@OneToOne
+	private Pedido idPedido;
 
 	public AlumnoCurso() {
 		super();
@@ -34,13 +37,14 @@ public class AlumnoCurso implements Serializable{
 	}
 
 	public AlumnoCurso(double notaMedia,boolean enCurso, Usuario idUsuario, Curso idCurso,
-			Logro idLogro) {
+			Logro idLogro, Pedido idPedido) {
 		super();
 		this.notaMedia = notaMedia;
 		this.enCurso = enCurso;
 		this.idUsuario = idUsuario;
 		this.idCurso = idCurso;
 		this.idLogro = idLogro;
+		this.idPedido = idPedido;
 	}
 
 	public Long getIdAlumnoCurso() {
@@ -89,6 +93,14 @@ public class AlumnoCurso implements Serializable{
 
 	public void setIdLogro(Logro idLogro) {
 		this.idLogro = idLogro;
+	}
+	
+	public Pedido getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(Pedido idPedido) {
+		this.idPedido = idPedido;
 	}
 
 }

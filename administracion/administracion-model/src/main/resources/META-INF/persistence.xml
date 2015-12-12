@@ -19,6 +19,7 @@
 	<class>es.uc3m.tiw.model.TipoPromocion</class>
 	<class>es.uc3m.tiw.model.Promocion</class>
 	<class>es.uc3m.tiw.model.Vale</class>
+	<class>es.uc3m.tiw.model.Pedido</class>
 	<properties>
 		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 	</properties>

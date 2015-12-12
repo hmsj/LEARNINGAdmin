@@ -383,11 +383,10 @@ public class CursosServlet extends HttpServlet {
 		String accion = request.getParameter("accion");
 		HttpSession sesion = request.getSession(true);
 		Usuario usuarioLogado = (Usuario) sesion.getAttribute("usuario");
+		String forwardJSP = "";
 		
-		
-		
-		/*if (idCursoParam != null && !"".equals(idCursoParam)) {
-			long idCurso = Integer.parseInt(idCursoParam);
+		if (idCursoParam != null && !"".equals(idCursoParam)) {
+			Long idCurso = Long.parseLong(idCursoParam);
 			Curso course = null;
 			try {
 				course = cursoDao.findById(idCurso);
@@ -412,36 +411,33 @@ public class CursosServlet extends HttpServlet {
 						if (alumn != null) {
 							//Curso cursado = comprobarCursado(alumn, course);
 							if (!alumn.isEnCurso())
-								mensaje = "El alumno ya ha cursado este curso";
+								mensajeError = "El alumno ya ha cursado este curso";
 							//Curso matriculado = comprobarMatricula(alumn,
 									//course);
 							if (alumn.isEnCurso())
-								mensaje = "El alumno ya está matriculado en este curso";
+								mensajeError = "El alumno ya está matriculado en este curso";
 
-							if (mensaje == null) {
-								for (int i = 0; i < alumnosCurso.size(); i++) {
-									if (alumnosCurso
-											.get(i)
-											.getIdUsuario()
-											.getUsername()
-											.equalsIgnoreCase(
-													alumn.getIdUsuario()
-															.getUsername())) {
-										alumnosCurso.get(i).setIdCurso(course);
-										this.getServletContext().setAttribute(
-												"alumnos", alumnosCurso);
-										mensaje = "El alumno ya se ha matriculado en el curso";
-									}
-								}
-							}
 						} else {
-							mensaje = "El alumno que desea añadir no existe en el sistema";
+							AlumnoCurso nuevoAlumno = null;
+							Usuario user = null;
+							try {
+								user = usuarioDao.findByUsername(nombreAlumno);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if(user!=null){
+								nuevoAlumno.setIdUsuario(user);
+								nuevoAlumno.setIdCurso(course);
+								nuevoAlumno.setEnCurso(true);
+								
+							}
 						}
 					} else {
-						mensaje = "No ha seleccionado una alumno al que añadir al curso";
+						mensajeError = "No ha seleccionado una alumno al que añadir al curso";
 					}
 					forwardJSP = "/curso.jsp";
-				} else if (accion != null
+				} /*else if (accion != null
 						&& "addProfesor".equalsIgnoreCase(accion)) {
 					String nombreProfesor = "";
 					if (request.getParameter("target") != null
@@ -477,12 +473,12 @@ public class CursosServlet extends HttpServlet {
 					}
 					forwardJSP = "/curso.jsp";
 				}
-			}
+			}*/
+				request.setAttribute("mensajeError", mensajeError);
 		}
-		if (mensaje != null) {
-			request.setAttribute("mensaje", mensaje);
+		
 		}
-		forward(request, response, forwardJSP);*/
+		forward(request, response, forwardJSP);
 	}
 
 	/* Metodo para redirigir a los jsp */

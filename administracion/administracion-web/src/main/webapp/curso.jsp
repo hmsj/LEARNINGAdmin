@@ -342,8 +342,10 @@
 									<option value="${usuario.username }">
 										${usuario.username }</option>
 								</c:forEach>
-							</select> <input name="accion" id="accion" type="hidden" value="addAlumno" />
-							<input name="idcurso" id="idcurso" type="hidden"
+							</select> 
+							<input name="tarjeta" id="tarjeta" type="text" placeholder="Inserte una tarjeta para realizar el pago"/>
+							<input name="accion" id="accion" type="hidden" value="addAlumno" />
+							<input name="idCurso" id="idCurso" type="hidden"
 								value="${curso.idCurso }" /> <input type="submit"
 								class="submit" id="submit" value="AÑADIR ALUMNO" />
 						</form>
