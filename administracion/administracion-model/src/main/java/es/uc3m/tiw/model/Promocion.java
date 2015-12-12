@@ -1,6 +1,7 @@
 package es.uc3m.tiw.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class Promocion implements Serializable{
 	private double valor;
 	
 	@Column(nullable=false)
-	private String fechaFin;
+	private Date fechaFin;
 	
 	@ManyToOne
 	private TipoPromocion tipoPromocion;
@@ -35,7 +36,7 @@ public class Promocion implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Promocion(String nombrePromocion, double valor, String fechaFin, TipoPromocion tipoPromocion) {
+	public Promocion(String nombrePromocion, double valor, Date fechaFin, TipoPromocion tipoPromocion) {
 		super();
 		this.nombrePromocion = nombrePromocion;
 		this.valor = valor;
@@ -68,11 +69,11 @@ public class Promocion implements Serializable{
 		this.valor = valor;
 	}
 
-	public String getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(String fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 

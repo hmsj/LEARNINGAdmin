@@ -15,7 +15,7 @@ public interface AlumnoCursoDao {
 
 	public abstract List<AlumnoCurso> findAll() throws Exception;
 	
-	public abstract AlumnoCurso findByUsername(String alumnoUsername) throws Exception;
+	public abstract List<AlumnoCurso> findByUsername(String alumnoUsername) throws Exception;
 
 	public abstract AlumnoCurso comprobarAlumnoCursado(String alumnoUsername, long idCurso) throws Exception;
 
@@ -32,5 +32,7 @@ public interface AlumnoCursoDao {
 	public abstract List<AlumnoCurso> listadoAlumnosEnCursoById(Long idUsuario) throws Exception;
 	
 	public abstract List<AlumnoCurso> listadoAlumnosCursadoById(Long idUsuario) throws Exception;
+	
+	public abstract int numeroCursosAlumno(Long idUsuario) throws Exception;
 
 }

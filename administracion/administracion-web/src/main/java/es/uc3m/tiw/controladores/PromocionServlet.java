@@ -147,8 +147,10 @@ public class PromocionServlet extends HttpServlet {
 			forward(request, response, forwardJSP);
 		}
 		if(request.getParameter("fechaFinPromocion")!=null && !"".equalsIgnoreCase(request.getParameter("fechaFinPromocion"))){
-			String fechaFin = request.getParameter("fechaFinPromocion");
-			
+			int day = Integer.parseInt(request.getParameter("fechaFinPromocion").substring(0, 2));
+			int month = Integer.parseInt(request.getParameter("fechaFinPromocion").substring(3, 5));
+			int year = Integer.parseInt(request.getParameter("fechaFinPromocion").substring(6, 10));
+			Date fechaFin = new Date (year, month, day);
 			nuevaPromocion.setFechaFin(fechaFin);
 		}else{
 		

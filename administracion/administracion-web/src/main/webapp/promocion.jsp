@@ -117,7 +117,7 @@
 						<input name="valorPromocion" type="text" id="valorPromocion"
 							placeholder="Valor de la promocion" /> <label
 							for="fechaFinPromocion">Fecha de finalizacion de la
-							promocion</label> <br /> <input type="text" name="fechaFinPromocion"
+							promocion</label> <br /> <input type="date" name="fechaFinPromocion"
 							placeholder="Fecha de finalizacion de la promocion" />
 					</fieldset>
 

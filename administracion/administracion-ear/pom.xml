@@ -71,7 +71,7 @@
 	<dependency>
   		<groupId>es.uc3m.tiw.ejb</groupId>
   		<artifactId>administracion-ejb</artifactId>
-  		<version>1.0</version>
+  		<version>3.0</version>
   		<type>ejb</type>
   	</dependency>
   	<dependency>

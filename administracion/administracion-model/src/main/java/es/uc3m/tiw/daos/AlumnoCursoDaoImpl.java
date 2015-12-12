@@ -54,10 +54,11 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 	}
 
 	@Override
-	public AlumnoCurso findByUsername(String alumnoUsername)
+	public List<AlumnoCurso> findByUsername(String alumnoUsername)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return em.find(AlumnoCurso.class, new String(alumnoUsername));
+		List<AlumnoCurso> listadoAlumnosCurso = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"'", AlumnoCurso.class).getResultList();
+		return listadoAlumnosCurso;
 	}
 
 	@Override
@@ -122,6 +123,14 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 		// TODO Auto-generated method stub
 		List<AlumnoCurso> listadoAlumnosCursadoId = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.idUsuario='"+ idUsuario +"' AND a.enCurso='"+false+"'", AlumnoCurso.class).getResultList();
 		return listadoAlumnosCursadoId;
+	}
+
+	@Override
+	public int numeroCursosAlumno(Long idUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		int numeroCursos = 0;
+		numeroCursos = (int) em.createNativeQuery("SELECT COUNT (a) FROM AlumnoCurso a WHERE a.idUsuario.idUsuario='"+ idUsuario +"'", AlumnoCurso.class).getSingleResult();
+		return numeroCursos;
 	}
 
 }
