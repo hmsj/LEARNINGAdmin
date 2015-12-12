@@ -9,5 +9,7 @@ public interface IGestionadorPedidos {
 	
 	public abstract Double obtenerPrecioFinal(Curso curso, Usuario usuario);
 	
-	public abstract void matricular (Curso curso, Usuario usuario, String tarjeta);
+	public abstract Pedido generarPedido (Curso curso, Usuario usuario, String tarjeta);
+	
+	public abstract String generarCodigoPedido ();
 }

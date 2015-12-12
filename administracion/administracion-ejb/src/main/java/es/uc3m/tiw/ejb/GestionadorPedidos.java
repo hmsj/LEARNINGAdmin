@@ -1,6 +1,8 @@
 package es.uc3m.tiw.ejb;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -8,11 +10,14 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
 import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
+import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.Curso;
+import es.uc3m.tiw.model.Pedido;
 import es.uc3m.tiw.model.Promocion;
 import es.uc3m.tiw.model.Usuario;
 import es.uc3m.tiw.model.Vale;
@@ -104,9 +109,32 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 	}
 
 	@Override
-	public void matricular(Curso curso, Usuario usuario, String tarjeta) {
+	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta) {
 		// TODO Auto-generated method stub
+		Pedido pedido = new Pedido();
+		Date fechaActual = new Date();
+		Double importePedido = 0.0;
+		importePedido = obtenerPrecioFinal(curso, usuario);
 		
+		pedido.setImporte(importePedido);
+		pedido.setCodigoTarjeta(tarjeta);
+		pedido.setFechaPedido((java.sql.Date) fechaActual);
+		pedido.setCodigoPedido(generarCodigoPedido());
+		pedido.setCodigoOperacion("BANCO");
+		
+		return null;
+	}
+
+	@Override
+	public String generarCodigoPedido() {
+		// TODO Auto-generated method stub
+		String codigoPedido = null;
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmssSSSa");
+	    Date fechaActual = new Date();
+	    String strDate = sdfDate.format(fechaActual);
+	    codigoPedido = "ORDER"+strDate;
+
+		return codigoPedido;
 	}
 
 }
