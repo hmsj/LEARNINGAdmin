@@ -177,12 +177,14 @@ public class RegistroServlet extends HttpServlet {
 				fileSaveDir.mkdir();
 			}
 			String fileName = "";
-			for (Part part : request.getParts()) {
-				fileName = extractFileName(part);
-				if (!"".equalsIgnoreCase(fileName))
-					part.write(savePath + File.separator + fileName);
+			for (Part part2 : request.getParts()) {
+				fileName = extractFileName(part2);
+				if (!"".equalsIgnoreCase(fileName)){					
+					part2.write(savePath + File.separator + fileName);
+					break;					
+				}
 			}
-				nuevoUsuario.setImagen(savePath + File.separator + fileName);
+			nuevoUsuario.setImagen(SAVE_DIR + File.separator + fileName);
 			
 			if (request.getParameter("pais") != null
 					&& !"".equalsIgnoreCase(request.getParameter("pais"))) {

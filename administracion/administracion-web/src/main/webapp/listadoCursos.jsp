@@ -128,7 +128,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 1 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -212,7 +212,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 2 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -296,7 +296,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 3 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -380,7 +380,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 4 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -464,7 +464,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 5 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -547,7 +547,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 6 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>
@@ -630,7 +630,7 @@
 									<c:forEach items="${cursos }" var="curso">
 									<%-- <c:if test="${curso.validado }"> --%>
 										<c:if test="${curso.idCategoria.idCategoria == 7 }">
-											<div class="col-md-6 col-sm-4 team-member">
+											<div class="col-md-4 col-sm-4 team-member">
 												<div class="effect effects wow fadeInUp">
 													<div class="img">
 														<c:choose>

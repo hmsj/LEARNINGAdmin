@@ -102,7 +102,7 @@
 			<div class="row">
 				<c:if test="${not empty usuarios }">
 					<c:forEach items="${usuarios }" var="usuario">
-						<div class="col-md-4 col-sm-4 team-member">
+						<div class="col-md-3 col-sm-3 team-member">
 							<div class="effect effects wow fadeInUp">
 								<div class="img">
 									<c:choose>
