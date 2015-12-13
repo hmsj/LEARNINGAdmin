@@ -15,6 +15,8 @@ import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
 import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
+import es.uc3m.tiw.daos.PedidoDao;
+import es.uc3m.tiw.daos.PedidoDaoImpl;
 import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.Curso;
 import es.uc3m.tiw.model.Pedido;
@@ -22,19 +24,15 @@ import es.uc3m.tiw.model.Promocion;
 import es.uc3m.tiw.model.Usuario;
 import es.uc3m.tiw.model.Vale;
 
-@Stateless(mappedName = "servicioMatricula")
+@Stateless(mappedName = "kk")
 @LocalBean
 public class GestionadorPedidos implements IGestionadorPedidos {
 	
-	@PersistenceContext(unitName = "administracion-model")
-	private EntityManager em;
-	@Resource
-	private UserTransaction ut;
-	
 	private AlumnoCursoDao alumnoCursoDao;
+	private PedidoDao pedidoDao;
 	
 	@Override
-	public Double obtenerPrecioFinal(Curso curso, Usuario usuario) {
+	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
 		
@@ -109,12 +107,13 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 	}
 
 	@Override
-	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta) {
+	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
+		pedidoDao = new PedidoDaoImpl(em, ut);
 		Pedido pedido = new Pedido();
 		Date fechaActual = new Date();
 		Double importePedido = 0.0;
-		importePedido = obtenerPrecioFinal(curso, usuario);
+		importePedido = obtenerPrecioFinal(curso, usuario, em, ut);
 		
 		pedido.setImporte(importePedido);
 		pedido.setCodigoTarjeta(tarjeta);
@@ -122,7 +121,15 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 		pedido.setCodigoPedido(generarCodigoPedido());
 		pedido.setCodigoOperacion("BANCO");
 		
-		return null;
+		Pedido pedidoCreado = null;
+		try {
+			pedidoCreado = pedidoDao.createPedido(pedido);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return pedidoCreado;
 	}
 
 	@Override
