@@ -1,37 +1,39 @@
 package es.uc3m.tiw.ejb;
 
-
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
 import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
 import es.uc3m.tiw.daos.PedidoDao;
 import es.uc3m.tiw.daos.PedidoDaoImpl;
-import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.Curso;
 import es.uc3m.tiw.model.Pedido;
 import es.uc3m.tiw.model.Promocion;
 import es.uc3m.tiw.model.Usuario;
 import es.uc3m.tiw.model.Vale;
 
-@Stateless(mappedName = "kk")
+/**
+ * Session Bean implementation class GestionadorPedidos2
+ */
+@Stateless(mappedName = "servicioMatricula")
 @LocalBean
-public class GestionadorPedidos implements IGestionadorPedidos {
-	
-	private AlumnoCursoDao alumnoCursoDao;
+public class GestionadorPedidos {
+    /**
+     * Default constructor. 
+     */
+    public GestionadorPedidos() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    private AlumnoCursoDao alumnoCursoDao;
 	private PedidoDao pedidoDao;
 	
-	@Override
 	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
@@ -106,7 +108,6 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 		return precioFinal;
 	}
 
-	@Override
 	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		pedidoDao = new PedidoDaoImpl(em, ut);
@@ -117,7 +118,7 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 		
 		pedido.setImporte(importePedido);
 		pedido.setCodigoTarjeta(tarjeta);
-		pedido.setFechaPedido((java.sql.Date) fechaActual);
+		pedido.setFechaPedido(new java.sql.Date(2015,12,13));
 		pedido.setCodigoPedido(generarCodigoPedido());
 		pedido.setCodigoOperacion("BANCO");
 		
@@ -132,7 +133,6 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 		return pedidoCreado;
 	}
 
-	@Override
 	public String generarCodigoPedido() {
 		// TODO Auto-generated method stub
 		String codigoPedido = null;
@@ -143,5 +143,6 @@ public class GestionadorPedidos implements IGestionadorPedidos {
 
 		return codigoPedido;
 	}
+
 
 }

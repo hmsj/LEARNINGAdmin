@@ -39,7 +39,7 @@ import es.uc3m.tiw.daos.SeccionCursoDao;
 import es.uc3m.tiw.daos.SeccionCursoDaoImpl;
 import es.uc3m.tiw.daos.UsuarioDao;
 import es.uc3m.tiw.daos.UsuarioDaoImpl;
-import es.uc3m.tiw.ejb.GestionadorPedidos2;
+import es.uc3m.tiw.ejb.GestionadorPedidos;
 import es.uc3m.tiw.model.AlumnoCurso;
 import es.uc3m.tiw.model.Categoria;
 import es.uc3m.tiw.model.Curso;
@@ -71,7 +71,7 @@ public class CursosServlet extends HttpServlet {
 	private static final String UPLOAD_DIR = "img/courses";
 	
 	@EJB
-	private GestionadorPedidos2 gestionadorPedidos;
+	private GestionadorPedidos gestionadorPedidos;
 	
 	@PersistenceContext(unitName = "administracion-model")
 	private EntityManager em;
