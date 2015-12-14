@@ -236,9 +236,15 @@ public class InicioServlet extends HttpServlet {
 			e.printStackTrace();
 		}	
 		
-		Pedido pedido1 = new Pedido("ORDER20151101102010PM", 550, "BANCO20151101102032PM", "A1545857581465294529", new Date(2015,11,1));
-		Pedido pedido2 = new Pedido("ORDER20150101102010PM", 550, "BANCO20150101102032PM", "A1545857581465294529", new Date(2015,1,1));
-		Pedido pedido3 = new Pedido("ORDER20150901102010PM", 550, "BANCO20150901102032PM", "A1545857581465294529", new Date(2015,9,1));
+		java.util.Date fecha1 = new java.util.Date(2015, 11, 1);
+		java.sql.Date fechaSQL1 = new java.sql.Date (fecha1.getTime());
+		java.util.Date fecha2 = new java.util.Date(2015, 1, 31);
+		java.sql.Date fechaSQL2 = new java.sql.Date (fecha2.getTime());
+		java.util.Date fecha3 = new java.util.Date(2015, 9, 1);
+		java.sql.Date fechaSQL3 = new java.sql.Date (fecha3.getTime());
+		Pedido pedido1 = new Pedido("ORDER20151101102010PM", 550, "BANCO20151101102032PM", "A1545857581465294529", fechaSQL1);
+		Pedido pedido2 = new Pedido("ORDER20150101102010PM", 550, "BANCO20150101102032PM", "A1545857581465294529", fechaSQL2);
+		Pedido pedido3 = new Pedido("ORDER20150901102010PM", 550, "BANCO20150901102032PM", "A1545857581465294529", fechaSQL3);
 		try {
 			pedidoDao.createPedido(pedido1);
 			pedidoDao.createPedido(pedido2);

@@ -66,7 +66,7 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 			throws Exception {
 		// TODO Auto-generated method stub
 		AlumnoCurso alumno = null;
-		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"' AND a.idCurso='"+idCurso+"' AND a.enCurso='"+true+"'", AlumnoCurso.class).getSingleResult();
+		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"' AND a.idCurso.idCurso='"+idCurso+"' AND a.enCurso='"+false+"'", AlumnoCurso.class).getSingleResult();
 		return alumno;
 	}
 
@@ -75,7 +75,7 @@ public class AlumnoCursoDaoImpl implements AlumnoCursoDao{
 			long idCurso) throws Exception {
 		// TODO Auto-generated method stub
 		AlumnoCurso alumno = null;
-		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"' AND a.idCurso='"+idCurso+"' AND a.enCurso='"+false+"'", AlumnoCurso.class).getSingleResult();
+		alumno = em.createQuery("SELECT a FROM AlumnoCurso a WHERE a.idUsuario.username='"+alumnoUsername+"' AND a.idCurso.idCurso='"+idCurso+"' AND a.enCurso='"+true+"'", AlumnoCurso.class).getSingleResult();
 		return alumno;
 	}
 	

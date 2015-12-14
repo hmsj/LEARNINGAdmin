@@ -270,6 +270,10 @@ public class CursosServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						List<Double> listadoPrecioUsuarioCurso = null;
+						for (Usuario usuario : usuarios) {
+							listadoPrecioUsuarioCurso.add(gestionadorPedidos.obtenerPrecioFinal(course, usuario, em, ut));
+						}
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
 						request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
@@ -279,6 +283,7 @@ public class CursosServlet extends HttpServlet {
 						request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
 						request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
 						request.setAttribute("listadoPromociones", listadoPromociones);
+						request.setAttribute("listadoPrecioUsuarioCurso", listadoPrecioUsuarioCurso);
 						forwardJSP = "/curso.jsp";
 					}else {
 						mensajeError = "Se ha producido un error al acceder a los datos";
@@ -313,89 +318,7 @@ public class CursosServlet extends HttpServlet {
 				}
 				
 			}
-		}
-		
-		
-		/*if (idCursoParam != null && !"".equals(idCursoParam)) {
-			long idCurso = Integer.parseInt(idCursoParam);
-			Curso course = null;
-			try {
-				course = cursoDao.findById(idCurso);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (course != null) {
-				if (usuarioLogado != null && usuarioLogado.isAdmin()) {
-					// TipoUsuario tipoUser = comprobarUsuario(usuarioLogado);
-					if (accion != null
-							&& "deleteAlumno".equalsIgnoreCase(accion)) {
-						String nombreAlumno = "";
-						if (request.getParameter("target") != null
-								&& !"".equalsIgnoreCase(request
-										.getParameter("target"))) {
-							nombreAlumno = request.getParameter("target");
-							AlumnoCurso alumn = null;
-							try {
-								alumn = alumnoCursoDao.comprobarAlumnoEnCurso(
-										nombreAlumno, idCurso);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							if (alumn != null) {
-								// Curso matriculado = comprobarMatricula(alumn,
-								// course);
-								if (!alumn.isEnCurso())
-									mensaje = "El alumno no está matriculado en este curso";
-
-								if (mensaje == null) {
-									// TODO Llamar metodo para eliminar alumnos
-								}
-							} else {
-								mensaje = "El alumno que desea eliminar no existe en el sistema";
-							}
-						} else {
-							mensaje = "No ha seleccionado un alumno al que eliminar del curso";
-						}
-						forwardJSP = "/curso.jsp";
-					} else if (accion != null
-							&& "modifyTem".equalsIgnoreCase(accion)) {
-						
-					} else if (accion != null
-							&& "deleteTem".equalsIgnoreCase(accion)) {
-
-					} else if (accion != null
-							&& "deleteProfesor".equalsIgnoreCase(accion)) {
-						String nombreProfesor = "";
-						if (request.getParameter("target") != null
-								&& !"".equalsIgnoreCase(request
-										.getParameter("target"))) {
-							nombreProfesor = request.getParameter("target");
-							ProfesorCurso profeAyudante = null;//profeDao.comprobarProfesorInvitado(nombreProfesor, idCurso);
-							if (profeAyudante != null) {
-								boolean yaEnCurso = comprobarProfesorYaEnCurso(
-										profe, course);
-								if (profeAyudante.isTitular()) {
-									// TODO Llamar metodo DAO para eliminar profesor invitado
-								} else {
-									mensaje = "El profesor ya esta dado de alta en el curso";
-								}
-							} else {
-								mensaje = "El profesor que desea eliminar no existe en el sistema";
-							}
-						} else {
-							mensaje = "No ha seleccionado un profesor al que eliminar del curso";
-						}
-						forwardJSP = "/curso.jsp";
-					} 
-				} else {
-					request.setAttribute("curso", course);
-					forwardJSP = "/curso.jsp";
-				}
-			}
-		}*/
-		
+		}		
 		forward(request, response, forwardJSP);
 	}
 
@@ -425,6 +348,7 @@ public class CursosServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 			if (course != null) {
+				
 				if (accion != null && "addAlumno".equalsIgnoreCase(accion)) {
 					String nombreAlumno = "";
 					if (request.getParameter("target") != null
@@ -442,19 +366,19 @@ public class CursosServlet extends HttpServlet {
 							}
 							AlumnoCurso alumn2 = null;
 							try {
-								alumn = alumnoCursoDao.comprobarAlumnoCursado(nombreAlumno, idCurso);
+								alumn2 = alumnoCursoDao.comprobarAlumnoCursado(nombreAlumno, idCurso);
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								alumn2 = null;
 							}
 							if (alumn == null  && alumn2 == null) {
-								AlumnoCurso nuevoAlumno = null;
+								AlumnoCurso nuevoAlumno = new AlumnoCurso();
 								Usuario user = null;
 								try {
 									user = usuarioDao.findByUsername(nombreAlumno);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
-									nuevoAlumno = null;
+									user = null;
 								}
 								if(user!=null){
 									if(numTarjeta.length()==20){
@@ -468,7 +392,7 @@ public class CursosServlet extends HttpServlet {
 											if(pedido!=null){
 												Pedido pedidoCreado = null;
 												try {
-													pedidoDao.createPedido(pedido);
+													pedidoCreado = pedidoDao.createPedido(pedido);
 												} catch (Exception e) {
 													// TODO Auto-generated catch block
 													pedidoCreado = null;
@@ -485,80 +409,9 @@ public class CursosServlet extends HttpServlet {
 														// TODO Auto-generated catch block
 														alumnoMatriculado = null;
 													}
-													if(alumnoMatriculado!=null){
-														
-														if (course!=null){
-															ProfesorCurso profesorTitularCurso = null;
-															try {
-																profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(course.getIdCurso());
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															List<AlumnoCurso> listadoAlumnosCurso = null;
-															try {
-																listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															} 
-															List<ProfesorCurso> profesoresInvitadosCurso = null;
-															try {
-																profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(course.getIdCurso());
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															List<SeccionCurso> listadoSeccionesDelCurso = null;
-															try {
-																listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(course.getIdCurso());
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															List<LeccionCurso> listadoLeccionesDelCurso = null;
-															try {
-																listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(course.getIdCurso());
-															} catch (Exception e1) {
-																// TODO Auto-generated catch block
-																e1.printStackTrace();
-															}
-															List<MaterialLeccion> listadoMaterialesDelCurso = null;
-															try {
-																listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(course.getIdCurso());
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															List<Promocion> listadoPromociones = null;
-															try {
-																listadoPromociones = promocionDao.findAll();
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															List<Usuario> usuarios = null;
-															try {
-																usuarios = usuarioDao.findAll();
-															} catch (Exception e) {
-																// TODO Auto-generated catch block
-																e.printStackTrace();
-															}
-															
+													if(alumnoMatriculado!=null){	
 														mensajeOK = "El alumno ha sido matriculado correctamente en el curso";
-														forwardJSP = "/curso.jsp";
-														request.setAttribute("mensajeOK", mensajeOK);
-														request.setAttribute("curso", course);
-														request.setAttribute("profesorTitularCurso", profesorTitularCurso);
-														request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
-														request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
-														request.setAttribute("usuarios", usuarios);
-														request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
-														request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
-														request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
-														request.setAttribute("listadoPromociones", listadoPromociones);
-														forward(request, response, forwardJSP);
-														}
+														forwardJSP = "/curso.jsp";													
 													}
 												}
 											}
@@ -573,55 +426,102 @@ public class CursosServlet extends HttpServlet {
 										forwardJSP = "/curso.jsp";
 									}								
 								}
+							}else if(alumn!=null){
+								mensajeError = "El alumno ya esta matriculado en este curso";
+								forwardJSP = "/curso.jsp";
+								
+							}else if(alumn2!=null){
+								mensajeError = "EL alumno ya ha realizado este curso";
+								forwardJSP = "/curso.jsp";
 							}
 						}else{
+							List<AlumnoCurso> listadoAlumnosCurso = null;
+							try {
+								listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} 
 							mensajeError = "Debe introducir un numero de tarjeta para matricular al alumno";
 							forwardJSP = "/curso.jsp";
 						}
 					} else {
-						mensajeError = "No ha seleccionado una alumno al que añadir al curso";
+						mensajeError = "No ha seleccionado un alumno al que añadir al curso";
+						forwardJSP = "/curso.jsp";
 					}
-					forwardJSP = "/curso.jsp";
-				} /*else if (accion != null
-						&& "addProfesor".equalsIgnoreCase(accion)) {
-					String nombreProfesor = "";
-					if (request.getParameter("target") != null
-							&& !"".equalsIgnoreCase(request
-									.getParameter("target"))) {
-						nombreProfesor = request.getParameter("target");
-						ProfesorCurso profe=null;
-						try {
-							profe = profesorCursoDao.findByUsername(nombreProfesor);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						if (profe != null) {
-							//boolean yaEnCurso = comprobarProfesorYaEnCurso(
-									//profe, course);
-							if (profe.getIdCurso().getIdCurso()==course.getIdCurso())
-								mensaje = "El profesor ya esta dado de alta en el curso";
-
-							if (mensaje == null) {
-								profe.setIdCurso(course);
-								profe.setTitular(false);
-								profesoresCurso.add(profe);
-								mensaje = "El profesor ya se ha añadido en el curso";
-								this.getServletContext().setAttribute("cursos",
-										cursos);
-							}
-						} else {
-							mensaje = "El profesor que desea añadir no existe en el sistema";
-						}
-					} else {
-						mensaje = "No ha seleccionado una profesor al que añadir al curso";
-					}
-					forwardJSP = "/curso.jsp";
 				}
-			}*/
-				request.setAttribute("mensajeError", mensajeError);
-		}
-		
+				List<AlumnoCurso> listadoAlumnosCurso = null;
+				try {
+					listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				ProfesorCurso profesorTitularCurso = null;
+				try {
+					profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(course.getIdCurso());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				List<ProfesorCurso> profesoresInvitadosCurso = null;
+				try {
+					profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(course.getIdCurso());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				List<SeccionCurso> listadoSeccionesDelCurso = null;
+				try {
+					listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(course.getIdCurso());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				List<LeccionCurso> listadoLeccionesDelCurso = null;
+				try {
+					listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(course.getIdCurso());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				List<MaterialLeccion> listadoMaterialesDelCurso = null;
+				try {
+					listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(course.getIdCurso());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				List<Promocion> listadoPromociones = null;
+				try {
+					listadoPromociones = promocionDao.findAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				List<Usuario> usuarios = null;
+				try {
+					usuarios = usuarioDao.findAll();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(mensajeOK != null && !"".equalsIgnoreCase(mensajeOK)){
+					request.setAttribute("mensajeOK", mensajeOK);
+				}else if (mensajeError != null && !"".equalsIgnoreCase(mensajeError)){
+					request.setAttribute("mensajeError", mensajeError);
+				}
+				request.setAttribute("curso", course);
+				request.setAttribute("profesorTitularCurso", profesorTitularCurso);
+				request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
+				request.setAttribute("listadoAlumnosCurso", listadoAlumnosCurso);
+				request.setAttribute("usuarios", usuarios);
+				request.setAttribute("listadoSeccionesDelCurso", listadoSeccionesDelCurso);
+				request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
+				request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
+				request.setAttribute("listadoPromociones", listadoPromociones);
+			}
 		}
 		forward(request, response, forwardJSP);
 	}

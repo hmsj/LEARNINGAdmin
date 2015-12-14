@@ -3,9 +3,11 @@ package es.uc3m.tiw.ejb;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
@@ -24,19 +26,23 @@ import es.uc3m.tiw.model.Vale;
 @Stateless(mappedName = "servicioMatricula")
 @LocalBean
 public class GestionadorPedidos {
+	private AlumnoCursoDao alumnoCursoDao;
+	private PedidoDao pedidoDao;
     /**
      * Default constructor. 
      */
     public GestionadorPedidos() {
         // TODO Auto-generated constructor stub
+    	
     }
     
-    private AlumnoCursoDao alumnoCursoDao;
-	private PedidoDao pedidoDao;
+    
 	
+	@SuppressWarnings("unused")
 	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+    	
 		
 		Promocion promocion = curso.getIdPromocion();
 		Vale vale = curso.getIdVale();
@@ -44,12 +50,13 @@ public class GestionadorPedidos {
 		Double beneficioProfe = curso.getPrecioInicial()*0.7;
 		Double precioFinal = 0.0;
 		Date fechaActual =  new java.util.Date();
+		Date fechaFinPromo = new java.util.Date(promocion.getFechaFin().getTime());
 		if(promocion != null){
-			if(fechaActual.compareTo(promocion.getFechaFin())>0){
+			if(fechaActual.compareTo(fechaFinPromo)<0){
 				if(promocion.getTipoPromocion().getIdTipoPromocion()==1){
 					//Promocion precio fijo
 					precioFinal = curso.getPrecioInicial()-promocion.getValor();
-					if(precioFinal > beneficioAdmin){
+					if(promocion.getValor() < beneficioAdmin){
 						precioFinal = precioFinal;
 					}else{
 						//No se puede aplicar la promocion
@@ -58,7 +65,7 @@ public class GestionadorPedidos {
 				}else if(promocion.getTipoPromocion().getIdTipoPromocion()==2){
 					//Promocion porcentaje del precio
 					precioFinal = (1-promocion.getValor())*curso.getPrecioInicial();
-					if(precioFinal > beneficioAdmin){
+					if(promocion.getValor()*curso.getPrecioInicial() < beneficioAdmin){
 						precioFinal = precioFinal;
 					}else{
 						//No se puede aplicar la promocion
@@ -111,26 +118,17 @@ public class GestionadorPedidos {
 	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		pedidoDao = new PedidoDaoImpl(em, ut);
-		Pedido pedido = new Pedido();
+		Pedido pedido = null;
 		Date fechaActual = new Date();
 		Double importePedido = 0.0;
 		importePedido = obtenerPrecioFinal(curso, usuario, em, ut);
+		java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
+		String codigoPedido = generarCodigoPedido();
+		String codigoOperacion = "BANCO";
 		
-		pedido.setImporte(importePedido);
-		pedido.setCodigoTarjeta(tarjeta);
-		pedido.setFechaPedido(new java.sql.Date(2015,12,13));
-		pedido.setCodigoPedido(generarCodigoPedido());
-		pedido.setCodigoOperacion("BANCO");
+		pedido = new Pedido(codigoPedido, importePedido, codigoOperacion, tarjeta, fechaPedido);
 		
-		Pedido pedidoCreado = null;
-		try {
-			pedidoCreado = pedidoDao.createPedido(pedido);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return pedidoCreado;
+		return pedido;
 	}
 
 	public String generarCodigoPedido() {

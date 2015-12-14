@@ -87,18 +87,18 @@
 			<h3 class="section-title white wow fadeInUp ">${curso.titulo }</h3>
 
 			<div class="row wow fadeInUp">
-
+				<c:if test="${not empty mensajeError }">
+					<div id="message">
+						<p class="error_message">${mensajeError }</p>
+					</div>
+				</c:if>
+				<c:if test="${not empty mensajeOK }">
+					<div id="message">
+						<p class="ok_message">${mensajeOK }</p>
+					</div>
+				</c:if>
 				<div class="col-md-6 col-sm-6 text-center">
-					<c:if test="${not empty mensajeError }">
-						<div id="message">
-							<p class="error_message">${mensajeError }</p>
-						</div>
-					</c:if>
-					<c:if test="${not empty mensajeOK }">
-						<div id="message">
-							<p class="ok_message">${mensajeOK }</p>
-						</div>
-					</c:if>
+					
 					<div class="price-box">
 						<div class="price-table">
 							<h3 class="label">Imagen</h3>
@@ -340,7 +340,7 @@
 							<select name="target" id="target">
 								<c:forEach items="${usuarios }" var="usuario">
 									<option value="${usuario.username }">
-										${usuario.username }</option>
+										${usuario.username } - </option>
 								</c:forEach>
 							</select> 
 							<input name="tarjeta" id="tarjeta" type="text" placeholder="Inserte una tarjeta para realizar el pago"/>
