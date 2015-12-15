@@ -226,49 +226,49 @@ public class CursosServlet extends HttpServlet {
 							profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							profesorTitularCurso = null;
 						}
 						List<AlumnoCurso> listadoAlumnosCurso = null;
 						try {
 							listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							listadoAlumnosCurso = null;
 						} 
 						List<ProfesorCurso> profesoresInvitadosCurso = null;
 						try {
 							profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							profesoresInvitadosCurso = null;
 						}
 						List<SeccionCurso> listadoSeccionesDelCurso = null;
 						try {
 							listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							listadoSeccionesDelCurso = null;
 						}
 						List<LeccionCurso> listadoLeccionesDelCurso = null;
 						try {
 							listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(course.getIdCurso());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							listadoLeccionesDelCurso = null;
 						}
 						List<MaterialLeccion> listadoMaterialesDelCurso = null;
 						try {
 							listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(course.getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							listadoMaterialesDelCurso = null;
 						}
 						List<Promocion> listadoPromociones = null;
 						try {
 							listadoPromociones = promocionDao.findAll();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							listadoPromociones = null;
 						}
 			
 						request.setAttribute("curso", course);
@@ -385,19 +385,20 @@ public class CursosServlet extends HttpServlet {
 										{
 											Pedido pedido = null;
 											pedido = gestionadorPedidos.generarPedido(course, user, numTarjeta, em, ut);
+											
 											if(pedido!=null){
 												Pedido pedidoCreado = null;
 												try {
 													pedidoCreado = pedidoDao.createPedido(pedido);
-												} catch (Exception e) {
+												} catch (Exception e1) {
 													// TODO Auto-generated catch block
-													pedidoCreado = null;
+													e1.printStackTrace();
 												}
 												if(pedidoCreado!=null){
 													nuevoAlumno.setIdUsuario(user);
 													nuevoAlumno.setIdCurso(course);
 													nuevoAlumno.setEnCurso(true);
-													nuevoAlumno.setIdPedido(pedidoCreado);
+													nuevoAlumno.setIdPedido(pedido);
 													AlumnoCurso alumnoMatriculado = null;
 													try {
 														alumnoMatriculado = alumnoCursoDao.createAlumnoCurso(nuevoAlumno);
@@ -409,6 +410,9 @@ public class CursosServlet extends HttpServlet {
 														mensajeOK = "El alumno ha sido matriculado correctamente en el curso";
 														forwardJSP = "/curso.jsp";													
 													}
+												}else{
+													mensajeError = "Se ha producido un error";
+													forwardJSP = "/curso.jsp";
 												}
 											}
 										}
@@ -436,7 +440,7 @@ public class CursosServlet extends HttpServlet {
 								listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+								listadoAlumnosCurso = null;
 							} 
 							mensajeError = "Debe introducir un numero de tarjeta para matricular al alumno";
 							forwardJSP = "/curso.jsp";
@@ -451,14 +455,14 @@ public class CursosServlet extends HttpServlet {
 					listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(course.getIdCurso());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoAlumnosCurso = null;
 				} 
 				ProfesorCurso profesorTitularCurso = null;
 				try {
 					profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(course.getIdCurso());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					profesorTitularCurso = null;
 				}
 				
 				List<ProfesorCurso> profesoresInvitadosCurso = null;
@@ -466,42 +470,42 @@ public class CursosServlet extends HttpServlet {
 					profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(course.getIdCurso());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					profesoresInvitadosCurso = null;
 				}
 				List<SeccionCurso> listadoSeccionesDelCurso = null;
 				try {
 					listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(course.getIdCurso());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoSeccionesDelCurso = null;
 				}
 				List<LeccionCurso> listadoLeccionesDelCurso = null;
 				try {
 					listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(course.getIdCurso());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					listadoLeccionesDelCurso = null;
 				}
 				List<MaterialLeccion> listadoMaterialesDelCurso = null;
 				try {
 					listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(course.getIdCurso());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoMaterialesDelCurso = null;
 				}
 				List<Promocion> listadoPromociones = null;
 				try {
 					listadoPromociones = promocionDao.findAll();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoPromociones = null;
 				}
 				List<Usuario> usuarios = null;
 				try {
 					usuarios = usuarioDao.findAll();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					usuarios = null;
 				}
 				if(mensajeOK != null && !"".equalsIgnoreCase(mensajeOK)){
 					request.setAttribute("mensajeOK", mensajeOK);
