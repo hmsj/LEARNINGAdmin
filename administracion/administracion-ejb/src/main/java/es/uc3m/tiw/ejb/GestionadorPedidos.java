@@ -36,7 +36,6 @@ public class GestionadorPedidos {
     	
     }
     
-    
 	
 	@SuppressWarnings("unused")
 	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
@@ -144,7 +143,6 @@ public class GestionadorPedidos {
 	
 	public Double obtenerBeneficioAdmin(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut){
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
-	    
 		Promocion promocion = curso.getIdPromocion();
 		Double beneficioIniAdmin = curso.getPrecioInicial()*0.3;
 		Date fechaActual =  new java.util.Date();
