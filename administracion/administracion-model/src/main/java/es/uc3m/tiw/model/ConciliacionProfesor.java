@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Pedido implements Serializable{
+public class ConciliacionProfesor implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,28 +32,19 @@ public class Pedido implements Serializable{
 	@Column(nullable=false)
 	private Date fechaPedido;
 
-	@Column(nullable=false)
-	private Double beneficioAdmin;
-	
-	@Column(nullable=false)
-	private Double beneficioProfe;
-	
-	public Pedido() {
+	public ConciliacionProfesor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Pedido(String codigoPedido, double importe, String codigoOperacion,
-			String codigoTarjeta, Date fechaPedido, Double beneficioAdmin,
-			Double beneficioProfe) {
+	public ConciliacionProfesor(String codigoPedido, double importe, String codigoOperacion,
+			String codigoTarjeta, Date fechaPedido) {
 		super();
 		this.codigoPedido = codigoPedido;
 		this.importe = importe;
 		this.codigoOperacion = codigoOperacion;
 		this.codigoTarjeta = codigoTarjeta;
 		this.fechaPedido = fechaPedido;
-		this.beneficioAdmin = beneficioAdmin;
-		this.beneficioProfe = beneficioProfe;
 	}
 
 	public Long getIdPedido() {
@@ -103,21 +94,5 @@ public class Pedido implements Serializable{
 	public void setFechaPedido(Date fechaPedido) {
 		this.fechaPedido = fechaPedido;
 	}
-
-	public Double getBeneficioAdmin() {
-		return beneficioAdmin;
-	}
-
-	public void setBeneficioAdmin(Double beneficioAdmin) {
-		this.beneficioAdmin = beneficioAdmin;
-	}
-
-	public Double getBeneficioProfe() {
-		return beneficioProfe;
-	}
-
-	public void setBeneficioProfe(Double beneficioProfe) {
-		this.beneficioProfe = beneficioProfe;
-	}
-
+	
 }

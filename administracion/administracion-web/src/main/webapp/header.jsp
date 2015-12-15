@@ -31,8 +31,8 @@
 								<li class="active"><a
 									href="usuarios?username=${sessionScope.usuario.username }">Mi
 										perfil</a></li>
-								<li><a href="login?accion=salir">Logout</a></li>
 								<li><a href="#">Conciliacion banco</a></li>
+								<li><a href="login?accion=salir">Logout</a></li>
 							</ul></li>
 							<c:if test="${sessionScope.usuario.admin }">
 								<li><a href="nuevoCurso">Añadir curso</a></li>

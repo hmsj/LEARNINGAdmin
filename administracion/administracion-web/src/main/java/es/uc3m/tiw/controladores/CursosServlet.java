@@ -270,10 +270,7 @@ public class CursosServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						List<Double> listadoPrecioUsuarioCurso = null;
-						for (Usuario usuario : usuarios) {
-							listadoPrecioUsuarioCurso.add(gestionadorPedidos.obtenerPrecioFinal(course, usuario, em, ut));
-						}
+			
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
 						request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
@@ -283,7 +280,6 @@ public class CursosServlet extends HttpServlet {
 						request.setAttribute("listadoLeccionesDelCurso", listadoLeccionesDelCurso);
 						request.setAttribute("listadoMaterialesLeccion", listadoMaterialesDelCurso);
 						request.setAttribute("listadoPromociones", listadoPromociones);
-						request.setAttribute("listadoPrecioUsuarioCurso", listadoPrecioUsuarioCurso);
 						forwardJSP = "/curso.jsp";
 					}else {
 						mensajeError = "Se ha producido un error al acceder a los datos";

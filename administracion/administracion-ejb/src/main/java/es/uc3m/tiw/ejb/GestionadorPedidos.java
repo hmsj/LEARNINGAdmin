@@ -42,16 +42,15 @@ public class GestionadorPedidos {
 	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
-    	
-		
+    
 		Promocion promocion = curso.getIdPromocion();
 		Vale vale = curso.getIdVale();
 		Double beneficioAdmin = curso.getPrecioInicial()*0.3;
 		Double beneficioProfe = curso.getPrecioInicial()*0.7;
 		Double precioFinal = 0.0;
 		Date fechaActual =  new java.util.Date();
-		Date fechaFinPromo = new java.util.Date(promocion.getFechaFin().getTime());
 		if(promocion != null){
+			Date fechaFinPromo = new java.util.Date(promocion.getFechaFin().getTime());
 			if(fechaActual.compareTo(fechaFinPromo)<0){
 				if(promocion.getTipoPromocion().getIdTipoPromocion()==1){
 					//Promocion precio fijo
@@ -81,7 +80,7 @@ public class GestionadorPedidos {
 			}
 		}else if(vale != null){
 			//Se hace despues de comprobar si hay promocion porque la promocion prevalece sobre el vale
-			if(fechaActual.compareTo(vale.getFechaCaducidad())>0){
+			if(fechaActual.compareTo(new java.util.Date(vale.getFechaCaducidad().getTime()))<0){
 				precioFinal = curso.getPrecioInicial()-vale.getValorVale();
 				if(precioFinal>beneficioProfe){
 					if(precioFinal>vale.getCosteMinimoAlumno()){
@@ -125,8 +124,9 @@ public class GestionadorPedidos {
 		java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
 		String codigoPedido = generarCodigoPedido();
 		String codigoOperacion = "BANCO";
-		
-		pedido = new Pedido(codigoPedido, importePedido, codigoOperacion, tarjeta, fechaPedido);
+		Double beneficioAdmin = obtenerBeneficioAdmin(curso, usuario, em, ut);
+		Double beneficioProfe = obtenerBeneficioProfe(curso, usuario, em, ut);
+		pedido = new Pedido(codigoPedido, importePedido, codigoOperacion, tarjeta, fechaPedido, beneficioAdmin, beneficioProfe);
 		
 		return pedido;
 	}
@@ -141,6 +141,88 @@ public class GestionadorPedidos {
 
 		return codigoPedido;
 	}
+	
+	public Double obtenerBeneficioAdmin(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut){
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+	    
+		Promocion promocion = curso.getIdPromocion();
+		Double beneficioIniAdmin = curso.getPrecioInicial()*0.3;
+		Date fechaActual =  new java.util.Date();
+		Double beneficioFinalAdmin = beneficioIniAdmin;
+		if(promocion != null){
+			Date fechaFinPromo = new java.util.Date(promocion.getFechaFin().getTime());
+			if(fechaActual.compareTo(fechaFinPromo)<0){
+				if(promocion.getTipoPromocion().getIdTipoPromocion()==1){
+					//Promocion precio fijo
+					if(promocion.getValor() < beneficioIniAdmin){
+						beneficioFinalAdmin = beneficioIniAdmin-promocion.getValor();
+					}else{
+						//No se puede aplicar la promocion
+						beneficioFinalAdmin = beneficioIniAdmin;
+					}
+				}else if(promocion.getTipoPromocion().getIdTipoPromocion()==2){
+					//Promocion porcentaje del precio
+					if(promocion.getValor()*curso.getPrecioInicial() < beneficioIniAdmin){
+						beneficioFinalAdmin = beneficioIniAdmin-promocion.getValor()*curso.getPrecioInicial();
+					}else{
+						//No se puede aplicar la promocion
+						beneficioFinalAdmin = beneficioIniAdmin;
+					}
+				}else{
+					//Se ha producido un error
+				}
+			}else{
+				//ERROR La promocion esta caducada
+				beneficioFinalAdmin = beneficioIniAdmin;
+			}
+		}else{
+			beneficioFinalAdmin = beneficioIniAdmin;
+		}
+		return beneficioFinalAdmin;
+	}
 
-
+	public Double obtenerBeneficioProfe(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut){
+		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
+	    
+		Vale vale = curso.getIdVale();
+		Double beneficioIniProfe = curso.getPrecioInicial()*0.7;
+		Date fechaActual =  new java.util.Date();
+		Double beneficioFinalProfe = beneficioIniProfe;
+		Double precioFinal = 0.0;
+		if(vale != null && curso.getIdPromocion() == null){
+			//Se hace despues de comprobar si hay promocion porque la promocion prevalece sobre el vale
+			Date fechaFinVale = new java.util.Date(vale.getFechaCaducidad().getTime());
+			if(fechaActual.compareTo(fechaFinVale)<0){
+				precioFinal = curso.getPrecioInicial()-vale.getValorVale();
+				if(precioFinal>beneficioIniProfe){
+					if(precioFinal>vale.getCosteMinimoAlumno()){
+						int numCursosAlumno = 0;
+						try {
+							numCursosAlumno = alumnoCursoDao.numeroCursosAlumno(usuario.getIdUsuario());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							numCursosAlumno = 0;
+						}
+						if(numCursosAlumno>0 && numCursosAlumno >= vale.getNumCursosInsc()){
+							beneficioFinalProfe = precioFinal * 0.7 - vale.getValorVale();
+						}else{
+							beneficioFinalProfe = beneficioIniProfe;
+						}
+					}else{
+						//Supera el coste minimo
+						beneficioFinalProfe = beneficioIniProfe;
+					}
+				}else{
+					//Supera el beneficio del profesor
+					beneficioFinalProfe = beneficioIniProfe;
+				}
+			}else{
+				//ERROR El vale no tiene validez
+				beneficioFinalProfe = beneficioIniProfe;
+			}
+		}else{
+			beneficioFinalProfe = beneficioIniProfe;
+		}
+		return beneficioFinalProfe;
+	}
 }

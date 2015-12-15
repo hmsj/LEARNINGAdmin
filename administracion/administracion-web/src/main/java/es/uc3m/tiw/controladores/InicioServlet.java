@@ -2,6 +2,7 @@ package es.uc3m.tiw.controladores;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -193,8 +194,9 @@ public class InicioServlet extends HttpServlet {
 			e2.printStackTrace();
 		}
 		
-		
-		Promocion promocion1 = new Promocion("Promocion Inicial",30.0,new Date(2015, 12, 31), tipoPromocion1);
+		java.util.Date fechaPromo1 = new java.util.Date(2015-1900, 12-1, 31);
+		java.sql.Date fechaPromoSQL1 = new java.sql.Date (fechaPromo1.getTime());
+		Promocion promocion1 = new Promocion("Promocion Inicial",25.0,fechaPromoSQL1, tipoPromocion1);
 		try {
 			promocionDao.createPromocion(promocion1);
 		} catch (Exception e1) {
@@ -235,16 +237,16 @@ public class InicioServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		
-		java.util.Date fecha1 = new java.util.Date(2015, 11, 1);
+	    
+		java.util.Date fecha1 = new java.util.Date(2015-1900, 11-1, 1);
 		java.sql.Date fechaSQL1 = new java.sql.Date (fecha1.getTime());
-		java.util.Date fecha2 = new java.util.Date(2015, 1, 31);
+		java.util.Date fecha2 = new java.util.Date(2015-1900, 1-1, 31);
 		java.sql.Date fechaSQL2 = new java.sql.Date (fecha2.getTime());
-		java.util.Date fecha3 = new java.util.Date(2015, 9, 1);
+		java.util.Date fecha3 = new java.util.Date(2015-1900, 9-1, 1);
 		java.sql.Date fechaSQL3 = new java.sql.Date (fecha3.getTime());
-		Pedido pedido1 = new Pedido("ORDER20151101102010PM", 550, "BANCO20151101102032PM", "A1545857581465294529", fechaSQL1);
-		Pedido pedido2 = new Pedido("ORDER20150101102010PM", 550, "BANCO20150101102032PM", "A1545857581465294529", fechaSQL2);
-		Pedido pedido3 = new Pedido("ORDER20150901102010PM", 550, "BANCO20150901102032PM", "A1545857581465294529", fechaSQL3);
+		Pedido pedido1 = new Pedido("ORDER20151101102010PM", 550, "BANCO20151101102032PM", "A1545857581465294529", fechaSQL1, 550*0.3, 550*0.7);
+		Pedido pedido2 = new Pedido("ORDER20150101102010PM", 550, "BANCO20150101102032PM", "A1545857581465294529", fechaSQL2, 550*0.3, 550*0.7);
+		Pedido pedido3 = new Pedido("ORDER20150901102010PM", 550, "BANCO20150901102032PM", "A1545857581465294529", fechaSQL3, 550*0.3, 550*0.7);
 		try {
 			pedidoDao.createPedido(pedido1);
 			pedidoDao.createPedido(pedido2);

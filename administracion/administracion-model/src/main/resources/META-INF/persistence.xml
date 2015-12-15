@@ -20,6 +20,8 @@
 	<class>es.uc3m.tiw.model.Promocion</class>
 	<class>es.uc3m.tiw.model.Vale</class>
 	<class>es.uc3m.tiw.model.Pedido</class>
+	<class>es.uc3m.tiw.model.ConciliacionEmpresa</class>
+	<class>es.uc3m.tiw.model.ConciliacionProfesor</class>
 	<properties>
 		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 	</properties>
