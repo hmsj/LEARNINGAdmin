@@ -3,12 +3,14 @@ package es.uc3m.tiw.ejb;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 import es.uc3m.tiw.daos.AlumnoCursoDao;
 import es.uc3m.tiw.daos.AlumnoCursoDaoImpl;
@@ -19,7 +21,6 @@ import es.uc3m.tiw.model.Pedido;
 import es.uc3m.tiw.model.Promocion;
 import es.uc3m.tiw.model.Usuario;
 import es.uc3m.tiw.model.Vale;
-
 /**
  * Session Bean implementation class GestionadorPedidos2
  */
@@ -41,7 +42,6 @@ public class GestionadorPedidos {
 	public Double obtenerPrecioFinal(Curso curso, Usuario usuario, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		alumnoCursoDao = new AlumnoCursoDaoImpl(em, ut);
-    
 		Promocion promocion = curso.getIdPromocion();
 		Vale vale = curso.getIdVale();
 		Double beneficioAdmin = curso.getPrecioInicial()*0.3;
@@ -116,13 +116,17 @@ public class GestionadorPedidos {
 	public Pedido generarPedido(Curso curso, Usuario usuario, String tarjeta, EntityManager em, UserTransaction ut) {
 		// TODO Auto-generated method stub
 		pedidoDao = new PedidoDaoImpl(em, ut);
+	
+		Client cliente = ClientBuilder.newClient();
+		
 		Pedido pedido = null;
 		Date fechaActual = new Date();
 		Double importePedido = 0.0;
 		importePedido = obtenerPrecioFinal(curso, usuario, em, ut);
 		java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
 		String codigoPedido = generarCodigoPedido();
-		String codigoOperacion = "BANCO";
+		WebTarget service = cliente.target("http://localhost:8080/banco-web/resources/pasarela/pagoMatricula/"+importePedido+"/"+tarjeta+"/"+codigoPedido+"/"+fechaPedido);
+		String codigoOperacion = service.request(MediaType.TEXT_PLAIN).get(String.class);
 		Double beneficioAdmin = obtenerBeneficioAdmin(curso, usuario, em, ut);
 		Double beneficioProfe = obtenerBeneficioProfe(curso, usuario, em, ut);
 		pedido = new Pedido(codigoPedido, importePedido, codigoOperacion, tarjeta, fechaPedido, beneficioAdmin, beneficioProfe);
