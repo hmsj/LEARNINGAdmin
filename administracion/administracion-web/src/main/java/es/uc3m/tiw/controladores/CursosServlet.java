@@ -409,7 +409,9 @@ public class CursosServlet extends HttpServlet {
 													}
 													if(alumnoMatriculado!=null){	
 														mensajeOK = "El alumno ha sido matriculado correctamente en el curso";
-														forwardJSP = "/curso.jsp";													
+														request.setAttribute("alumnoMatriculado", alumnoMatriculado);
+														request.setAttribute("pedidoCreado", pedidoCreado);
+														forwardJSP = "/ticketPedido.jsp";													
 													}
 												}else{
 													mensajeError = "Se ha producido un error";
