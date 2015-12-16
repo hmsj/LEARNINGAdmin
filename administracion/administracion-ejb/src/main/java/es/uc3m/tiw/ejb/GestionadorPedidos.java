@@ -125,8 +125,9 @@ public class GestionadorPedidos {
 		importePedido = obtenerPrecioFinal(curso, usuario, em, ut);
 		java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
 		String codigoPedido = generarCodigoPedido();
-		WebTarget service = cliente.target("http://localhost:8080/banco-web/resources/pasarela/pagoMatricula/"+importePedido+"/"+tarjeta+"/"+codigoPedido+"/"+fechaPedido);
-		String codigoOperacion = service.request(MediaType.TEXT_PLAIN).get(String.class);
+		WebTarget service = cliente.target("http://localhost:8080/banco-web/resources/pasarela/pagoMatricula/"+importePedido+"/"+tarjeta+"/"+codigoPedido+"/"+fechaPedido+"/xml");
+		String banco= service.request(MediaType.TEXT_PLAIN).get(String.class);
+		String codigoOperacion = banco;
 		Double beneficioAdmin = obtenerBeneficioAdmin(curso, usuario, em, ut);
 		Double beneficioProfe = obtenerBeneficioProfe(curso, usuario, em, ut);
 		pedido = new Pedido(codigoPedido, importePedido, codigoOperacion, tarjeta, fechaPedido, beneficioAdmin, beneficioProfe);
