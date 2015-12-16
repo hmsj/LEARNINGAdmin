@@ -117,7 +117,7 @@ public class MaterialServlet extends HttpServlet {
 				curso = cursoDao.findById(Long.parseLong(request.getParameter("idCurso")));
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				curso = null;
 			}
 			if(accion.equalsIgnoreCase("material")){
 				List<LeccionCurso> listadoLeccionesCurso = null;
@@ -125,7 +125,7 @@ public class MaterialServlet extends HttpServlet {
 					listadoLeccionesCurso = leccionCursoDao.ListadoLeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoLeccionesCurso = null;
 				}
 				if(listadoLeccionesCurso != null){
 					request.setAttribute("listadoLeccionesCurso", listadoLeccionesCurso);
@@ -138,7 +138,7 @@ public class MaterialServlet extends HttpServlet {
 					listadoSeccionesCurso = seccionCursoDao.listadoSeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					listadoSeccionesCurso = null;
 				}
 				if(listadoSeccionesCurso != null){
 					request.setAttribute("listadoSeccionesCurso", listadoSeccionesCurso);
@@ -193,7 +193,7 @@ public class MaterialServlet extends HttpServlet {
 						listadoLeccionesCurso = leccionCursoDao.ListadoLeccionesUnCurso(Long.parseLong(request.getParameter("idCurso")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						listadoLeccionesCurso = null;
 					}
 				}
 				if(request.getParameter("leccionMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("leccionMaterial"))){
@@ -201,14 +201,14 @@ public class MaterialServlet extends HttpServlet {
 						leccionCurso = leccionCursoDao.findById(Long.parseLong(request.getParameter("leccionMaterial")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						leccionCurso = null;
 					}
 					if(leccionCurso!=null){
 						try {
 							curso = cursoDao.findById(leccionCurso.getIdSeccion().getIdCurso().getIdCurso());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							curso = null;
 						}
 					}
 					if(request.getParameter("tituloMaterial")!=null && !"".equalsIgnoreCase(request.getParameter("tituloMaterial"))){
@@ -232,11 +232,12 @@ public class MaterialServlet extends HttpServlet {
 									nuevoMaterial.setDescripcion(descripcion);
 									nuevoMaterial.setFichero(savePath + File.separator + fileName);
 									nuevoMaterial.setIdLeccion(leccionCurso);
+									MaterialLeccion materialCreated = null;
 									try {
-										materialLeccionDao.createMaterialLeccion(nuevoMaterial);
+										materialCreated = materialLeccionDao.createMaterialLeccion(nuevoMaterial);
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
-										e.printStackTrace();
+										materialCreated = null;
 									}
 									mensajeOK = "Material añadido correctamente";
 									request.setAttribute("mensajeOK", mensajeOK);
@@ -246,49 +247,49 @@ public class MaterialServlet extends HttpServlet {
 											profesorTitularCurso = profesorCursoDao.ProfeTitularCurso(curso.getIdCurso());
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											profesorTitularCurso = null;
 										}
 										List<AlumnoCurso> listadoAlumnosCurso = null;
 										try {
 											listadoAlumnosCurso = alumnoCursoDao.listadoAlumnosEnUnCurso(curso.getIdCurso());
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											listadoAlumnosCurso = null;
 										} 
 										List<ProfesorCurso> profesoresInvitadosCurso = null;
 										try {
 											profesoresInvitadosCurso = profesorCursoDao.listadoProfesInvitadosUnCurso(curso.getIdCurso());
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											profesoresInvitadosCurso = null;
 										}
 										List<SeccionCurso> listadoSeccionesDelCurso = null;
 										try {
 											listadoSeccionesDelCurso = seccionCursoDao.listadoSeccionesUnCurso(curso.getIdCurso());
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											listadoSeccionesDelCurso = null;
 										}
 										List<LeccionCurso> listadoLeccionesDelCurso = null;
 										try {
 											listadoLeccionesDelCurso = leccionCursoDao.ListadoLeccionesUnCurso(curso.getIdCurso());
 										} catch (Exception e1) {
 											// TODO Auto-generated catch block
-											e1.printStackTrace();
+											listadoLeccionesDelCurso = null;
 										}
 										List<MaterialLeccion> listadoMaterialesDelCurso = null;
 										try {
 											listadoMaterialesDelCurso = materialLeccionDao.listadoMaterialesCurso(curso.getIdCurso());
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											listadoMaterialesDelCurso = null;
 										}
 										List<Promocion> listadoPromociones = null;
 										try {
 											listadoPromociones = promocionDao.findAll();
 										} catch (Exception e) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											listadoPromociones = null;
 										}
 										request.setAttribute("curso", curso);
 										request.setAttribute("profesorTitularCurso", profesorTitularCurso);
@@ -347,7 +348,7 @@ public class MaterialServlet extends HttpServlet {
 						seccion = seccionCursoDao.findById(Long.parseLong(request.getParameter("seccionLeccion")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						seccion = null;
 					}					
 					nuevaLeccionCurso.setIdSeccion(seccion);
 					if(request.getParameter("tituloLeccion")!=null && !"".equalsIgnoreCase(request.getParameter("tituloLeccion"))){
@@ -384,12 +385,12 @@ public class MaterialServlet extends HttpServlet {
 											nuevoMaterial.setTitulo(titulo);
 											nuevoMaterial.setDescripcion(descripcion);
 											nuevoMaterial.setFichero(savePath + File.separator + fileName);
-											
+											MaterialLeccion materialCreated = null;
 											try {
-												materialLeccionDao.createMaterialLeccion(nuevoMaterial);
+												materialCreated = materialLeccionDao.createMaterialLeccion(nuevoMaterial);
 											} catch (Exception e) {
 												// TODO Auto-generated catch block
-												e.printStackTrace();
+												materialCreated = null;
 											}
 											mensajeOK = "Leccion añadida correctamente";
 											request.setAttribute("mensajeOK", mensajeOK);
@@ -501,12 +502,12 @@ public class MaterialServlet extends HttpServlet {
 												nuevoMaterial.setTitulo(titulo);
 												nuevoMaterial.setDescripcion(descripcion);
 												nuevoMaterial.setFichero(savePath + File.separator + fileName);
-												
+												MaterialLeccion materialCreated = null;
 												try {
-													materialLeccionDao.createMaterialLeccion(nuevoMaterial);
+													materialCreated = materialLeccionDao.createMaterialLeccion(nuevoMaterial);
 												} catch (Exception e) {
 													// TODO Auto-generated catch block
-													e.printStackTrace();
+													materialCreated = null;
 												}
 												mensajeOK = "Seccion añadida correctamente";
 												request.setAttribute("mensajeOK", mensajeOK);

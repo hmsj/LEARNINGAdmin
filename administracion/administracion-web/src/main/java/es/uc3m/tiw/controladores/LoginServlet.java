@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
 			user = usuarioDao.comprobarUsuarioUsernamePass(usuario, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			user=null;
 		}
 		if (user != null && user.isAdmin()) {
 			forwardJSP = "/principal.jsp";

@@ -69,7 +69,7 @@ public class PromocionServlet extends HttpServlet {
 			promociones = promocionDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			promociones = null;
 		}
 	}
 

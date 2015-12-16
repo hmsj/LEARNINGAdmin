@@ -66,13 +66,13 @@ public class AlumnosServlet extends HttpServlet {
 			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			alumnosCurso = null;
 		}
 		try {
 			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			usuarios = null;
 		}
 		request.setAttribute("usuarios", usuarios);
 		String forwardJSP = "/listadoAlumnos.jsp";

@@ -136,63 +136,63 @@ public class CursosServlet extends HttpServlet {
 			categorias = categoriaDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			categorias = null;
 		}
 		List<SeccionCurso> seccionesCurso = null;
 		try {
 			seccionesCurso = seccionCursoDao.findAll();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			seccionesCurso = null;
 		}
 		List<LeccionCurso> leccionesCurso = null;
 		try {
 			leccionesCurso = leccionCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			leccionesCurso = null;
 		}
 		List<MaterialLeccion> materialesLeccion = null;
 		try {
 			materialesLeccion = materialLeccionDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			materialesLeccion = null;
 		}
 		List<AlumnoCurso> alumnosCurso = null;
 		try {
 			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			alumnosCurso = null;
 		}
 		List<ProfesorCurso> profesoresCurso = null; 
 		try {
 			profesoresCurso = profesorCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			profesoresCurso = null; 
 		}
 		List<ProfesorCurso> profesoresTitulares = null;
 		try {
 			profesoresTitulares = profesorCursoDao.listadoProfesTitulares();
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			profesoresTitulares = null;
 		}
 		List<Dificultad> dificultades = null;
 		try {
 			dificultades = dificultadDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			dificultades = null;
 		}
 		List<Usuario> usuarios = null;
 		try {
 			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			usuarios = null;
 		}
 		
 		String idCursoParam = request.getParameter("idCurso");
@@ -218,7 +218,7 @@ public class CursosServlet extends HttpServlet {
 						course  = cursoDao.findById(idCurso);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						course = null;
 					}
 					if (course!=null){
 						ProfesorCurso profesorTitularCurso = null;
@@ -270,7 +270,7 @@ public class CursosServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							listadoPromociones = null;
 						}
-			
+
 						request.setAttribute("curso", course);
 						request.setAttribute("profesorTitularCurso", profesorTitularCurso);
 						request.setAttribute("profesoresInvitadosCurso", profesoresInvitadosCurso);
@@ -297,7 +297,7 @@ public class CursosServlet extends HttpServlet {
 						cursoVal = cursoDao.findById(Long.parseLong(request.getParameter("idCurso")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						cursoVal = null;
 					} 
 					if(cursoVal != null && !cursoVal.isValidado()){
 						cursoVal.setValidado(true);
@@ -315,6 +315,7 @@ public class CursosServlet extends HttpServlet {
 				
 			}
 		}		
+		
 		forward(request, response, forwardJSP);
 	}
 
@@ -341,7 +342,7 @@ public class CursosServlet extends HttpServlet {
 				course = cursoDao.findById(idCurso);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				course = null;
 			}
 			if (course != null) {
 				
@@ -392,7 +393,7 @@ public class CursosServlet extends HttpServlet {
 													pedidoCreado = pedidoDao.createPedido(pedido);
 												} catch (Exception e1) {
 													// TODO Auto-generated catch block
-													e1.printStackTrace();
+													pedidoCreado = null;
 												}
 												if(pedidoCreado!=null){
 													nuevoAlumno.setIdUsuario(user);

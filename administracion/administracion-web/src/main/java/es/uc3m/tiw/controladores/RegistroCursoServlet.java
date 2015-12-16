@@ -126,13 +126,13 @@ public class RegistroCursoServlet extends HttpServlet {
 			categorias = categoriaDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			categorias = null;
 		}
 		try {
 			dificultades = dificultadDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			dificultades = null;
 		}
 
 	

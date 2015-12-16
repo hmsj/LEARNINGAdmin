@@ -67,7 +67,7 @@ public class RegistroServlet extends HttpServlet {
 			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			usuarios = null;
 		}
 
 	}
@@ -223,7 +223,7 @@ public class RegistroServlet extends HttpServlet {
 				dirCreated = direccionDao.createDireccion(nuevaDireccion);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				dirCreated = null;
 			}
 			if (dirCreated != null) {
 				nuevoUsuario.setIdDireccion(nuevaDireccion);
@@ -234,7 +234,7 @@ public class RegistroServlet extends HttpServlet {
 				userCreated = usuarioDao.createUsuario(nuevoUsuario);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				userCreated = null;
 			}
 			if (userCreated != null) {
 				forwardJSP = "/principal.jsp";

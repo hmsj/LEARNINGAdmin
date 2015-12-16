@@ -85,31 +85,31 @@ public class UsuariosServlet extends HttpServlet {
 			cursos = cursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			cursos = null;
 		}
 		try {
 			alumnosCurso = alumnoCursoDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			alumnosCurso = null;
 		}
 		try {
 			usuarios = usuarioDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			usuarios = null;
 		}
 		try {
 			logros = logroDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logros = null;
 		}
 		try {
 			dificultades = dificultadDao.findAll();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			dificultades = null;
 		}
 	}
 
@@ -134,26 +134,26 @@ public class UsuariosServlet extends HttpServlet {
 					usuario = usuarioDao.findById(Long.parseLong(request.getParameter("idUsuario")));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					usuario = null;
 				}
 				if (usuario!=null) {
 					try {
 						alumnoEnCurso = alumnoCursoDao.listadoAlumnosEnCursoById(usuario.getIdUsuario());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						alumnoEnCurso = null;
 					}
 					try {
 						alumnoCursados = alumnoCursoDao.listadoAlumnosCursadoById(usuario.getIdUsuario());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						alumnoCursados = null;
 					}
 					try {
 						profesorTitular = profesorCursoDao.listadoTitularById(usuario.getIdUsuario());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						profesorTitular = null;
 					}
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("alumnoEnCurso", alumnoEnCurso);
@@ -174,7 +174,7 @@ public class UsuariosServlet extends HttpServlet {
 						usuarioDelete = usuarioDao.findById(Long.parseLong(request.getParameter("idUsuario")));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						usuarioDelete = null;
 					}
 					try {
 						usuarioDao.removeUsuario(usuarioDelete);
@@ -305,7 +305,7 @@ public class UsuariosServlet extends HttpServlet {
 						usuarioNuevo = usuarioDao.modifyUsuario(usuarioModificado);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						usuarioNuevo = null;
 					}
 					mensajeOK = "Datos modificados correctamente";
 					request.setAttribute("usuario", usuarioNuevo);
