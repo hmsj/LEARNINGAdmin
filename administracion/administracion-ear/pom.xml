@@ -73,17 +73,20 @@
   		<artifactId>administracion-ejb</artifactId>
   		<version>3.0</version>
   		<type>ejb</type>
-  	</dependency>
+  		<scope>provided</scope>
+	</dependency>
   	<dependency>
   		<groupId>es.uc3m.tiw.web</groupId>
   		<artifactId>administracion-web</artifactId>
   		<version>3.0</version>
   		<type>war</type>
+  		<scope>provided</scope>
   	</dependency>
   	<dependency>
   		<groupId>es.uc3m.tiw.model</groupId>
   		<artifactId>administracion-model</artifactId>
   		<version>3.0</version>
+  		<scope>provided</scope>
   	</dependency>
   </dependencies>
 </project>
